@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Warhammer 40k</title>
+
+	<style>
+		table {
+			table-layout: fixed;
+			width: 50%;
+			text-align: center;
+		}
+
+	</style>
+
+	<script>
+		function updateTroopTable() {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					var response = JSON.parse(request.responseText)
+					console.log(response)
+					var models = response.value["models"]
+					var table = document.createElement("TABLE")
+					console.log(models)
+					for (var key in models) {
+						console.log(key)
+						var tableRow = document.createElement("TR")
+						for (var value in models[key]) {
+							var tableCell
+							if (key == "header") {
+								tableCell = document.createElement("TH")
+							}
+							else {
+								tableCell = document.createElement("TD")
+							}
+
+							console.log(models[key][value])
+							tableCell.innerHTML = models[key][value]
+							tableRow.appendChild(tableCell)
+						}
+						table.appendChild(tableRow)
+					}
+					var oldTable = document.getElementById("models")
+					oldTable.parentNode.replaceChild(table, oldTable)
+					table.setAttribute("id", "models")
+				}
+			}
+			request.open("POST", "resources/models.json", true)
+			request.send();
+		}
+	</script>
+</head>
+
+<body>
+	<header>
+		<h1>Warhammer 40k Army Builder</h1>
+		<button onclick="updateTroopTable()">Update Troop Table</button>
+	</header>
+	  
+	  <main>
+		<section id="troops">
+		  <table id="models">
+		  </table>
+		</section>
+	  </main>
+</body>
+
+</html>
