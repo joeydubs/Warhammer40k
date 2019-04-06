@@ -1,0 +1,24 @@
+table#models
+	each key in Object.keys(models)
+		- model = models[key]
+		tr
+			if key === 'header'
+				each val, item in model
+					th= val
+			else
+				each val, item in model
+					if item === 'tier'
+						each dtieritem, tier in model.tier.tier1
+							td= dtieritem
+					else
+						td= val
+				td
+					button(class="AddModelButton" id=key onclick="addModel(this.id)") Add
+		if model.keywords === 'Vehicle'
+			- tiers = model.tier
+			each dtier, tier in tiers
+				tr
+					unless tier === 'tier1'
+						each val, item in dtier
+							td= val
+						td= "|"

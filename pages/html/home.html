@@ -7,7 +7,7 @@
 	<style>
 		table {
 			table-layout: fixed;
-			width: 50%;
+			width: 72%;
 			text-align: center;
 		}
 
@@ -19,35 +19,25 @@
 			request.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					var response = JSON.parse(request.responseText)
-					console.log(response)
-					var models = response.value["models"]
-					var table = document.createElement("TABLE")
-					console.log(models)
-					for (var key in models) {
-						console.log(key)
-						var tableRow = document.createElement("TR")
-						for (var value in models[key]) {
-							var tableCell
-							if (key == "header") {
-								tableCell = document.createElement("TH")
-							}
-							else {
-								tableCell = document.createElement("TD")
-							}
-
-							console.log(models[key][value])
-							tableCell.innerHTML = models[key][value]
-							tableRow.appendChild(tableCell)
-						}
-						table.appendChild(tableRow)
-					}
-					var oldTable = document.getElementById("models")
-					oldTable.parentNode.replaceChild(table, oldTable)
-					table.setAttribute("id", "models")
+					console.log(typeof response.value)
+					document.getElementById("troops").innerHTML = response.value
 				}
 			}
 			request.open("POST", "resources/models.json", true)
-			request.send();
+			request.send()
+		}
+
+		function addModel(id) {
+			console.log(id)
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Add model request received")
+				}
+			}
+			request.open("POST", "/addmodel")
+			request.setRequestHeader("Content-Type", "application/json")
+			request.send(JSON.stringify({"model": id}))
 		}
 	</script>
 </head>
@@ -55,13 +45,14 @@
 <body>
 	<header>
 		<h1>Warhammer 40k Army Builder</h1>
-		<button onclick="updateTroopTable()">Update Troop Table</button>
+		<nav>
+			<button onclick="updateTroopTable()">Update Troop Table</button>
+			<button onclick="myTroops()">My Troops</button>
+		</nav>
 	</header>
 	  
 	  <main>
 		<section id="troops">
-		  <table id="models">
-		  </table>
 		</section>
 	  </main>
 </body>
