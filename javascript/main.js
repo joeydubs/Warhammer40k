@@ -4,10 +4,15 @@ const unit = require('./unit')
 //const model = require('./model.js')
 const pathToResources = "/../resources/"
 
+
+function getStratagems(army) {
+    // To-Do
+    //var stratagems = []
+
+}
+
 newImport = new fileImport()
 newImport.importJson("models.json", true, pathToResources)
-//console.log(newImport.library)
-
 models = new modelsLib(newImport.library)
 
 var unit1 = new unit()
@@ -30,8 +35,9 @@ unit2.addModel(models.getModel("overlord"))
 console.log(unit1.models)
 console.log(unit1.getSize())
 console.log(unit1.getRole())
-unit1.models.forEach(function(item) {
-    console.log(item.factionkeywords)
-})
+console.log(unit1.keywords)
+console.log(unit1.factionkeywords)
 console.log(unit2.models)
 console.log(unit2.getRole())
+console.log(unit2.keywords)
+console.log(unit2.factionkeywords)
