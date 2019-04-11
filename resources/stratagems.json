@@ -15,10 +15,10 @@
         "stratagem": "Use this Stratagem after a C’TAN SHARD from your army has resolved a Power of the C’tan. Roll a D6 to randomly select a Power of the C’tan from page 113. The C’tan Shard immediately uses the power rolled, even if it has already used that power this phase.",
         "cost": 2,
         "conditions": [
-            "abilities"
+            "factionkeywords"
         ],
-        "abilities": [
-            "Powers of the C'tan"
+        "factionkeywords": [
+            "C'tan Shards"
         ]
     },
     "EMERGENCY INVASION BEAM": {
@@ -26,7 +26,8 @@
         "stratagem": "Use this Stratagem when the last <DYNASTY> Night Scythe and/or Monolith from your army is destroyed. Before removing the model from the battlefield, you can immediately set up a friendly <DYNASTY> unit still on their tomb world wholly within 3\" of the Night Scythe/Monolith and more than 1\" from any enemy models.",
         "cost": 1,
         "conditions": [
-            "keywords"
+            "keywords",
+            "any"
         ],
         "keywords": [
             "Night Scythe",
@@ -60,12 +61,8 @@
         "stratagem": "Use this Stratagem before you set up a unit from a tomb world using the Invasion Beams ability of a Night Scythe from your army, or the Eternity Gate ability of a Monolith from your army. You can set up two units from a tomb world instead of one.",
         "cost": 1,
         "conditions": [
-            "abilities",
-            "keywords"
-        ],
-        "abilities": [
-            "Invasion Beams",
-            "Eternity Gate"
+            "keywords",
+            "any"
         ],
         "keywords": [
             "Night Scythe",
@@ -77,7 +74,6 @@
         "stratagem": "Use this Stratagem after a NECRONS unit from your army has declared its targets in the Shooting phase, but before any hit rolls are made. Pick one of the enemy units that your unit is targeting. The enemy unit does not receive the benefit of cover against your unit’s weapons this phase.",
         "cost": 1,
         "conditions": [
-            "none"
         ]
     },
     "RESURRECTION PROTOCOLS": {
@@ -96,109 +92,236 @@
                 "Trazyn the Infinite"
             ],
             "factionkeywords": [
-                "C'tan Shard"
+                "C'tan Shards"
             ]
         }
+    },
+    "DAMAGE CONTROL OVERRIDE": {
+        "description": "Its self-repair routines overridden, the vehicle briefly operates at peak efficiency despite being critically damaged.",
+        "stratagem": "Use this Stratagem at the start of any turn. Pick a NECRONS VEHICLE from your army. Until the end of this turn, use the top row of that vehicle’s damage table, regardless of how many wounds it has left. This ends immediately if the model is reduced to 0 wounds.",
+        "cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Vehicle"
+        ]
+    },
+    "REPAIR SUBROUTINES": {
+        "description": "When engaged in a battle of attrition, Canoptek constructs react by enabling a series of repairing adaptive subroutines.",
+        "stratagem": "Use this Stratagem at the start of your turn, before making any Reanimation Protocols rolls. Select a CANOPTEK unit from your army that is on the battlefield. That unit gains the Reanimation Protocols ability until the end of your turn."
+        ,"cost": 2,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Canoptek"
+        ]
+    },
+    "SELF-DESTRUCTION": {
+        "description": "The self-destruct protocols of Canoptek Scarabs cause them to explode in a hail of razor-sharp armour fragments.",
+        "stratagem": "Use this Stratagem after a unit of Canoptek Scarabs from your army piles in, but before they make their close combat attacks. Select a Canoptek Scarab Swarm model in your unit and then pick an enemy unit within 1\" of it. Your Canoptek Scarab Swarm model is destroyed. Remove it from the battlefield and roll a D6; on a 2+ the enemy unit you picked suffers D3 mortal wounds."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Canoptek Scarabs"
+        ]
+    },
+    "DISRUPTION FIELDS": {
+        "description": "The thrumming aura of negative energy known as a disruption field warps and dissolves both armour and flesh.",
+        "stratagem": "Use this Stratagem before a NECRONS INFANTRY unit from your army fights in the Fight phase. Increase the Strength characteristic of all models in that unit by 1 until the end of the phase."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Infantry"
+        ]
+    },
+    "ENTROPIC STRIKE": {
+        "description": "The disruption field emanating from this warrior’s weapon is so powerful that it entirely obliterates matter from existence.",
+        "stratagem": "Use this Stratagem in the Fight phase before a NECRONS CHARACTER from your army fights. Invulnerable saves cannot be taken against the first close combat attack made by this character this phase."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Character"
+        ]
+    },
+    "DISPERSION FIELD AMPLIFICATION": {
+        "description": "Lychguard can overcharge the fields of their dispersion shields.",
+        "stratagem": "Use this Stratagem in the Shooting phase when an enemy unit targets a unit of Lychguard from your army equipped with dispersion shields. Your unit’s invulnerable save is improved to 3+ until the end of the phase. In addition, until the end of the phase, each time you roll an unmodified 6 for this unit’s invulnerable saving throw, the unit that made that attack suffers a mortal wound after it has finished making all of its shooting attacks."
+        ,"cost": 2,
+        "conditions": [
+            "wargear",
+            "keywords"
+        ],
+        "wargear": [
+            "Dispersion Shield"
+        ],
+        "keywords": [
+            "Lychguard"
+        ]
+    },
+    "QUANTUM DEFLECTION": {
+        "description": "Necron quantum shielding is a true marvel of techno-arcana, phasing into existence only at the moment of impact.",
+        "stratagem": "Use this Stratagem when an enemy unit targets a VEHICLE in your army that has the Quantum Shielding ability, but before any hit rolls are made. Until the end of the phase, subtract 1 from rolls made for your vehicle’s Quantum Shielding ability to see if damage is ignored for each unsaved wound."
+        ,"cost": 1,
+        "conditions": [
+            "abilities",
+            "keywords"
+        ],
+        "abilities": [
+            "Quantum Shielding"
+        ],
+        "keywords": [
+            "Vehicle"
+        ]
+    },
+    "EXTERMINATION PROTOCOLS": {
+        "description": "Destroyers have sacrificed every last ember of their souls in order to pursue the obliteration of all mortal life.",
+        "stratagem": "Use this Stratagem in your Shooting phase before shooting with a Destroyer Lord, a unit of Destroyers or a unit of Heavy Destroyers from your army. Re-roll failed hit and wound rolls for that unit until the end of the phase."
+        ,"cost": 1,
+        "conditions": [
+            "keywords",
+            "any"
+        ],
+        "keywords": [
+            "Destroyer Lord",
+            "Destroyers",
+            "Heavy Destroyers"
+        ]
+    },
+    "THE PHAERON’S WILL": {
+        "description": "The generals of the Necron Empire are peerless strategists who have overseen the obliteration of countless civilisations.",
+        "stratagem": "Use this Stratagem after an OVERLORD from your army has used their My Will Be Done or Wave of Command ability. That model can immediately use that ability for a second time this turn."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Overlord"
+        ]
+    },
+    "ADAPTIVE SUBROUTINES": {
+        "description": "The Crypteks have invested their mechanical constructs with complex hunter-killer algorithms.",
+        "stratagem": "Use this Stratagem after a CANOPTEK unit from your army has Advanced. That unit can still shoot and/or charge this turn."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Canoptek"
+        ]
+    },
+    "DIMENSIONAL CORRIDOR": {
+        "description": "Necron Monoliths can redirect a tomb world’s forces by projecting a series of short-ranged dimensional portals.",
+        "stratagem": "Use this Stratagem at the start of your Movement phase. Select a <DYNASTY> INFANTRY unit from your army that is more than 1\" from any enemy models and remove it from the battlefield. Then, set the unit up again so that it is wholly within 3\" of a <DYNASTY> Monolith from your army and more than 1\" from any enemy models. That unit counts as having disembarked from the Monolith this turn and can move normally."
+        ,"cost": 1,
+        "conditions": [
+            "keywords",
+            "all"
+        ],
+        "keywords": [
+            "Infantry",
+            "Monolith"
+        ]
+    },
+    "JUDGEMENT OF THE TRIARCH": {
+        "description": "Those who defy the will of the Triarch are subject to swift and merciless retribution.",
+        "stratagem": "Use this Stratagem before a unit of Triarch Praetorians from your army shoots in the Shooting phase or fights in the Fight phase. Add 1 to hit rolls made for this unit until the end of the phase."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Triarch Praetorians"
+        ]
+    },
+    "GRAVITIC SINGULARITY": {
+        "description": "A pulsing gravitic anomaly appears in the sky over the Obelisk, dragging enemy aircraft into its crushing embrace.",
+        "stratagem": "Use this Stratagem at the start of your Shooting phase. Select an Obelisk from your army. When resolving this model’s Gravity Pulse ability this phase, each enemy unit within range that can FLY suffers D3 mortal wounds on a roll of 4+, instead of a roll of 6."
+        ,"cost": 1,
+        "conditions": [
+            "keywords"
+        ],
+        "keywords": [
+            "Obelisk"
+        ]
+    },
+    "COSMIC POWERS": {
+        "description": "The powers of the C’tan are myriad and terrifying. To battle a fragment of these shackled star gods is to find reality unbound.",
+        "stratagem": "Use this Stratagem at the start of your Movement phase. Select a C’TAN SHARD from your army. That model can replace one of its Powers of the C’tan with a different Power of the C’tan of your choice."
+        ,"cost": 1,
+        "conditions": [
+            "factionkeywords"
+        ],
+        "factionkeywords": [
+            "C'tan Shards"
+        ]
+    },
+    "METHODICAL DESTRUCTION": {
+        "description": "The Sautekh Dynasty excel in systematic killing, marking each target until it is completely obliterated.",
+        "stratagem": "Use this Stratagem after a SAUTEKH unit from your army has inflicted an unsaved wound on an enemy unit. Add 1 to hit rolls for friendly SAUTEKH units that target the same enemy unit this phase."
+        ,"cost": 2,
+        "conditions": [
+            "factionkeywords"
+        ],
+        "factionkeywords": [
+            "Sautekh"
+        ]
+    },
+    "RECLAIM A LOST EMPIRE": {
+        "description": "The Nihilakh seek to rule the galaxy, and once they have claimed a domain it is almost impossible to drive them from it.",
+        "stratagem": "Use this Stratagem at the end of your turn. Select a NIHILAKH unit from your army. If the unit is within 3\" of an objective marker, or if it did not move for any reason during its turn, then until the start of your next turn you can add 1 to saving throws made for that unit and increase the Attacks characteristic of models in that unit by 1."
+        ,"cost": 2,
+        "conditions": [
+            "factionkeywords"
+        ],
+        "factionkeywords": [
+            "Nihilakh"
+        ]
+    },
+    "TRANSLOCATION CRYPT": {
+        "description": "Masters of teleportation technology, the Nephrekh ride into battle upon blinding beams of light.",
+        "stratagem": "Use this Stratagem during deployment. You can set up a NEPHREKH INFANTRY or SWARM unit from your army in a translocation crypt instead of placing it on the battlefield. At the end of any of your Movement phases this unit can translocate into battle – set it up anywhere on the battlefield that is more than 9\" away from any enemy models."
+        ,"cost": 1,
+        "conditions": [
+            "factionkeywords",
+            "keywords",
+            "any"
+        ],
+        "factionkeywords": [
+            "Nephrekh"
+        ],
+        "keywords": [
+            "Infantry",
+            "Swarm"
+        ]
+    },
+    "BLOOD RITES": {
+        "description": "Novokh’s warriors have mastered the arts of martial warfare, and their deathless bodies allow them to fight on tirelessly.",
+        "stratagem": "Use this Stratagem at the end of the Fight phase. Select a NOVOKH unit from your army – that unit can immediately fight for a second time."
+        ,"cost": 3,
+        "conditions": [
+            "factionkeywords"
+        ],
+        "factionkeywords": [
+            "Novokh"
+        ]
+    },
+    "TALENT FOR ANNIHILATION": {
+        "description": "The Mephrit seek not merely to defeat their foes, but to entirely expunge them from the face of the galaxy.",
+        "stratagem": "Use this Stratagem before a MEPHRIT unit from your army attacks in the Shooting phase. Each time you make an unmodified hit roll of 6 for a model in that unit, you can make one additional hit roll for that model with the same weapon against the same target. These additional hit rolls cannot themselves generate any further hit rolls."
+        ,"cost": 1,
+        "conditions": [
+            "factionkeywords"
+        ],
+        "factionkeywords": [
+            "Mephrit"
+        ]
     }
 }
-
-DAMAGE CONTROL OVERRIDE
-Necrons Stratagem
-Its self-repair routines overridden, the vehicle briefly operates at peak efficiency despite being critically damaged.
-Use this Stratagem at the start of any turn. Pick a NECRONS VEHICLE from your army. Until the end of this turn, use the top row of that vehicle’s damage table, regardless of how many wounds it has left. This ends
-immediately if the model is reduced to 0 wounds.
-REPAIR SUBROUTINES
-Necrons Stratagem
-When engaged in a battle of attrition, Canoptek constructs react by enabling a series of repairing adaptive subroutines.
-Use this Stratagem at the start of your turn, before making any Reanimation Protocols rolls. Select a CANOPTEK unit from your army that is on the battlefield. That unit gains the
-Reanimation Protocols ability until the end of your turn.
-SELF-DESTRUCTION
-Necrons Stratagem
-The self-destruct protocols of Canoptek Scarabs cause them to explode in a hail of razor-sharp armour fragments.
-Use this Stratagem after a unit of Canoptek Scarabs from your army piles in, but before they make their close combat attacks. Select a Canoptek Scarab Swarm model in your unit and then pick an enemy unit within 1" of it. Your Canoptek Scarab Swarm model is destroyed. Remove it from the battlefield and roll a D6; on a 2+ the enemy unit
-you picked suffers D3 mortal wounds.
-DISRUPTION FIELDS
-Necrons Stratagem
-The thrumming aura of negative energy known as a disruption field warps and dissolves both armour and flesh.
-Use this Stratagem before a NECRONS INFANTRY unit from your army fights in the Fight phase. Increase the Strength characteristic of all models in that unit by 1 until
-the end of the phase.
-ENTROPIC STRIKE
-Necrons Stratagem
-The disruption field emanating from this warrior’s weapon is so powerful that it entirely obliterates matter from existence.
-Use this Stratagem in the Fight phase before a NECRONS CHARACTER from your army fights. Invulnerable saves cannot be taken against the first close combat attack made
-DISPERSION FIELD AMPLIFICATION
-Necrons Stratagem
-Lychguard can overcharge the fields of their dispersion shields.
-Use this Stratagem in the Shooting phase when an
-enemy unit targets a unit of Lychguard from your army equipped with dispersion shields. Your unit’s invulnerable save is improved to 3+ until the end of the phase. In addition, until the end of the phase, each time you roll an unmodified 6 for this unit’s invulnerable saving throw, the unit that made that attack suffers a mortal wound after it
-has finished making all of its shooting attacks.
-QUANTUM DEFLECTION
-Necrons Stratagem
-Necron quantum shielding is a true marvel of techno-arcana, phasing into existence only at the moment of impact.
-Use this Stratagem when an enemy unit targets a VEHICLE in your army that has the Quantum Shielding ability, but before any hit rolls are made. Until the end of the phase, subtract 1 from rolls made for your vehicle’s Quantum Shielding ability to see if damage is ignored for
-each unsaved wound.
-EXTERMINATION PROTOCOLS
-Necrons Stratagem
-Destroyers have sacrificed every last ember of their souls in order to pursue the obliteration of all mortal life.
-Use this Stratagem in your Shooting phase before shooting with a Destroyer Lord, a unit of Destroyers or a unit of Heavy Destroyers from your army. Re-roll failed hit and
-wound rolls for that unit until the end of the phase.
-THE PHAERON’S WILL
-Necrons Stratagem
-The generals of the Necron Empire are peerless strategists who have overseen the obliteration of countless civilisations.
-Use this Stratagem after an OVERLORD from your army has used their My Will Be Done or Wave of Command ability. That model can immediately use that ability for a
-second time this turn.
-ADAPTIVE SUBROUTINES
-Necrons Stratagem
-The Crypteks have invested their mechanical constructs with complex hunter-killer algorithms.
-Use this Stratagem after a CANOPTEK unit from your army has Advanced. That unit can still shoot and/or
-charge this turn.
-by this character this phase.
-DIMENSIONAL CORRIDOR
-Necrons Stratagem
-Necron Monoliths can redirect a tomb world’s forces by projecting a series of short-ranged dimensional portals.
-Use this Stratagem at the start of your Movement phase. Select a <DYNASTY> INFANTRY unit from your army that is more than 1" from any enemy models and remove
-it from the battlefield. Then, set the unit up again so that it is wholly within 3" of a <DYNASTY> Monolith from your army and more than 1" from any enemy models. That unit counts as having disembarked from the Monolith this turn
-and can move normally.
-JUDGEMENT OF THE TRIARCH
-Necrons Stratagem
-Those who defy the will of the Triarch are subject to swift and merciless retribution.
-Use this Stratagem before a unit of Triarch Praetorians from your army shoots in the Shooting phase or fights in the Fight phase. Add 1 to hit rolls made for this unit until
-the end of the phase.
-GRAVITIC SINGULARITY
-Necrons Stratagem
-A pulsing gravitic anomaly appears in the sky over the Obelisk, dragging enemy aircraft into its crushing embrace.
-Use this Stratagem at the start of your Shooting phase. Select an Obelisk from your army. When resolving this model’s Gravity Pulse ability this phase, each enemy unit within range that can FLY suffers D3 mortal wounds on a
-roll of 4+, instead of a roll of 6.
-COSMIC POWERS
-Necrons Stratagem
-The powers of the C’tan are myriad and terrifying. To battle a fragment of these shackled star gods is to find reality unbound.
-Use this Stratagem at the start of your Movement phase. Select a C’TAN SHARD from your army. That model can replace one of its Powers of the C’tan with a different
-Power of the C’tan of your choice.
-‘I have seen the death of stars, mortal. I have seen the gods themselves bowed and broken, enslaved to the whims of the empire. And you think to resist?’
-METHODICAL DESTRUCTION
-Sautekh Stratagem
-The Sautekh Dynasty excel in systematic killing, marking each target until it is completely obliterated.
-Use this Stratagem after a SAUTEKH unit from your army has inflicted an unsaved wound on an enemy unit. Add
-1 to hit rolls for friendly SAUTEKH units that target the
-same enemy unit this phase.
-RECLAIM A LOST EMPIRE
-Nihilakh Stratagem
-The Nihilakh seek to rule the galaxy, and once they have claimed a domain it is almost impossible to drive them from it.
-Use this Stratagem at the end of your turn. Select a NIHILAKH unit from your army. If the unit is within 3" of an objective marker, or if it did not move for any reason during its turn, then until the start of your next turn you can add 1 to saving throws made for that unit and increase
-the Attacks characteristic of models in that unit by 1.
-TRANSLOCATION CRYPT
-Nephrekh Stratagem
-Masters of teleportation technology, the Nephrekh ride into battle upon blinding beams of light.
-Use this Stratagem during deployment. You can set up a NEPHREKH INFANTRY or SWARM unit from your army in a translocation crypt instead of placing it on the battlefield. At the end of any of your Movement phases this unit can translocate into battle – set it up anywhere on the battlefield
-that is more than 9" away from any enemy models.
-BLOOD RITES
-Novokh Stratagem
-Novokh’s warriors have mastered the arts of martial warfare, and their deathless bodies allow them to fight on tirelessly.
-Use this Stratagem at the end of the Fight phase. Select a NOVOKH unit from your army – that unit can
-immediately fight for a second time.
-TALENT FOR ANNIHILATION
-Mephrit Stratagem
-The Mephrit seek not merely to defeat their foes, but to entirely expunge them from the face of the galaxy.
-Use this Stratagem before a MEPHRIT unit from your army attacks in the Shooting phase. Each time you make an unmodified hit roll of 6 for a model in that unit, you can make one additional hit roll for that model with the same weapon against the same target. These additional hit
-- Overlord Lacras of the Mephrit Dynasty
-rolls cannot themselves generate any further hit rolls.
