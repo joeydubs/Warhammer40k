@@ -2,10 +2,11 @@ const fileImport = require('./fileimport')
 const modelsLib = require('./modellib')
 const unit = require('./unit')
 //const model = require('./model.js')
+const pathToResources = "/../resources/"
 
 newImport = new fileImport()
-newImport.importJson("models.json", true)
-console.log(newImport.library)
+newImport.importJson("models.json", true, pathToResources)
+//console.log(newImport.library)
 
 models = new modelsLib(newImport.library)
 

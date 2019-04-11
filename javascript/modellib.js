@@ -1,4 +1,4 @@
-const model = require('./model.js')
+const model = require('./model')
 
 class ModelLib {
     constructor(lib) {
