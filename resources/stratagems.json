@@ -26,8 +26,7 @@
         "stratagem": "Use this Stratagem when the last <DYNASTY> Night Scythe and/or Monolith from your army is destroyed. Before removing the model from the battlefield, you can immediately set up a friendly <DYNASTY> unit still on their tomb world wholly within 3\" of the Night Scythe/Monolith and more than 1\" from any enemy models.",
         "cost": 1,
         "conditions": [
-            "keywords",
-            "any"
+            "keywords"
         ],
         "keywords": [
             "Night Scythe",
@@ -61,8 +60,7 @@
         "stratagem": "Use this Stratagem before you set up a unit from a tomb world using the Invasion Beams ability of a Night Scythe from your army, or the Eternity Gate ability of a Monolith from your army. You can set up two units from a tomb world instead of one.",
         "cost": 1,
         "conditions": [
-            "keywords",
-            "any"
+            "keywords"
         ],
         "keywords": [
             "Night Scythe",
@@ -185,8 +183,7 @@
         "stratagem": "Use this Stratagem in your Shooting phase before shooting with a Destroyer Lord, a unit of Destroyers or a unit of Heavy Destroyers from your army. Re-roll failed hit and wound rolls for that unit until the end of the phase.",
         "cost": 1,
         "conditions": [
-            "keywords",
-            "any"
+            "keywords"
         ],
         "keywords": [
             "Destroyer Lord",
@@ -290,8 +287,7 @@
         "cost": 1,
         "conditions": [
             "factionkeywords",
-            "keywords",
-            "any"
+            "keywords"
         ],
         "factionkeywords": [
             "Nephrekh"
