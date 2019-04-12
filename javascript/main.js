@@ -1,6 +1,7 @@
 const fileImport = require('./fileimport')
 const modelsLib = require('./modellib')
 const unit = require('./unit')
+const army = require('./army')
 //const model = require('./model.js')
 const pathToResources = "/../resources/"
 
@@ -14,7 +15,7 @@ function getStratagems(army) {
 
     for (key in allStratagems) {
         stratagem = allStratagems[key]
-        console.log(stratagem)
+        console.log(key)
 
         keywordsOK = true
         factionkeywordsOK = true
@@ -29,46 +30,46 @@ function getStratagems(army) {
             conditions.forEach(function (switchValue) {
                 switch (switchValue) {
                     case "keywords":
-                        console.log("keywords case")
+                        //console.log("keywords case")
                         keywordsArray = stratagem[switchValue]
                         if (all) {
-                            console.log("all is true")
+                            //console.log("all is true")
                             keywordsArray.forEach(function (arrayVal) {
                                 (army.keywords.includes(arrayVal) && keywordsOK) ? keywordsOK = true : keywordsOK = false
-                                console.log("Array value: " + arrayVal)
-                                console.log("keywordsOK: " + keywordsOK)
+                                //console.log("Array value: " + arrayVal)
+                                //console.log("keywordsOK: " + keywordsOK)
                             })
                         }
                         else {
-                            console.log("all is false")
+                            //console.log("all is false")
                             keywordsOK = false
                             keywordsArray.forEach(function (arrayVal) {
                                 (army.keywords.includes(arrayVal) && !keywordsOK) ? keywordsOK = true : keywordsOK = false
-                                console.log("Array value: " + arrayVal)
-                                console.log("keywordsOK: " + keywordsOK)
+                                //console.log("Array value: " + arrayVal)
+                                //console.log("keywordsOK: " + keywordsOK)
                             })
                         }
                         break
                     case "wargear":
-                        console.log("wargear case")
+                        //console.log("wargear case")
                         wargearArray = stratagem[switchValue]
                         wargearArray.forEach(function (arrayVal) {
                             (army.wargear.includes(arrayVal)) ? wargearOK = true : wargearOK = false
-                            console.log("Array value: " + arrayVal)
-                            console.log("wargearOK: " + wargearOK)
+                            //console.log("Array value: " + arrayVal)
+                            //console.log("wargearOK: " + wargearOK)
                         })
                         break
                     case "factionkeywords":
-                        console.log("factionkeywords Case")
+                        //console.log("factionkeywords Case")
                         factionkeywordsArray = stratagem[switchValue]
                         factionkeywordsArray.forEach(function (arrayVal) {
                             (army.factionkeywords.includes(arrayVal)) ? factionkeywordsOK = true : factionkeywordsOK = false
-                            console.log("Array value: " + arrayVal)
-                            console.log("factionkeywordsOK: " + factionkeywordsOK)
+                            //console.log("Array value: " + arrayVal)
+                            //console.log("factionkeywordsOK: " + factionkeywordsOK)
                         })
                         break
                     case "excludes":
-                        console.log("excludes Case")
+                        //console.log("excludes Case")
                         excludesArray = stratagem[switchValue]
                         excludesArray.forEach(function (arrayVal) {
                             if (excludesOK) {
@@ -82,8 +83,8 @@ function getStratagems(army) {
                                     excludesOK = false
                                 }
 
-                                console.log("Array value: " + arrayVal)
-                                console.log("excludesOK: " + excludesOK)
+                                //console.log("Array value: " + arrayVal)
+                                //console.log("excludesOK: " + excludesOK)
                             }
                         })
                         break
@@ -128,4 +129,11 @@ console.log(unit2.getRole())
 console.log(unit2.keywords)
 console.log(unit2.factionkeywords)
 
-console.log(getStratagems(unit1))
+//console.log(getStratagems(unit1))
+
+myArmy = new army()
+
+myArmy.addUnit(unit1)
+myArmy.addUnit(unit2)
+
+console.log(getStratagems(myArmy))
