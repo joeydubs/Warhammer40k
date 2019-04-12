@@ -42,6 +42,12 @@ class Unit {
                 this.keywords.push(model.keywords[i])
             }
         }
+
+        for (var i = 0; i < model.wargear.length; i++) {
+            if (!this.wargear.includes(model.wargear[i])) {
+                this.wargear.push(model.wargear[i])
+            }
+        }
     }
 
     removeModel(index) {

@@ -23,80 +23,76 @@ function getStratagems(army) {
 
         addStratagem = false
 
-        for (i = 0; i < army.models.length; i++) {
-            model = army.models[i]
-            console.log(model.name)
-            if (!addStratagem) {
-                conditions = stratagem.conditions
-                all = (conditions.includes("all")) ? true : false
-                conditions.forEach(function (switchValue) {
-                    switch (switchValue) {
-                        case "keywords":
-                            console.log("keywords case")
-                            keywordsArray = stratagem[switchValue]
-                            if (all) {
-                                console.log("all is true")
-                                keywordsArray.forEach(function (arrayVal) {
-                                    (model.keywords.includes(arrayVal) && addStratagem) ? keywordsOK = true : keywordsOK = false
-                                    console.log("Array value: " + arrayVal)
-                                    console.log("keywordsOK: " + keywordsOK)
-                                })
-                            }
-                            else {
-                                console.log("all is false")
-                                keywordsOK = false
-                                keywordsArray.forEach(function (arrayVal) {
-                                    (model.keywords.includes(arrayVal) && !keywordsOK) ? keywordsOK = true : keywordsOK = false
-                                    console.log("Array value: " + arrayVal)
-                                    console.log("keywordsOK: " + keywordsOK)
-                                })
-                            }
-                            break
-                        case "wargear":
-                            console.log("wargear case")
-                            wargearArray = stratagem[switchValue]
-                            wargearArray.forEach(function (arrayVal) {
-                                (model.wargear.includes(arrayVal)) ? wargearOK = true : wargearOK = false
+        if (!addStratagem) {
+            conditions = stratagem.conditions
+            all = (conditions.includes("all")) ? true : false
+            conditions.forEach(function (switchValue) {
+                switch (switchValue) {
+                    case "keywords":
+                        console.log("keywords case")
+                        keywordsArray = stratagem[switchValue]
+                        if (all) {
+                            console.log("all is true")
+                            keywordsArray.forEach(function (arrayVal) {
+                                (army.keywords.includes(arrayVal) && keywordsOK) ? keywordsOK = true : keywordsOK = false
                                 console.log("Array value: " + arrayVal)
-                                console.log("wargearOK: " + wargearOK)
+                                console.log("keywordsOK: " + keywordsOK)
                             })
-                            break
-                        case "factionkeywords":
-                            console.log("factionkeywords Case")
-                            factionkeywordsArray = stratagem[switchValue]
-                            factionkeywordsArray.forEach(function (arrayVal) {
-                                (model.factionkeywords.includes(arrayVal)) ? factionkeywordsOK = true : factionkeywordsOK = false
+                        }
+                        else {
+                            console.log("all is false")
+                            keywordsOK = false
+                            keywordsArray.forEach(function (arrayVal) {
+                                (army.keywords.includes(arrayVal) && !keywordsOK) ? keywordsOK = true : keywordsOK = false
                                 console.log("Array value: " + arrayVal)
-                                console.log("factionkeywordsOK: " + factionkeywordsOK)
+                                console.log("keywordsOK: " + keywordsOK)
                             })
-                            break
-                        case "excludes":
-                            console.log("excludes Case")
-                            excludesArray = stratagem[switchValue]
-                            excludesArray.forEach(function (arrayVal) {
-                                if (excludesOK) {
-                                    if (model.factionkeywords.includes(arrayVal)) {
-                                        excludesOK = false
-                                    }
-                                    if (model.keywords.includes(arrayVal)) {
-                                        excludesOK = false
-                                    }
-                                    if (model.wargear.includes(arrayVal)) {
-                                        excludesOK = false
-                                    }
-                                    
-                                    console.log("Array value: " + arrayVal)
-                                    console.log("excludesOK: " + excludesOK)
+                        }
+                        break
+                    case "wargear":
+                        console.log("wargear case")
+                        wargearArray = stratagem[switchValue]
+                        wargearArray.forEach(function (arrayVal) {
+                            (army.wargear.includes(arrayVal)) ? wargearOK = true : wargearOK = false
+                            console.log("Array value: " + arrayVal)
+                            console.log("wargearOK: " + wargearOK)
+                        })
+                        break
+                    case "factionkeywords":
+                        console.log("factionkeywords Case")
+                        factionkeywordsArray = stratagem[switchValue]
+                        factionkeywordsArray.forEach(function (arrayVal) {
+                            (army.factionkeywords.includes(arrayVal)) ? factionkeywordsOK = true : factionkeywordsOK = false
+                            console.log("Array value: " + arrayVal)
+                            console.log("factionkeywordsOK: " + factionkeywordsOK)
+                        })
+                        break
+                    case "excludes":
+                        console.log("excludes Case")
+                        excludesArray = stratagem[switchValue]
+                        excludesArray.forEach(function (arrayVal) {
+                            if (excludesOK) {
+                                if (army.factionkeywords.includes(arrayVal)) {
+                                    excludesOK = false
                                 }
-                            })
-                            break
-                        default:
-                            console.log("Default Case. Switch value: " + switchValue)
-                    }
-                })
-                addStratagem = keywordsOK && factionkeywordsOK && wargearOK && excludesOK
-                console.log("Switches complete - addStratagem: " + addStratagem)
-            }
+                                if (army.keywords.includes(arrayVal)) {
+                                    excludesOK = false
+                                }
+                                if (army.wargear.includes(arrayVal)) {
+                                    excludesOK = false
+                                }
+
+                                console.log("Array value: " + arrayVal)
+                                console.log("excludesOK: " + excludesOK)
+                            }
+                        })
+                        break
+                    default:
+                        console.log("Default Case. Switch value: " + switchValue)
+                }
+            })
+            addStratagem = keywordsOK && factionkeywordsOK && wargearOK && excludesOK
+            console.log("Switches complete - addStratagem: " + addStratagem)
         }
 
         if (addStratagem) {
@@ -118,7 +114,7 @@ unit2.setFaction("Mephrit")
 
 unit1.addModel(models.getModel("nightbringer"))
 unit1.addModel(models.getModel("monolith"))
-//unit1.addModel(models.getModel("lychguard"))
+unit1.addModel(models.getModel("lychguard"))
 
 unit2.addModel(models.getModel("overlord"))
 

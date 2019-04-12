@@ -4,9 +4,9 @@
         "stratagem": "Use this Stratagem before making Reanimation Protocols rolls for a unit from your army. You can re-roll Reanimation Protocols rolls of 1 for that unit this turn.",
         "cost": 2,
         "conditions": [
-            "abilities"
+            "wargear"
         ],
-        "abilities": [
+        "wargear": [
             "Reanimation Protocol"
         ]
     },
