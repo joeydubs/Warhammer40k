@@ -2,6 +2,7 @@ class Model {
     constructor(attributes) {
         //['console.log(attributes)
         this.name = attributes.name
+        this.wargear = attributes.wargear
         this.factionkeywords = attributes.factionkeywords
         this.keywords = attributes.keywords
         this.role = attributes.role

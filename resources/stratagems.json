@@ -84,14 +84,10 @@
         "keywords": [
             "Character"
         ],
-        "excludes": {
-            "keywords": [
-                "Trazyn the Infinite"
-            ],
-            "factionkeywords": [
-                "C'tan Shards"
-            ]
-        }
+        "excludes": [
+            "Trazyn the Infinite",
+            "C'tan Shards"
+        ]
     },
     "DAMAGE CONTROL OVERRIDE": {
         "description": "Its self-repair routines overridden, the vehicle briefly operates at peak efficiency despite being critically damaged.",
@@ -168,10 +164,10 @@
         "stratagem": "Use this Stratagem when an enemy unit targets a VEHICLE in your army that has the Quantum Shielding ability, but before any hit rolls are made. Until the end of the phase, subtract 1 from rolls made for your vehicle’s Quantum Shielding ability to see if damage is ignored for each unsaved wound.",
         "cost": 1,
         "conditions": [
-            "abilities",
+            "wargear",
             "keywords"
         ],
-        "abilities": [
+        "wargear": [
             "Quantum Shielding"
         ],
         "keywords": [

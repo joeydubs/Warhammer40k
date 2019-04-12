@@ -2,9 +2,10 @@ const Model = require('./model')
 
 class Unit {
     constructor() {
-        this.models = [];
-        this.keywords = [];
-        this.factionkeywords = [];
+        this.models = []
+        this.wargear = []
+        this.keywords = []
+        this.factionkeywords = []
     }
 
     setFaction(faction) {
