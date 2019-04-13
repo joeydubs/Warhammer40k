@@ -14,6 +14,8 @@
 	</style>
 
 	<script>
+		var modelList = {}
+
 		function updateTroopTable() {
 			var request = new XMLHttpRequest()
 			request.onreadystatechange = function() {
@@ -32,7 +34,13 @@
 			request.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Get Model List request received")
-					document.getElementById("troops").innerHTML = request.responseText
+					modelList = JSON.parse(request.responseText)
+					for (model in modelList) {
+						var option = document.createElement("option")
+						option.innerHTML = model
+						document.getElementById("model-selector").add(option)
+					}
+					document.getElementById("unit-builder").style.visibility = "visible"
 				}
 			}
 			request.open("POST", "/getModelList")
@@ -53,6 +61,12 @@
 	  
 	  <main>
 		<section id="troops">
+		</section>
+		<section>
+			<form id="unit-builder" hidden>
+				<select id="model-selector">
+				</select>
+			</form>
 		</section>
 	  </main>
 </body>
