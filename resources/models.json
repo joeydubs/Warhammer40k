@@ -39,7 +39,7 @@
             "Infantry",
             "Warriors"
         ],
-        "role": "Troop",
+        "role": "Troops",
         "m": 5,
         "ws": 3,
         "bs": 3,
@@ -63,7 +63,7 @@
             "Infantry",
             "Immortals"
         ],
-        "role": "Troop",
+        "role": "Troops",
         "m": 5,
         "ws": 3,
         "bs": 3,
@@ -88,7 +88,7 @@
             "Infantry",
             "Lychguard"
         ],
-        "role": "Elite",
+        "role": "Elites",
         "m": 5,
         "ws": 3,
         "bs": 3,
@@ -114,7 +114,7 @@
             "Vehicle",
             "Triarch Stalker"
         ],
-        "role": "Elite",
+        "role": "Elites",
         "tiers": {
             "tier1": {
                 "m": 10,
@@ -174,7 +174,7 @@
             "Fly",
             "C'tan Shard of the Nightbringer"
         ],
-        "role": "Elite",
+        "role": "Elites",
         "m": 8,
         "ws": 2,
         "bs": 2,
@@ -208,7 +208,7 @@
             "Fly",
             "Monolith"
         ],
-        "role": "Elite",
+        "role": "Heavy Support",
         "tiers": {
             "tier1": {
                 "m": 6,
