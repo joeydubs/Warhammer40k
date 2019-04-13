@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
 	<title>Warhammer 40k</title>
 
 	<style>
-		table {
-			table-layout: fixed;
-			width: 72%;
-			text-align: center;
-		}
-
 	</style>
 
 	<script>
-		var modelList = {}
+		var modelList = []
+		var models = []
 
 		function updateTroopTable() {
 			var request = new XMLHttpRequest()
-			request.onreadystatechange = function() {
+			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					var response = JSON.parse(request.responseText)
 					console.log(typeof response.value)
@@ -29,22 +25,81 @@
 			request.send()
 		}
 
-		function getModelList() {
+		function fetchModelList() {
 			var request = new XMLHttpRequest()
-			request.onreadystatechange = function() {
+			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Get Model List request received")
 					modelList = JSON.parse(request.responseText)
+					console.log(modelList)
+					document.getElementById("model-selector").innerHTML = ""
 					for (model in modelList) {
 						var option = document.createElement("option")
-						option.innerHTML = model
+						option.innerHTML = modelList[model]
 						document.getElementById("model-selector").add(option)
 					}
-					document.getElementById("unit-builder").style.visibility = "visible"
+					document.getElementById("unit-builder").removeAttribute("hidden")
 				}
 			}
 			request.open("POST", "/getModelList")
 			request.send()
+		}
+
+		function fetchModelStats() {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Fetch Model Stats request received")
+					var modelStats = JSON.parse(request.responseText)
+					displayStats(modelStats)
+				}
+			}
+			request.open("POST", "/getModelStats")
+			request.setRequestHeader("Content-Type", "application/json");
+			request.send(JSON.stringify({"model": document.getElementById("model-selector").value}))
+		}
+
+		function addModel() {
+			var model = document.getElementById("model-selector").value
+			models.push(model)
+			generateTable(models)
+		}
+
+		function removeModel(index) {
+			models.splice(index, 1)
+			generateTable(models)
+		}
+
+		function displayStats(modelStats) {
+			document.getElementById("model-stats").innerHTML = ""
+			var row1 = document.createElement("tr")
+			var row2 = document.createElement("tr")
+			for (key in modelStats) {
+				var th = document.createElement("th")
+				th.innerText = key
+				row1.appendChild(th)
+				var td = document.createElement("td")
+				td.innerText = modelStats[key]
+				row2.appendChild(td)
+			}
+			document.getElementById("model-stats").appendChild(row1)
+			document.getElementById("model-stats").appendChild(row2)
+		}
+
+		function generateTable(elementArray) {
+			var table = document.createElement("table")
+			table.id = "unit-models"
+			elementArray.forEach(element => {
+				var row = document.createElement("tr")
+				var remove = document.createElement("td")
+				var name = document.createElement("td")
+				remove.innerHTML = `<button onclick='removeModel(${models.indexOf(element)})'>Remove</button>`
+				name.innerHTML = element
+				row.appendChild(remove)
+				row.appendChild(name)
+				table.appendChild(row)
+			});
+			document.getElementById("unit-models").replaceWith(table)
 		}
 	</script>
 </head>
@@ -55,20 +110,23 @@
 		<nav>
 			<button onclick="updateTroopTable()">Update Troop Table</button>
 			<button onclick="myTroops()">My Troops</button>
-			<button onclick="getModelList()">Model List</button>
+			<button onclick="fetchModelList()">Model List</button>
 		</nav>
 	</header>
-	  
-	  <main>
+
+	<main>
 		<section id="troops">
 		</section>
-		<section>
-			<form id="unit-builder" hidden>
-				<select id="model-selector">
-				</select>
-			</form>
+		<section id="unit-builder" hidden>
+			<select id="model-selector"></select>
+			<button onclick="fetchModelStats()">Get Stats</button>
+			<button onclick="addModel()">Add</button>
+			<section>
+				<table id="model-stats"></table>
+			</section>
+			<table id="unit-models"></table>
 		</section>
-	  </main>
+	</main>
 </body>
 
 </html>

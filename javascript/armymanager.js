@@ -123,7 +123,11 @@ class ArmyManager {
     }
 
     getModelList() {
-        return this.models.library
+        return Object.keys(this.models.library)
+    }
+
+    getModelStats(model) {
+        return this.models.library[model]
     }
 
     getArmy() {
