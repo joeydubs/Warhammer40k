@@ -1,13 +1,15 @@
+const fs = require('fs')
 const http = require('http')
 const url = require('url')
 const express = require('express')
+const path = require('path')
 const pug = require('pug')
 
-const app = express()
-const path = require('path')
 const port = 5300
+const app = express()
 
-const fs = require('fs')
+const ArmyManager = require('./javascript/armymanager')
+army = new ArmyManager()
 
 app.use(express.json())
 
@@ -31,9 +33,12 @@ app.post('/resources/models.json', function (req, res) {
 	res.send(JSON.stringify(payload))
 })
 
-app.post('/addmodel', function (req, res) {
-	var model = req.body.model
-	console.log(model)
+app.post('/getModelList', function (req, res) {
+	var modelList = army.getModelList();
+
+	res.status(200)
+	res.type('json')
+	res.send(JSON.stringify(modelList))
 })
 
 app.listen(port, function () {
