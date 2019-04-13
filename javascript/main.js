@@ -1,14 +1,19 @@
-const fileImport = require('./fileimport')
-const modelsLib = require('./modellib')
-const unit = require('./unit')
-const army = require('./army')
+const FileImport = require('./fileimport')
+const ModelsLib = require('./modellib')
+const Unit = require('./unit')
+const Army = require('./army')
 //const model = require('./model.js')
 const pathToResources = "/../resources/"
 
-newImport = new fileImport()
+newImport = new FileImport()
 
 newImport.importJson("stratagems.json", true, pathToResources)
 allStratagems = newImport.library
+
+newImport.importJson("models.json", true, pathToResources)
+models = new ModelsLib(newImport.library)
+
+myArmy = new Army()
 
 function getStratagems(army) {
     stratagems = {}
@@ -104,36 +109,30 @@ function getStratagems(army) {
     return stratagems
 }
 
-newImport.importJson("models.json", true, pathToResources)
-models = new modelsLib(newImport.library)
+function createUnit (modelArray) {
+    unit = new Unit()
 
-var unit1 = new unit()
-var unit2 = new unit()
+    modelArray.forEach(element => {
+        model = models.getModel(element)
+        unit.addModel(model)
+    })
 
-unit1.setFaction("Mephrit")
-unit2.setFaction("Mephrit")
+    myArmy.addUnit(unit)
+}
 
-unit1.addModel(models.getModel("nightbringer"))
-unit1.addModel(models.getModel("monolith"))
-unit1.addModel(models.getModel("lychguard"))
+function getModelList() {
+    return models.library
+}
 
-unit2.addModel(models.getModel("overlord"))
+function getArmy () {
+    return myArmy
+}
 
-console.log(unit1.models)
-console.log(unit1.getSize())
-console.log(unit1.getRole())
-console.log(unit1.keywords)
-console.log(unit1.factionkeywords)
-console.log(unit2.models)
-console.log(unit2.getRole())
-console.log(unit2.keywords)
-console.log(unit2.factionkeywords)
+modelArray = ["immortal", "immortal", "immortal", "immortal", "immortal"]
+modelArray2 = ["overlord"]
+modelArray3 = ["stalker"]
 
-//console.log(getStratagems(unit1))
+createUnit(modelArray)
+createUnit(modelArray2)
 
-myArmy = new army()
-
-myArmy.addUnit(unit1)
-myArmy.addUnit(unit2)
-
-console.log(getStratagems(myArmy))
+console.log(getArmy())
