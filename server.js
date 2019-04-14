@@ -51,6 +51,14 @@ app.post('/getModelStats', function (req, res) {
 	res.send(JSON.stringify(modelStats))
 })
 
+app.post('/createUnit', function(req, res) {
+	var modelList = req.body
+	console.log(modelList)
+	army.createUnit(modelList)
+	res.status(200)
+	res.send()
+})
+
 app.listen(port, function () {
 	console.log("Warhammer server is listening on port " + port + "!")
 })

@@ -56,17 +56,22 @@
 			}
 			request.open("POST", "/getModelStats")
 			request.setRequestHeader("Content-Type", "application/json");
-			request.send(JSON.stringify({"model": document.getElementById("model-selector").value}))
+			request.send(JSON.stringify({ "model": document.getElementById("model-selector").value }))
 		}
 
 		function addModel() {
 			var model = document.getElementById("model-selector").value
 			models.push(model)
+			document.getElementById("model-stats").setAttribute("hidden", true)
+			document.getElementById("submit-unit").removeAttribute("disabled")
 			generateTable(models)
 		}
 
 		function removeModel(index) {
 			models.splice(index, 1)
+			if (models.length == 0) {
+				document.getElementById("submit-unit").setAttribute("disabled", true)
+			}
 			generateTable(models)
 		}
 
@@ -84,6 +89,7 @@
 			}
 			document.getElementById("model-stats").appendChild(row1)
 			document.getElementById("model-stats").appendChild(row2)
+			document.getElementById("model-stats").removeAttribute("hidden")
 		}
 
 		function generateTable(elementArray) {
@@ -100,6 +106,20 @@
 				table.appendChild(row)
 			});
 			document.getElementById("unit-models").replaceWith(table)
+		}
+
+		function createUnit() {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Save Unit request received")
+					models = []
+					document.getElementById("unit-models").innerHTML = ""
+				}
+			}
+			request.open("POST", "/createUnit")
+			request.setRequestHeader("Content-Type", "application/json")
+			request.send(JSON.stringify(models))
 		}
 	</script>
 </head>
@@ -121,10 +141,9 @@
 			<select id="model-selector"></select>
 			<button onclick="fetchModelStats()">Get Stats</button>
 			<button onclick="addModel()">Add</button>
-			<section>
-				<table id="model-stats"></table>
-			</section>
+			<table id="model-stats" hidden></table>
 			<table id="unit-models"></table>
+			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
 		</section>
 	</main>
 </body>
