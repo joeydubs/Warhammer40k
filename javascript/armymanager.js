@@ -131,7 +131,7 @@ class ArmyManager {
     }
 
     getArmy() {
-        return this.army
+        return this.army.units
     }
 }
 

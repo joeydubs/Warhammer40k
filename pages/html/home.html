@@ -9,7 +9,6 @@
 	</style>
 
 	<script>
-		var modelList = []
 		var models = []
 
 		function updateTroopTable() {
@@ -30,7 +29,7 @@
 			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Get Model List request received")
-					modelList = JSON.parse(request.responseText)
+					var modelList = JSON.parse(request.responseText)
 					console.log(modelList)
 					document.getElementById("model-selector").innerHTML = ""
 					for (model in modelList) {
@@ -38,10 +37,11 @@
 						option.innerHTML = modelList[model]
 						document.getElementById("model-selector").add(option)
 					}
+					document.getElementById("army-table").setAttribute("hidden", true)
 					document.getElementById("unit-builder").removeAttribute("hidden")
 				}
 			}
-			request.open("POST", "/getModelList")
+			request.open("POST", "/fetchModelList")
 			request.send()
 		}
 
@@ -54,9 +54,25 @@
 					displayStats(modelStats)
 				}
 			}
-			request.open("POST", "/getModelStats")
+			request.open("POST", "/fetchModelStats")
 			request.setRequestHeader("Content-Type", "application/json");
 			request.send(JSON.stringify({ "model": document.getElementById("model-selector").value }))
+		}
+
+		function fetchArmy() {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Fetch Army request received")
+					document.getElementById("army-table").removeAttribute("hidden")
+					document.getElementById("unit-builder").setAttribute("hidden", true)
+					console.log(JSON.parse(request.responseText))
+					var army = JSON.parse(request.responseText)
+					generateArmyTable(army)
+				}
+			}
+			request.open("POST", "/fetchArmy")
+			request.send()
 		}
 
 		function addModel() {
@@ -64,7 +80,7 @@
 			models.push(model)
 			document.getElementById("model-stats").setAttribute("hidden", true)
 			document.getElementById("submit-unit").removeAttribute("disabled")
-			generateTable(models)
+			generateUnitTable(models)
 		}
 
 		function removeModel(index) {
@@ -72,7 +88,7 @@
 			if (models.length == 0) {
 				document.getElementById("submit-unit").setAttribute("disabled", true)
 			}
-			generateTable(models)
+			generateUnitTable(models)
 		}
 
 		function displayStats(modelStats) {
@@ -92,10 +108,10 @@
 			document.getElementById("model-stats").removeAttribute("hidden")
 		}
 
-		function generateTable(elementArray) {
+		function generateUnitTable(unit) {
 			var table = document.createElement("table")
 			table.id = "unit-models"
-			elementArray.forEach(element => {
+			unit.forEach(element => {
 				var row = document.createElement("tr")
 				var remove = document.createElement("td")
 				var name = document.createElement("td")
@@ -107,6 +123,25 @@
 			});
 			document.getElementById("unit-models").replaceWith(table)
 		}
+		function generateArmyTable(army) {
+			var table = document.createElement("table")
+			table.id = "army-table"
+			army.forEach(unit => {
+				var tr = document.createElement("tr")
+				var th = document.createElement("th")
+				th.innerText = `Unit ${army.indexOf(unit) + 1} - ${unit.role}`
+				tr.appendChild(th)
+				table.appendChild(tr)
+				unit.models.forEach(model => {
+					var tr = document.createElement("tr")
+					tr.insertCell(0)
+					var td = tr.insertCell(-1)
+					td.innerText = model.name
+					table.appendChild(tr)
+				})
+			})
+			document.getElementById("army-table").replaceWith(table)
+		}
 
 		function createUnit() {
 			var request = new XMLHttpRequest()
@@ -115,6 +150,7 @@
 					console.log("Save Unit request received")
 					models = []
 					document.getElementById("unit-models").innerHTML = ""
+					document.getElementById("submit-unit").setAttribute("disabled", true)
 				}
 			}
 			request.open("POST", "/createUnit")
@@ -129,14 +165,13 @@
 		<h1>Warhammer 40k Army Builder</h1>
 		<nav>
 			<button onclick="updateTroopTable()">Update Troop Table</button>
-			<button onclick="myTroops()">My Troops</button>
+			<button onclick="fetchArmy()">My Army</button>
 			<button onclick="fetchModelList()">Model List</button>
 		</nav>
 	</header>
 
 	<main>
-		<section id="troops">
-		</section>
+		<section id="troops"></section>
 		<section id="unit-builder" hidden>
 			<select id="model-selector"></select>
 			<button onclick="fetchModelStats()">Get Stats</button>
@@ -144,6 +179,9 @@
 			<table id="model-stats" hidden></table>
 			<table id="unit-models"></table>
 			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
+		</section>
+		<section id="my-army">
+			<table id="army-table"></table>
 		</section>
 	</main>
 </body>

@@ -33,7 +33,7 @@ app.post('/resources/models.json', function (req, res) {
 	res.send(JSON.stringify(payload))
 })
 
-app.post('/getModelList', function (req, res) {
+app.post('/fetchModelList', function (req, res) {
 	var modelList = army.getModelList();
 
 	res.status(200)
@@ -41,7 +41,7 @@ app.post('/getModelList', function (req, res) {
 	res.send(JSON.stringify(modelList))
 })
 
-app.post('/getModelStats', function (req, res) {
+app.post('/fetchModelStats', function (req, res) {
 	var model = req.body.model
 	//console.log(model)
 	var modelStats = army.getModelStats(model);
@@ -49,6 +49,14 @@ app.post('/getModelStats', function (req, res) {
 	res.status(200)
 	res.type('json')
 	res.send(JSON.stringify(modelStats))
+})
+
+app.post("/fetchArmy", function(req, res) {
+	var myArmy = army.getArmy()
+
+	res.status(200)
+	res.type("json")
+	res.send(JSON.stringify(myArmy))
 })
 
 app.post('/createUnit', function(req, res) {
