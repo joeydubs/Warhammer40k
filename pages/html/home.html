@@ -61,7 +61,7 @@
 
 		function fetchArmy() {
 			var request = new XMLHttpRequest()
-			request.onreadystatechange = function() {
+			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Fetch Army request received")
 					document.getElementById("army-table").removeAttribute("hidden")
@@ -127,10 +127,12 @@
 			var table = document.createElement("table")
 			table.id = "army-table"
 			army.forEach(unit => {
+				var index = army.indexOf(unit)
 				var tr = document.createElement("tr")
 				var th = document.createElement("th")
-				th.innerText = `Unit ${army.indexOf(unit) + 1} - ${unit.role}`
+				th.innerText = `Unit ${index + 1} - ${unit.role}`
 				tr.appendChild(th)
+				tr.insertCell(-1).innerHTML = `<button onclick="removeUnit(${index})">Remove</button>`
 				table.appendChild(tr)
 				unit.models.forEach(model => {
 					var tr = document.createElement("tr")
@@ -145,7 +147,7 @@
 
 		function createUnit() {
 			var request = new XMLHttpRequest()
-			request.onreadystatechange = function() {
+			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Save Unit request received")
 					models = []
@@ -156,6 +158,20 @@
 			request.open("POST", "/createUnit")
 			request.setRequestHeader("Content-Type", "application/json")
 			request.send(JSON.stringify(models))
+		}
+
+		function removeUnit(index) {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Remove Unit request received")
+					var army = JSON.parse(request.responseText)
+					generateArmyTable(army)
+				}
+			}
+			request.open("POST", "/removeUnit")
+			request.setRequestHeader("Content-Type", "application/json")
+			request.send(JSON.stringify({ "index": index }))
 		}
 	</script>
 </head>

@@ -67,6 +67,17 @@ app.post('/createUnit', function(req, res) {
 	res.send()
 })
 
+app.post("/removeUnit", function(req, res) {
+	var index = req.body.index
+	army.removeUnit(index)
+
+	var myArmy = army.getArmy()
+
+	res.status(200)
+	res.type("json")
+	res.send(JSON.stringify(myArmy))
+})
+
 app.listen(port, function () {
 	console.log("Warhammer server is listening on port " + port + "!")
 })

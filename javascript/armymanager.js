@@ -122,6 +122,10 @@ class ArmyManager {
         this.army.addUnit(unit)
     }
 
+    removeUnit(index) {
+        this.army.removeUnit(index)
+    }
+
     getModelList() {
         return Object.keys(this.models.library)
     }
