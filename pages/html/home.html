@@ -6,6 +6,24 @@
 	<title>Warhammer 40k</title>
 
 	<style>
+		table {
+			border-collapse: collapse;
+		}
+
+		th {
+			padding: 5px;
+			border-top: 1px solid black;
+			border-bottom: 1px solid rgb(189, 189, 189);
+		}
+
+		td {
+			padding: 5px;
+			vertical-align: top;
+		}
+
+		.indent {
+			margin-left: 40px
+		}
 	</style>
 
 	<script>
@@ -38,6 +56,7 @@
 						document.getElementById("model-selector").add(option)
 					}
 					document.getElementById("army-table").setAttribute("hidden", true)
+					document.getElementById("stratagems").setAttribute("hidden", true)
 					document.getElementById("unit-builder").removeAttribute("hidden")
 				}
 			}
@@ -64,14 +83,31 @@
 			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Fetch Army request received")
-					document.getElementById("army-table").removeAttribute("hidden")
 					document.getElementById("unit-builder").setAttribute("hidden", true)
-					console.log(JSON.parse(request.responseText))
+					document.getElementById("stratagems").setAttribute("hidden", true)
+					document.getElementById("army-table").removeAttribute("hidden")
 					var army = JSON.parse(request.responseText)
 					generateArmyTable(army)
 				}
 			}
 			request.open("POST", "/fetchArmy")
+			request.send()
+		}
+
+		function fetchStratagems() {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Fetch Stratagems request Received")
+					document.getElementById("army-table").setAttribute("hidden", true)
+					document.getElementById("unit-builder").setAttribute("hidden", true)
+					document.getElementById("stratagems").removeAttribute("hidden")
+					var stratagems = JSON.parse(request.responseText)
+					console.log(stratagems)
+					generateStratagemsTable(stratagems)
+				}
+			}
+			request.open("POST", "/fetchStratagems")
 			request.send()
 		}
 
@@ -100,7 +136,12 @@
 				th.innerText = key
 				row1.appendChild(th)
 				var td = document.createElement("td")
-				td.innerText = modelStats[key]
+				var data = modelStats[key]
+				if (Array.isArray(data)) {
+					console.log(true)
+					data = data.join("\n")
+				}
+				td.innerText = data
 				row2.appendChild(td)
 			}
 			document.getElementById("model-stats").appendChild(row1)
@@ -130,9 +171,11 @@
 				var index = army.indexOf(unit)
 				var tr = document.createElement("tr")
 				var th = document.createElement("th")
+				var removeTH = document.createElement("th")
 				th.innerText = `Unit ${index + 1} - ${unit.role}`
+				removeTH.innerHTML = `<button onclick="removeUnit(${index})">Remove</button>`
 				tr.appendChild(th)
-				tr.insertCell(-1).innerHTML = `<button onclick="removeUnit(${index})">Remove</button>`
+				tr.appendChild(removeTH)
 				table.appendChild(tr)
 				unit.models.forEach(model => {
 					var tr = document.createElement("tr")
@@ -143,6 +186,25 @@
 				})
 			})
 			document.getElementById("army-table").replaceWith(table)
+		}
+
+		function generateStratagemsTable(stratagems) {
+			var stratSection = document.getElementById("stratagems")
+			stratSection.innerHTML = ""
+			for (key in stratagems) {
+				var stratagem = stratagems[key]
+				var header = document.createElement("p")
+				var description = document.createElement("p")
+				description.className = "indent"
+				var effect = document.createElement("p")
+				effect.className = "indent"
+				header.innerHTML = `<em>${key}</em>`
+				description.innerText = stratagem["description"]
+				effect.innerText = stratagem["stratagem"]
+				stratSection.appendChild(header)
+				stratSection.appendChild(description)
+				stratSection.appendChild(effect)
+			}
 		}
 
 		function createUnit() {
@@ -180,9 +242,10 @@
 	<header>
 		<h1>Warhammer 40k Army Builder</h1>
 		<nav>
-			<button onclick="updateTroopTable()">Update Troop Table</button>
-			<button onclick="fetchArmy()">My Army</button>
+			<button onclick="updateTroopTable()" disabled>Update Troop Table</button>
 			<button onclick="fetchModelList()">Model List</button>
+			<button onclick="fetchArmy()">My Army</button>
+			<button onclick="fetchStratagems()">My Stratagems</button>
 		</nav>
 	</header>
 
@@ -198,6 +261,8 @@
 		</section>
 		<section id="my-army">
 			<table id="army-table"></table>
+		</section>
+		<section id="stratagems">
 		</section>
 	</main>
 </body>

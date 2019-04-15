@@ -23,12 +23,12 @@ app.post('/resources/models.json', function (req, res) {
 	//console.log(jsonDict)
 	const compiledPug = pug.compileFile("./pages/pug/tableGenerator.pug")
 	//console.log(compiledPug({models: jsonDict}))
-	
+
 	res.status(200)
 	res.type('json')
 	var payload = {
 		status: 200,
-		value: compiledPug({models: jsonDict})
+		value: compiledPug({ models: jsonDict })
 	}
 	res.send(JSON.stringify(payload))
 })
@@ -51,7 +51,7 @@ app.post('/fetchModelStats', function (req, res) {
 	res.send(JSON.stringify(modelStats))
 })
 
-app.post("/fetchArmy", function(req, res) {
+app.post("/fetchArmy", function (req, res) {
 	var myArmy = army.getArmy()
 
 	res.status(200)
@@ -59,7 +59,15 @@ app.post("/fetchArmy", function(req, res) {
 	res.send(JSON.stringify(myArmy))
 })
 
-app.post('/createUnit', function(req, res) {
+app.post("/fetchStratagems", function (req, res) {
+	var stratagems = army.getStratagems()
+
+	res.status(200)
+	res.type("json")
+	res.send(JSON.stringify(stratagems))
+})
+
+app.post('/createUnit', function (req, res) {
 	var modelList = req.body
 	console.log(modelList)
 	army.createUnit(modelList)
@@ -67,7 +75,7 @@ app.post('/createUnit', function(req, res) {
 	res.send()
 })
 
-app.post("/removeUnit", function(req, res) {
+app.post("/removeUnit", function (req, res) {
 	var index = req.body.index
 	army.removeUnit(index)
 

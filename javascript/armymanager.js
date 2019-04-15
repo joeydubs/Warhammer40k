@@ -17,11 +17,13 @@ class ArmyManager {
 
         this.army = new Army()
     }
+
     getStratagems(army) {
         var stratagems = {}
+        var army = this.army
 
-        for (key in allStratagems) {
-            stratagem = allStratagems[key]
+        for (var key in this.allStratagems) {
+            var stratagem = this.allStratagems[key]
             console.log(key)
 
             var keywordsOK = true
@@ -49,7 +51,7 @@ class ArmyManager {
                             }
                             else {
                                 //console.log("all is false")
-                                var keywordsOK = false
+                                keywordsOK = false
                                 keywordsArray.forEach(function (arrayVal) {
                                     (army.keywords.includes(arrayVal) && !keywordsOK) ? keywordsOK = true : keywordsOK = false
                                     //console.log("Array value: " + arrayVal)
