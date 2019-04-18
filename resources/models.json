@@ -6,6 +6,18 @@
             "Phase Shifter",
             "My Will Be Done"
         ],
+        "wargearoptions": {
+            "or": [
+                ["Staff of light"],
+                ["Voidscythe"],
+                ["Hyperphase sword"],
+                ["Voidblade"],
+                ["Warscythe"]
+            ],
+            "any": [
+                "Resurrection Orb"
+            ]
+        },
         "factionkeywords": [
             "Necrons",
             "<Dynasty>"
@@ -29,6 +41,7 @@
     "warrior": {
         "name": "Necron Warriors",
         "wargear": [
+            "Gauss flayer",
             "Reanimation Protocols"
         ],
         "factionkeywords": [
@@ -55,6 +68,12 @@
         "wargear": [
             "Reanimation Protocols"
         ],
+        "wargearoptions": {
+            "or": [
+                ["Gauss blaster"],
+                ["Tesla carbine"]
+            ]
+        },
         "factionkeywords": [
             "Necrons",
             "<Dynasty>"
@@ -80,6 +99,15 @@
             "Reanimation Protocols",
             "Guardian Protocols"
         ],
+        "wargearoptions": {
+            "or": [
+                ["Warscythe"],
+                [
+                    "Hyperphase sword",
+                    "Dispersion Shield"
+                ]
+            ]
+        },
         "factionkeywords": [
             "Necrons",
             "<Dynasty>"
@@ -102,11 +130,19 @@
     "stalker": {
         "name": "Triarch Stalker",
         "wargear": [
+            "Massive forelimbs",
             "Living Metal",
             "Quantum Shielding",
             "Targeting Relay",
             "Explodes"
         ],
+        "wargearoptions": {
+            "or": [
+                ["Heat ray"],
+                ["Particle shredder"],
+                ["Twin heavy gauss cannon"]
+            ]
+        },
         "factionkeywords": [
             "Necrons"
         ],

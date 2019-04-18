@@ -117,7 +117,17 @@ class ArmyManager {
         var unit = new Unit()
 
         modelArray.forEach(element => {
-            var model = this.models.getModel(element)
+            var model = this.models.getModel(element.model)
+
+            if (element.any) {
+                model.wargear = model.wargear.concat(element.any)
+
+            }
+            if (element.or) {
+                model.wargear = model.wargear.concat(element.or)
+
+            }
+
             unit.addModel(model)
         })
 
