@@ -1,4 +1,22 @@
 {
+    "COMMAND RE-ROLL": {
+        "description": "",
+        "stratagem": "You can re-roll any single dice.",
+        "cost": 1,
+        "conditions": []
+    },
+    "COUNTER-OFFENSIVE": {
+        "description": "",
+        "stratagem": "This Stratagem is used right after an enemy unit that charged has fought. Select one of your own eligible units and fight with it next.",
+        "cost": 2,
+        "conditions": []
+    },
+    "INSANE BRAVERY": {
+        "description": "",
+        "stratagem": "You can automatically pass a single Morale test (this Stratagem must be used before taking the test).",
+        "cost": 2,
+        "conditions": []
+    },
     "ENHANCED REANIMATION PROTOCOLS": {
         "description": "The Necrons are a deathless foe that can recover from obliteration time and again.",
         "stratagem": "Use this Stratagem before making Reanimation Protocols rolls for a unit from your army. You can re-roll Reanimation Protocols rolls of 1 for that unit this turn.",

@@ -8,11 +8,21 @@
         ],
         "wargearoptions": {
             "or": [
-                ["Staff of light"],
-                ["Voidscythe"],
-                ["Hyperphase sword"],
-                ["Voidblade"],
-                ["Warscythe"]
+                [
+                    "Staff of light"
+                ],
+                [
+                    "Voidscythe"
+                ],
+                [
+                    "Hyperphase sword"
+                ],
+                [
+                    "Voidblade"
+                ],
+                [
+                    "Warscythe"
+                ]
             ],
             "any": [
                 "Resurrection Orb"
@@ -70,8 +80,12 @@
         ],
         "wargearoptions": {
             "or": [
-                ["Gauss blaster"],
-                ["Tesla carbine"]
+                [
+                    "Gauss blaster"
+                ],
+                [
+                    "Tesla carbine"
+                ]
             ]
         },
         "factionkeywords": [
@@ -101,7 +115,9 @@
         ],
         "wargearoptions": {
             "or": [
-                ["Warscythe"],
+                [
+                    "Warscythe"
+                ],
                 [
                     "Hyperphase sword",
                     "Dispersion Shield"
@@ -127,6 +143,33 @@
         "ld": 10,
         "sv": 3
     },
+    "deathmark": {
+        "name": "Deathmarks",
+        "wargear": [
+            "Synaptic disintegrator",
+            "Reanimation Protocols",
+            "Hunters from Hyperspace",
+            "Ethereal Interception"
+        ],
+        "factionkeywords": [
+            "Necrons",
+            "<Dynasty>"
+        ],
+        "keywords": [
+            "Infantry",
+            "Deathmarks"
+        ],
+        "role": "Elites",
+        "m": 5,
+        "ws": 3,
+        "bs": 3,
+        "s": 4,
+        "t": 4,
+        "w": 1,
+        "a": 1,
+        "ld": 10,
+        "sv": 3
+    },
     "stalker": {
         "name": "Triarch Stalker",
         "wargear": [
@@ -138,9 +181,15 @@
         ],
         "wargearoptions": {
             "or": [
-                ["Heat ray"],
-                ["Particle shredder"],
-                ["Twin heavy gauss cannon"]
+                [
+                    "Heat ray"
+                ],
+                [
+                    "Particle shredder"
+                ],
+                [
+                    "Twin heavy gauss cannon"
+                ]
             ]
         },
         "factionkeywords": [
@@ -221,6 +270,111 @@
         "ld": 10,
         "sv": 4
     },
+    "wraith": {
+        "name": "Canoptek Wraiths",
+        "wargear": [
+            "Vicious claws",
+            "Wraith Form"
+        ],
+        "wargearoptions": {
+            "or": [
+                [
+                    "Particle caster"
+                ],
+                [
+                    "Transdimensional beamer"
+                ],
+                [
+                    "Whip coils"
+                ]
+            ]
+        },
+        "factionkeywords": [
+            "Necrons",
+            "Canoptek",
+            "<Dynasty>"
+        ],
+        "keywords": [
+            "Beasts",
+            "Canoptek Wraiths"
+        ],
+        "role": "Fast Attack",
+        "m": 12,
+        "ws": 3,
+        "bs": 3,
+        "s": 6,
+        "t": 5,
+        "w": 3,
+        "a": 3,
+        "ld": 10,
+        "sv": 4
+    },
+    "scarab": {
+        "name": "Canoptek Scarabs",
+        "wargear": [
+            "Feeder mandibles"
+        ],
+        "factionkeywords": [
+            "Necrons",
+            "Canoptek",
+            "<Dynasty>"
+        ],
+        "keywords": [
+            "Swarm",
+            "Fly",
+            "Canoptek Scarabs"
+        ],
+        "role": "Fast Attack",
+        "m": 10,
+        "ws": 4,
+        "bs": "-",
+        "s": 3,
+        "t": 3,
+        "w": 3,
+        "a": 4,
+        "ld": 10,
+        "sv": 6
+    },
+    "spyder": {
+        "name": "Canoptek Spyders",
+        "wargear": [
+            "Automaton claws",
+            "Scarab Hive"
+        ],
+        "wargearoptions": {
+            "any": [
+                [
+                    "Fabricator Claw Array"
+                ],
+                [
+                    "Gloom Prism"
+                ],
+                [
+                    "Particle beamer"
+                ]
+            ]
+        },
+        "factionkeywords": [
+            "Necrons",
+            "Canoptek",
+            "<Dynasty>"
+        ],
+        "keywords": [
+            "Monster",
+            "Fly",
+            "Canoptek Spyders"
+        ],
+        "role": "Heavy Support",
+        "m": 6,
+        "ws": 4,
+        "bs": 4,
+        "s": 6,
+        "t": 6,
+        "w": 4,
+        "a": 4,
+        "ld": 10,
+        "sv": 3
+    },
     "monolith": {
         "name": "Monolith",
         "wargear": [
@@ -281,6 +435,65 @@
                 "a": 3,
                 "ld": 10,
                 "sv": 3
+            }
+        }
+    },
+    "doomsday": {
+        "name": "Doomsday Ark",
+        "wargear": [
+            "Doomsday cannon",
+            "Gauss flayer array",
+            "Living Metal",
+            "Explodes",
+            "Hovering",
+            "Quantum Shielding"
+        ],
+        "factionkeywords": [
+            "Necrons",
+            "<Dynasty>"
+        ],
+        "keywords": [
+            "Vehicle",
+            "Fly",
+            "Doomsday Ark"
+        ],
+        "role": "Heavy Support",
+        "tiers": {
+            "tier1": {
+                "m": 12,
+                "ws": 6,
+                "bs": 3,
+                "s": 6,
+                "t": 6,
+                "w": 14,
+                "wmin": 8,
+                "a": 3,
+                "ld": 10,
+                "sv": 4
+            },
+            "tier2": {
+                "m": 8,
+                "ws": 6,
+                "bs": 4,
+                "s": 6,
+                "t": 6,
+                "w": 7,
+                "wmin": 4,
+                "a": "D3",
+                "ld": 10,
+                "sv": 4
+            },
+            "tier3": {
+                "m": 4,
+                "ws": 6,
+                "bs": 5,
+                "s": 6,
+                "t": 6,
+                "w": 3,
+                "wmin": 1,
+                "a": 1,
+                "ld": 10,
+                "sv": 4
             }
         }
     }
