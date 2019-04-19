@@ -28,7 +28,6 @@ class Unit {
         if (!this.role) {
             console.log("Setting Unit role")
             this.role = model.role
-            console.log(this.role)
         }
 
         for (var i = 0; i < model.factionkeywords.length; i++) {

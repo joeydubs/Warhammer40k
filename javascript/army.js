@@ -24,9 +24,9 @@ class Army {
                 this.wargear.push(element)
             }
         });
-        console.log(this.keywords)
-        console.log(this.factionkeywords)
-        console.log(this.wargear)
+        //console.log(this.keywords)
+        //console.log(this.factionkeywords)
+        //console.log(this.wargear)
     }
 
     removeUnit(index) {

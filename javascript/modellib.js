@@ -6,7 +6,8 @@ class ModelLib {
     }
 
     getModel(key) {
-        return new model(this.library[key])
+        var attributes = JSON.parse(JSON.stringify(this.library[key]))
+        return new model(attributes)
     }
 }
 

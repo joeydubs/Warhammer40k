@@ -248,7 +248,7 @@
 				var tr = document.createElement("tr")
 				var th = document.createElement("th")
 				var removeTH = document.createElement("th")
-				th.innerText = `Unit ${index + 1} - ${unit.role}`
+				th.innerText = `Unit ${index + 1} - ${unit.role} (${unit.models.length})`
 				removeTH.innerHTML = `<button onclick="removeUnit(${index})">Remove</button>`
 				tr.appendChild(th)
 				tr.appendChild(removeTH)
@@ -258,6 +258,8 @@
 					tr.insertCell(0)
 					var td = tr.insertCell(-1)
 					td.innerText = model.name
+					var td2 = tr.insertCell(-1)
+					td2.innerText = model.wargear
 					table.appendChild(tr)
 				})
 			})
@@ -295,7 +297,7 @@
 			}
 			request.open("POST", "/createUnit")
 			request.setRequestHeader("Content-Type", "application/json")
-			request.send(JSON.stringify(models))
+			request.send(JSON.stringify({"models": models, "dynasty": document.getElementById("dynasty-selector").value}))
 		}
 
 		function removeUnit(index) {
@@ -329,11 +331,18 @@
 		<section id="troops"></section>
 		<section id="unit-builder" hidden>
 			<select id="model-selector"></select>
+			<select id="dynasty-selector">
+					<option>Mephrit</option>
+					<option>Nephrekh</option>
+					<option>Nihilakh</option>
+					<option>Novokh</option>
+					<option>Sautekh</option>
+				</select>
 			<button onclick="fetchStats()">Get Stats</button>
 			<button onclick="addModel()">Add</button>
+			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
 			<table id="model-stats" hidden></table>
 			<table id="unit-models"></table>
-			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
 		</section>
 		<section id="my-army">
 			<table id="army-table"></table>

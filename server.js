@@ -68,9 +68,11 @@ app.post("/fetchStratagems", function (req, res) {
 })
 
 app.post('/createUnit', function (req, res) {
-	var modelList = req.body
+	var modelList = req.body.models
+	var dynasty = req.body.dynasty
+	console.log(dynasty)
 
-	army.createUnit(modelList)
+	army.createUnit(modelList, dynasty)
 	res.status(200)
 	res.send()
 })

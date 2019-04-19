@@ -53,7 +53,7 @@ class ArmyManager {
                                 //console.log("all is false")
                                 keywordsOK = false
                                 keywordsArray.forEach(function (arrayVal) {
-                                    (army.keywords.includes(arrayVal) && !keywordsOK) ? keywordsOK = true : keywordsOK = false
+                                    (army.keywords.includes(arrayVal) || !keywordsOK) ? keywordsOK = true : keywordsOK = false
                                     //console.log("Array value: " + arrayVal)
                                     //console.log("keywordsOK: " + keywordsOK)
                                 })
@@ -113,8 +113,9 @@ class ArmyManager {
         return stratagems
     }
 
-    createUnit(modelArray) {
+    createUnit(modelArray, dynasty) {
         var unit = new Unit()
+        unit.setFaction(dynasty)
 
         modelArray.forEach(element => {
             var model = this.models.getModel(element.model)
