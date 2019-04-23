@@ -53,7 +53,9 @@ class ArmyManager {
                                 //console.log("all is false")
                                 keywordsOK = false
                                 keywordsArray.forEach(function (arrayVal) {
-                                    (army.keywords.includes(arrayVal) || !keywordsOK) ? keywordsOK = true : keywordsOK = false
+                                    if (army.keywords.includes(arrayVal)) {
+                                        keywordsOK = true
+                                    }
                                     //console.log("Array value: " + arrayVal)
                                     //console.log("keywordsOK: " + keywordsOK)
                                 })
