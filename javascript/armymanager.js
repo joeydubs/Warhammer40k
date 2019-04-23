@@ -1,5 +1,6 @@
 const FileImport = require('./fileimport')
 const ModelsLib = require('./modellib')
+const WargearLib = require('./wargearlib')
 const Unit = require('./unit')
 const Army = require('./army')
 //const model = require('./model.js')
@@ -14,6 +15,9 @@ class ArmyManager {
 
         this.newImport.importJson("models.json", true, pathToResources)
         this.models = new ModelsLib(this.newImport.library)
+
+        this.newImport.importJson("wargear.json", true, pathToResources)
+        this.wargear = new WargearLib(this.newImport.library)
 
         this.army = new Army()
     }
@@ -115,6 +119,10 @@ class ArmyManager {
         return stratagems
     }
 
+    getWargear() {
+        return this.army.wargear
+    }
+
     createUnit(modelArray, dynasty) {
         var unit = new Unit()
         unit.setFaction(dynasty)
@@ -135,6 +143,10 @@ class ArmyManager {
         })
 
         this.army.addUnit(unit)
+        
+        for (var key in this.army.wargear) {
+            this.army.wargear[key] = this.wargear.getWargear(key)
+        }
     }
 
     removeUnit(index) {

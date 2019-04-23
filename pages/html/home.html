@@ -57,6 +57,7 @@
 					}
 					document.getElementById("army-table").setAttribute("hidden", true)
 					document.getElementById("stratagems").setAttribute("hidden", true)
+					document.getElementById("wargear").setAttribute("hidden", true)
 					document.getElementById("unit-builder").removeAttribute("hidden")
 				}
 			}
@@ -159,6 +160,7 @@
 					console.log("Fetch Army request received")
 					document.getElementById("unit-builder").setAttribute("hidden", true)
 					document.getElementById("stratagems").setAttribute("hidden", true)
+					document.getElementById("wargear").setAttribute("hidden", true)
 					document.getElementById("army-table").removeAttribute("hidden")
 					var army = JSON.parse(request.responseText)
 					generateArmyTable(army)
@@ -172,9 +174,10 @@
 			var request = new XMLHttpRequest()
 			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
-					console.log("Fetch Stratagems request Received")
+					console.log("Fetch Stratagems request received")
 					document.getElementById("army-table").setAttribute("hidden", true)
 					document.getElementById("unit-builder").setAttribute("hidden", true)
+					document.getElementById("wargear").setAttribute("hidden", true)
 					document.getElementById("stratagems").removeAttribute("hidden")
 					var stratagems = JSON.parse(request.responseText)
 					console.log(stratagems)
@@ -185,9 +188,27 @@
 			request.send()
 		}
 
+		function fetchWargear() {
+			var request = new XMLHttpRequest()
+			request.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					console.log("Fetch Wargear request received")
+					document.getElementById("army-table").setAttribute("hidden", true)
+					document.getElementById("unit-builder").setAttribute("hidden", true)
+					document.getElementById("stratagems").setAttribute("hidden", true)
+					document.getElementById("wargear").removeAttribute("hidden")
+					var wargear = JSON.parse(request.responseText)
+					console.log(wargear)
+					generateWargearTable(wargear)
+				}
+			}
+			request.open("POST", "/fetchWargear")
+			request.send()
+		}
+
 		function addModel() {
 			var model = document.getElementById("model-selector").value
-			models.push({"model": model})
+			models.push({ "model": model })
 			document.getElementById("model-stats").setAttribute("hidden", true)
 			document.getElementById("submit-unit").removeAttribute("disabled")
 			generateUnitTable(models)
@@ -285,6 +306,19 @@
 			}
 		}
 
+		generateWargearTable(wargear) {
+			var tbody = document.createElement("tbody")
+			tbody.id = "wargear-tbody"
+			for (item in wargear) {
+				var gear = wargear[item]
+				if ("profiles" in gear) {
+					for (profile in gear["profiles"]) {
+						// TODO
+					}
+				}
+			}
+		}
+
 		function createUnit() {
 			var request = new XMLHttpRequest()
 			request.onreadystatechange = function () {
@@ -297,7 +331,7 @@
 			}
 			request.open("POST", "/createUnit")
 			request.setRequestHeader("Content-Type", "application/json")
-			request.send(JSON.stringify({"models": models, "dynasty": document.getElementById("dynasty-selector").value}))
+			request.send(JSON.stringify({ "models": models, "dynasty": document.getElementById("dynasty-selector").value }))
 		}
 
 		function removeUnit(index) {
@@ -333,12 +367,12 @@
 		<section id="unit-builder" hidden>
 			<select id="model-selector"></select>
 			<select id="dynasty-selector">
-					<option>Mephrit</option>
-					<option>Nephrekh</option>
-					<option>Nihilakh</option>
-					<option>Novokh</option>
-					<option>Sautekh</option>
-				</select>
+				<option>Mephrit</option>
+				<option>Nephrekh</option>
+				<option>Nihilakh</option>
+				<option>Novokh</option>
+				<option>Sautekh</option>
+			</select>
 			<button onclick="fetchStats()">Get Stats</button>
 			<button onclick="addModel()">Add</button>
 			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
@@ -350,7 +384,22 @@
 		</section>
 		<section id="stratagems">
 		</section>
-		<section id="wargear"></section>
+		<section id="wargear">
+			<table id="wargear-table">
+				<thead id="wargear-thead">
+					<tr>
+						<th>Name</th>
+						<th>Range</th>
+						<th>Type</th>
+						<th>S</th>
+						<th>AP</th>
+						<th>D</th>
+						<th>Ability</th>
+					</tr>
+				</thead>
+				<tbody id="wargear-tbody"></tbody>
+			</table>
+		</section>
 	</main>
 </body>
 

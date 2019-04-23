@@ -2,7 +2,7 @@
     "Doomsday cannon": {
         "isweapon": true,
         "profiles": {
-            "Low power": {
+            "- Low power": {
                 "Range": 36,
                 "type": "Heavy D6",
                 "s": 8,
@@ -10,7 +10,7 @@
                 "d": "D3",
                 "ability": "-"
             },
-            "High power": {
+            "- High power": {
                 "Range": 72,
                 "type": "Heavy D6",
                 "s": 10,
@@ -49,21 +49,23 @@
     },
     "Staff of light": {
         "isweapon": true,
-        "Shooting": {
-            "Range": 12,
-            "type": "Assault 3",
-            "s": 5,
-            "ap": -2,
-            "d": 1,
-            "ability": "-"
-        },
-        "Melee": {
-            "Range": "Melee",
-            "type": "Melee",
-            "s": "User",
-            "ap": -2,
-            "d": 1,
-            "ability": "-"
+        "profiles": {
+            "- Shooting": {
+                "Range": 12,
+                "type": "Assault 3",
+                "s": 5,
+                "ap": -2,
+                "d": 1,
+                "ability": "-"
+            },
+            "- Melee": {
+                "Range": "Melee",
+                "type": "Melee",
+                "s": "User",
+                "ap": -2,
+                "d": 1,
+                "ability": "-"
+            }
         }
     }
 }

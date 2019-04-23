@@ -67,6 +67,14 @@ app.post("/fetchStratagems", function (req, res) {
 	res.send(JSON.stringify(stratagems))
 })
 
+app.post("/fetchWargear", function (req, res) {
+	var wargear = army.getWargear()
+
+	res.status(200)
+	res.type("json")
+	res.send(JSON.stringify(wargear))
+})
+
 app.post('/createUnit', function (req, res) {
 	var modelList = req.body.models
 	var dynasty = req.body.dynasty
