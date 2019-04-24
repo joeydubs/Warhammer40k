@@ -56,7 +56,7 @@
 						option.innerHTML = modelList[model]
 						document.getElementById("model-selector").add(option)
 					}
-					document.getElementById("army-table").setAttribute("hidden", true)
+					document.getElementById("my-army").setAttribute("hidden", true)
 					document.getElementById("stratagems").setAttribute("hidden", true)
 					document.getElementById("wargear").setAttribute("hidden", true)
 					document.getElementById("unit-builder").removeAttribute("hidden")
@@ -162,7 +162,7 @@
 					document.getElementById("unit-builder").setAttribute("hidden", true)
 					document.getElementById("stratagems").setAttribute("hidden", true)
 					document.getElementById("wargear").setAttribute("hidden", true)
-					document.getElementById("army-table").removeAttribute("hidden")
+					document.getElementById("my-army").removeAttribute("hidden")
 					var army = JSON.parse(request.responseText)
 					generateArmyTable(army)
 				}
@@ -176,7 +176,7 @@
 			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Fetch Stratagems request received")
-					document.getElementById("army-table").setAttribute("hidden", true)
+					document.getElementById("my-army").setAttribute("hidden", true)
 					document.getElementById("unit-builder").setAttribute("hidden", true)
 					document.getElementById("wargear").setAttribute("hidden", true)
 					document.getElementById("stratagems").removeAttribute("hidden")
@@ -194,7 +194,7 @@
 			request.onreadystatechange = function () {
 				if (this.readyState == 4 && this.status == 200) {
 					console.log("Fetch Wargear request received")
-					document.getElementById("army-table").setAttribute("hidden", true)
+					document.getElementById("my-army").setAttribute("hidden", true)
 					document.getElementById("unit-builder").setAttribute("hidden", true)
 					document.getElementById("stratagems").setAttribute("hidden", true)
 					document.getElementById("wargear").removeAttribute("hidden")
