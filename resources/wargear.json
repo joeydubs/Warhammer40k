@@ -3,7 +3,7 @@
         "isweapon": true,
         "profiles": {
             "- Low power": {
-                "Range": 36,
+                "range": 36,
                 "type": "Heavy D6",
                 "s": 8,
                 "ap": -2,
@@ -11,7 +11,7 @@
                 "ability": "-"
             },
             "- High power": {
-                "Range": 72,
+                "range": 72,
                 "type": "Heavy D6",
                 "s": 10,
                 "ap": -5,
@@ -22,7 +22,7 @@
     },
     "Gauss blaster": {
         "isweapon": true,
-        "Range": 24,
+        "range": 24,
         "type": "Rapid Fire 1",
         "s": 5,
         "ap": -2,
@@ -31,7 +31,7 @@
     },
     "Gauss flayer": {
         "isweapon": true,
-        "Range": 24,
+        "range": 24,
         "type": "Rapid Fire 1",
         "s": 4,
         "ap": -1,
@@ -40,7 +40,7 @@
     },
     "Gauss flayer array": {
         "isweapon": true,
-        "Range": 24,
+        "range": 24,
         "type": "Rapid Fire 5",
         "s": 4,
         "ap": -1,
@@ -51,7 +51,7 @@
         "isweapon": true,
         "profiles": {
             "- Shooting": {
-                "Range": 12,
+                "range": 12,
                 "type": "Assault 3",
                 "s": 5,
                 "ap": -2,
@@ -59,7 +59,7 @@
                 "ability": "-"
             },
             "- Melee": {
-                "Range": "Melee",
+                "range": "Melee",
                 "type": "Melee",
                 "s": "User",
                 "ap": -2,
@@ -67,5 +67,8 @@
                 "ability": "-"
             }
         }
+    },
+    "Resurrection Orb": {
+        "ability": "If a model has a resurrection orb, once per battle, immediately after you have made your Reanimation Protocols rolls at the beginning of the turn, you can make Reanimation Protocols rolls for models from a friendly <DYNASTY> INFANTRY unit within 3\" of that model."
     }
 }

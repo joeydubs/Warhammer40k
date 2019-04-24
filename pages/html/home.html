@@ -8,6 +8,7 @@
 	<style>
 		table {
 			border-collapse: collapse;
+			max-width: 50%;
 		}
 
 		th {
@@ -306,17 +307,54 @@
 			}
 		}
 
-		generateWargearTable(wargear) {
-			var tbody = document.createElement("tbody")
-			tbody.id = "wargear-tbody"
+		function generateWargearTable(wargear) {
+			var properties = ["range", "type", "s", "ap", "d", "ability"]
+			var wtbody = document.createElement("tbody")
+			var atbody = document.createElement("tbody")
+			wtbody.id = "weapons-tbody"
+			atbody.id = "abilities-tbody"
+			var tr, td
 			for (item in wargear) {
 				var gear = wargear[item]
-				if ("profiles" in gear) {
-					for (profile in gear["profiles"]) {
-						// TODO
+				tr = document.createElement("tr")
+				td = document.createElement("td")
+				td.innerText = item
+				tr.appendChild(td)
+				if (gear["isweapon"]) {
+					if ("profiles" in gear) {
+						wtbody.appendChild(tr)
+						var profiles = gear["profiles"]
+						for (profile in profiles) {
+							tr = document.createElement("tr")
+							td = document.createElement("td")
+							td.innerText = profile
+							tr.appendChild(td)
+							for (i = 0; i < properties.length; i++) {
+								td = document.createElement("td")
+								td.innerText = profiles[profile][properties[i]]
+								tr.appendChild(td)
+							}
+							wtbody.appendChild(tr)
+						}
+					}
+					else {
+						for (i = 0; i < properties.length; i++) {
+							td = document.createElement("td")
+							td.innerText = gear[properties[i]]
+							tr.appendChild(td)
+						}
+						wtbody.appendChild(tr)
 					}
 				}
+				else {
+					td = document.createElement("td")
+					td.innerText = gear["ability"]
+					tr.appendChild(td)
+					atbody.appendChild(tr)
+				}
 			}
+			document.getElementById("weapons-tbody").replaceWith(wtbody)
+			document.getElementById("abilities-tbody").replaceWith(atbody)
 		}
 
 		function createUnit() {
@@ -363,7 +401,7 @@
 	</header>
 
 	<main>
-		<section id="troops"></section>
+		<section id="troops" hidden></section>
 		<section id="unit-builder" hidden>
 			<select id="model-selector"></select>
 			<select id="dynasty-selector">
@@ -379,14 +417,14 @@
 			<table id="model-stats" hidden></table>
 			<table id="unit-models"></table>
 		</section>
-		<section id="my-army">
+		<section id="my-army" hidden>
 			<table id="army-table"></table>
 		</section>
-		<section id="stratagems">
+		<section id="stratagems" hidden>
 		</section>
-		<section id="wargear">
-			<table id="wargear-table">
-				<thead id="wargear-thead">
+		<section id="wargear" hidden>
+			<table id="wargear-weapons-table">
+				<thead id="weapons-thead">
 					<tr>
 						<th>Name</th>
 						<th>Range</th>
@@ -397,7 +435,16 @@
 						<th>Ability</th>
 					</tr>
 				</thead>
-				<tbody id="wargear-tbody"></tbody>
+				<tbody id="weapons-tbody"></tbody>
+			</table>
+			<table id="wargear-abilities-table">
+				<thead id="abilities-thead">
+					<tr>
+						<th>Name</th>
+						<th>Ability</th>
+					</tr>
+				</thead>
+				<tbody id="abilities-tbody"></tbody>
 			</table>
 		</section>
 	</main>

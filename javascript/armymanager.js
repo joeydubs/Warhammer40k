@@ -69,7 +69,7 @@ class ArmyManager {
                             //console.log("wargear case")
                             var wargearArray = stratagem[switchValue]
                             wargearArray.forEach(function (arrayVal) {
-                                (army.wargear.includes(arrayVal)) ? wargearOK = true : wargearOK = false
+                                (army.wargear[arrayVal]) ? wargearOK = true : wargearOK = false
                                 //console.log("Array value: " + arrayVal)
                                 //console.log("wargearOK: " + wargearOK)
                             })
@@ -94,7 +94,7 @@ class ArmyManager {
                                     if (army.keywords.includes(arrayVal)) {
                                         excludesOK = false
                                     }
-                                    if (army.wargear.includes(arrayVal)) {
+                                    if (army.wargear[arrayVal]) {
                                         excludesOK = false
                                     }
 
