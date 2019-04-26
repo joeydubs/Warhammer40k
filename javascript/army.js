@@ -38,8 +38,8 @@ class Army {
     updateKeywords() {
         this.keywords = []
         this.factionkeywords = []
-        this.wargear = []
-        
+        this.wargear = {}
+
         this.units.forEach(unit => {
             unit.keywords.forEach(element => {
                 if (!this.keywords.includes(element)) {
@@ -52,10 +52,10 @@ class Army {
                 }
             });
             unit.wargear.forEach(element => {
-                if (!this.wargear.includes(element)) {
-                    this.wargear.push(element)
+                if (!(element in this.wargear)) {
+                    this.wargear[element] = undefined
                 }
-            });    
+            });
         })
     }
 }
