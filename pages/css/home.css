@@ -1,0 +1,19 @@
+table {
+    border-collapse: collapse;
+    max-width: 50%;
+}
+
+th {
+    padding: 5px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid rgb(189, 189, 189);
+}
+
+td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.indent {
+    margin-left: 40px
+}

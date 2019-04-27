@@ -17,6 +17,14 @@ app.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname + '/pages/html/home.html'))
 })
 
+app.get('/home.js', function(req, res) {
+	res.sendFile(path.join(__dirname + "/javascript/home.js"))
+})
+
+app.get('/home.css', function(req, res) {
+	res.sendFile(path.join(__dirname + "/pages/css/home.css"))
+})
+
 app.post('/resources/models.json', function (req, res) {
 	var fileContents = fs.readFileSync("./resources/models.json").toString()
 	var jsonDict = JSON.parse(fileContents)
