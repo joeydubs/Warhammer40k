@@ -4,6 +4,7 @@ const url = require('url')
 const express = require('express')
 const path = require('path')
 const pug = require('pug')
+const sqlite = require('sqlite3')
 
 const port = 5300
 const app = express()
@@ -15,6 +16,15 @@ app.use(express.json())
 
 app.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname + '/pages/html/home.html'))
+})
+
+app.get('/dbtest', function (req, res) {
+	army.dbtest(function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		res.send("DB Test message: " + result)
+	})
 })
 
 app.get('/home.js', function(req, res) {

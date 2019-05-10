@@ -3,6 +3,7 @@ const ModelsLib = require('./modellib')
 const WargearLib = require('./wargearlib')
 const Unit = require('./unit')
 const Army = require('./army')
+const sqlite = require('sqlite3')
 //const model = require('./model.js')
 const pathToResources = "/../resources/"
 
@@ -163,6 +164,33 @@ class ArmyManager {
 
     getArmy() {
         return this.army.units
+    }
+
+    dbtest(respond) {
+        var message = "message"
+        var db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READONLY, function (err) {
+            if (err) {
+                console.log("There was an error opening the Database. ")
+                message = err.message
+                console.log(message)
+                respond(null, message)
+            } else {
+                message = "Database successfully opened."
+                console.log(message)
+            }
+        })
+    
+        db.close(function (err) {
+            if (err) {
+                console.log("There was an error closing the Database.")
+                message = err.message
+                console.log(message)
+            } else {
+                message = "Database successfully closed."
+                console.log(message)
+                respond(null, message)
+            }
+        })
     }
 }
 
