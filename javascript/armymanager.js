@@ -167,27 +167,38 @@ class ArmyManager {
     }
 
     dbtest(respond) {
-        var message = "message"
-        var db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READONLY, function (err) {
+        var message = ""
+        var error = ""
+        let db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READONLY, function (err) {
             if (err) {
                 console.log("There was an error opening the Database. ")
-                message = err.message
-                console.log(message)
-                respond(null, message)
+                error = err.message
+                console.log(error)
+                respond(null, error)
             } else {
-                message = "Database successfully opened."
-                console.log(message)
+                console.log("Database successfully opened.")
+            }
+        })
+
+        let query = `SELECT * FROM models`
+
+        db.each(query, function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                message += "Name: " + row.name + ", Role: " + row.role + ", Faction: " + row.faction + "\n"
             }
         })
     
         db.close(function (err) {
             if (err) {
                 console.log("There was an error closing the Database.")
-                message = err.message
-                console.log(message)
+                error = err.message
+                console.log(error)
+                respond(null, error)
             } else {
-                message = "Database successfully closed."
-                console.log(message)
+                console.log("Database successfully closed.")
                 respond(null, message)
             }
         })
