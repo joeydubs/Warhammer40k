@@ -4,102 +4,102 @@ CREATE TABLE units (
     id INTEGER PRIMARY KEY,
     name TEXT,
     description TEXT,
-    power INTEGER,
-    points INTEGER
+    role TEXT,
+    power INTEGER
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Overlord",
     NULL,
-    NULL,
-    NULL
+    "HQ",
+    6
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Necron Warriors",
     NULL,
-    NULL,
-    NULL
-)
+    "Troops",
+    6
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Immortals",
     NULL,
-    NULL,
-    NULL
-)
+    "Troops",
+    4
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Lychguard",
     NULL,
-    NULL,
-    NULL
-)
+    "Troops",
+    8
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Deathmarks",
     NULL,
-    NULL,
-    NULL
-)
+    "Troops",
+    5
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Triarch Stalker",
     NULL,
-    NULL,
-    NULL
-)
+    "Elites",
+    8
+);
 
 INSERT INTO units VALUES (
     NULL,
     "C'tan Shard of the Nightbringer",
     NULL,
-    NULL,
-    NULL
-)
+    "Elites",
+    12
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Canoptek Wraiths",
     NULL,
-    NULL,
-    NULL
-)
+    "Fast Attack",
+    9
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Canoptek Scarabs",
     NULL,
-    NULL,
-    NULL
-)
+    "Fast Attack",
+    2
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Canoptek Spyders",
     NULL,
-    NULL,
-    NULL
-)
+    "Heavy Support",
+    4
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Monolith",
     NULL,
-    NULL,
-    NULL
-)
+    "Heavy Support",
+    19
+);
 
 INSERT INTO units VALUES (
     NULL,
     "Doomsday Ark",
     NULL,
-    NULL,
-    NULL
-)
+    "Heavy Support",
+    10
+);

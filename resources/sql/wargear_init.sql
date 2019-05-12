@@ -1,14 +1,12 @@
 DROP TABLE wargear;
 
-CREATE TABLE wargear
-(
+CREATE TABLE wargear (
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     flavor TEXT,
     description TEXT,
     points INTEGER,
-    weapon BOOLEAN,
-    faction TEXT
+    weapon BOOLEAN
 );
 
 INSERT INTO wargear
@@ -19,8 +17,7 @@ VALUES
         null,
         null,
         null,
-        true,
-        "Necrons"
+        true
 );
 INSERT INTO wargear
 VALUES
@@ -30,8 +27,7 @@ VALUES
         null,
         null,
         null,
-        true,
-        "Necrons"
+        true
 );
 INSERT INTO wargear
 VALUES
@@ -41,8 +37,7 @@ VALUES
         null,
         null,
         null,
-        true,
-        "Necrons"
+        true
 );
 INSERT INTO wargear
 VALUES
@@ -52,8 +47,7 @@ VALUES
         null,
         null,
         null,
-        true,
-        "Necrons"
+        true
 );
 INSERT INTO wargear
 VALUES
@@ -63,8 +57,7 @@ VALUES
         null,
         null,
         null,
-        true,
-        "Necrons"
+        true
 );
 INSERT INTO wargear
 VALUES
@@ -74,6 +67,5 @@ VALUES
         null,
         null,
         null,
-        false,
-        "Necrons"
+        false
 );

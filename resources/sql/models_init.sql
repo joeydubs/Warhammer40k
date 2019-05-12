@@ -4,102 +4,89 @@ CREATE TABLE models (
     id INTEGER PRIMARY KEY,
     name TEXT,
     description TEXT,
-    role TEXT,
-    faction TEXT
+    points INTEGER
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Overlord",
     NULL,
-    "HQ",
-    "Necrons"
+    84
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Necron Warrior",
     NULL,
-    "Troops",
-    "Necrons"
+    12
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Immortal",
     NULL,
-    "Troops",
-    "Necrons"
+    8
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Lychguard",
     NULL,
-    "Elites",
-    "Necrons"
+    19
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Deathmarks",
     NULL,
-    "Elites",
-    "Necrons"
+    19
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Triarch Stalker",
     NULL,
-    "Elites",
-    "Necrons"
+    117
 );
 
 INSERT INTO models VALUES (
     NULL,
     "C'tan Shard of the Nightbringer",
     NULL,
-    "Elites",
-    "Necrons"
+    210
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Canoptek Wraith",
     NULL,
-    "Fast Attack",
-    "Necrons"
+    55
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Canoptek Scarab Swarm",
     NULL,
-    "Fast Attack",
-    "Necrons"
+    13
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Canoptek Spyders",
     NULL,
-    "Heavy Support",
-    "Necrons"
+    65
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Monolith",
     NULL,
-    "Heavy Support",
-    "Necrons"
+    381
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Doomsday Ark",
     NULL,
-    "Heavy Support",
-    "Necrons"
+    193
 );
