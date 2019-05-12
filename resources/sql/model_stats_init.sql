@@ -14,6 +14,7 @@ CREATE TABLE model_stats (
     "save" INTEGER
 );
 
+-- overlord, 1
 INSERT INTO model_stats VALUES (
     NULL,
     NULL,
@@ -28,6 +29,7 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- necron warrior, 2
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -42,6 +44,7 @@ INSERT INTO model_stats VALUES (
     4
 );
 
+-- immortal, 3
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -56,6 +59,7 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- lychguard, 4
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -70,6 +74,7 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- deathmarks, 5
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -84,6 +89,7 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- triarch stalker, 6
 INSERT INTO model_stats VALUES (
     null,
     "6-10",
@@ -98,34 +104,37 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- triarch stalker, 7
 INSERT INTO model_stats VALUES (
     null,
     "3-5",
     8,
     4,
     4,
-    7,
-    6,
-    10,
-    "3",
-    10,
-    3
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
 );
 
+-- triarch stalker, 8
 INSERT INTO model_stats VALUES (
     null,
     "1-2",
     6,
     5,
     5,
-    7,
-    6,
-    10,
-    "3",
-    10,
-    3
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
 );
 
+-- nightbringer, 9
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -140,6 +149,7 @@ INSERT INTO model_stats VALUES (
     4
 );
 
+-- canoptek wraith, 10
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -154,6 +164,7 @@ INSERT INTO model_stats VALUES (
     4
 );
 
+-- canoptek scarabs, 11
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -168,6 +179,7 @@ INSERT INTO model_stats VALUES (
     6
 );
 
+-- canoptek spyder, 12
 INSERT INTO model_stats VALUES (
     null,
     NULL,
@@ -182,6 +194,7 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- monolith, 13
 INSERT INTO model_stats VALUES (
     null,
     "11-20",
@@ -196,72 +209,77 @@ INSERT INTO model_stats VALUES (
     3
 );
 
+-- monolith, 14
 INSERT INTO model_stats VALUES (
     null,
     "6-10",
     5,
-    6,
+    null,
     4,
-    8,
-    8,
-    20,
-    "3",
-    10,
-    3
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
 );
 
+-- monolith, 15
 INSERT INTO model_stats VALUES (
     null,
     "1-5",
     4,
-    6,
+    null,
     5,
-    8,
-    8,
-    20,
-    "3",
-    10,
-    3
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
 );
 
+-- doomsday ark, 16
 INSERT INTO model_stats VALUES (
     null,
     "8-14",
     12,
-    6,
+    null,
     3,
-    6,
-    6,
-    14,
+    null,
+    null,
+    null,
     "3",
-    10,
-    4
+    null,
+    null
 );
 
+-- doomsday ark, 17
 INSERT INTO model_stats VALUES (
     null,
     "4-7",
     8,
-    6,
+    null,
     4,
-    6,
-    6,
-    14,
+    null,
+    null,
+    null,
     "D3",
-    10,
-    4
+    null,
+    null
 );
 
+-- doomsday ark, 18
 INSERT INTO model_stats VALUES (
     null,
     "1-3",
     4,
-    6,
+    null,
     5,
-    6,
-    6,
-    14,
+    null,
+    null,
+    null,
     "1",
-    10,
-    4
+    null,
+    null
 );

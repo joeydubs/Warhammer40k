@@ -27,11 +27,11 @@ app.get('/dbtest', function (req, res) {
 	})
 })
 
-app.get('/home.js', function(req, res) {
+app.get('/home.js', function (req, res) {
 	res.sendFile(path.join(__dirname + "/javascript/home.js"))
 })
 
-app.get('/home.css', function(req, res) {
+app.get('/home.css', function (req, res) {
 	res.sendFile(path.join(__dirname + "/pages/css/home.css"))
 })
 
@@ -52,21 +52,44 @@ app.post('/resources/models.json', function (req, res) {
 })
 
 app.post('/fetchModelList', function (req, res) {
+	/*
 	var modelList = army.getModelList();
 
 	res.status(200)
 	res.type('json')
 	res.send(JSON.stringify(modelList))
+	*/
+
+	army.getModelList(function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
 })
 
 app.post('/fetchModelStats', function (req, res) {
 	var model = req.body.model
+	/*
 	//console.log(model)
 	var modelStats = army.getModelStats(model);
 
 	res.status(200)
 	res.type('json')
 	res.send(JSON.stringify(modelStats))
+	*/
+
+	army.getModelStats(model, function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		console.log(result)
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
 })
 
 app.post("/fetchArmy", function (req, res) {

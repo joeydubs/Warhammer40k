@@ -194,6 +194,7 @@ function removeModel(index) {
 }
 
 function displayStats(modelStats) {
+    /*
     document.getElementById("model-stats").innerHTML = ""
     var row1 = document.createElement("tr")
     var row2 = document.createElement("tr")
@@ -213,6 +214,40 @@ function displayStats(modelStats) {
     document.getElementById("model-stats").appendChild(row1)
     document.getElementById("model-stats").appendChild(row2)
     document.getElementById("model-stats").removeAttribute("hidden")
+    */
+    var table = document.createElement("table")
+    table.id = "model-stats"
+    table.innerHTML = 
+        `<tr>
+        <th>Name</th>
+        <th>Remaining W</th>
+        <th>M</th>
+        <th>WS</th>
+        <th>BS</th>
+        <th>S</th>
+        <th>T</th>
+        <th>W</th>
+        <th>A</th>
+        <th>Ld</th>
+        <th>Sv</th>
+        </tr>`
+    for (index in modelStats) {
+        var stats = modelStats[index]
+        var row = document.createElement("tr")
+        index == 0 ? row.insertCell().innerText = stats.name : row.insertCell()
+        row.insertCell().innerText = stats.damage
+        row.insertCell().innerText = stats.move
+        row.insertCell().innerText = stats.weapon
+        row.insertCell().innerText = stats.ballistic
+        row.insertCell().innerText = stats.strength
+        row.insertCell().innerText = stats.toughness
+        row.insertCell().innerText = stats.wounds
+        row.insertCell().innerText = stats.attacks
+        row.insertCell().innerText = stats.leadership
+        row.insertCell().innerText = stats.save
+        table.appendChild(row)
+    }
+    document.getElementById("model-stats").replaceWith(table)
 }
 
 function generateUnitTable(unit) {

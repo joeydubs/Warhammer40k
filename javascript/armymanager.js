@@ -21,6 +21,17 @@ class ArmyManager {
         this.wargear = new WargearLib(this.newImport.library)
 
         this.army = new Army()
+
+        this.db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READONLY, function (err) {
+            if (err) {
+                console.log("There was an error opening the Database. ")
+                error = err.message
+                console.log(error)
+            } else {
+                console.log("Database successfully opened.")
+            }
+        })
+
     }
 
     getStratagems(army) {
@@ -144,7 +155,7 @@ class ArmyManager {
         })
 
         this.army.addUnit(unit)
-        
+
         for (var key in this.army.wargear) {
             this.army.wargear[key] = this.wargear.getWargear(key)
         }
@@ -154,12 +165,64 @@ class ArmyManager {
         this.army.removeUnit(index)
     }
 
-    getModelList() {
-        return Object.keys(this.models.library)
+    getModelList(respond) {
+        let query = "SELECT name FROM models"
+
+        var message = []
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                console.log(row.name)
+                message.push(row.name)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+
+        //return Object.keys(this.models.library)
     }
 
-    getModelStats(model) {
-        return this.models.library[model]
+    getModelStats(model, respond) {
+        let query =
+        `SELECT name, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+        FROM model_stats
+        INNER JOIN models ON models.id = model_stats_join.model
+        INNER JOIN model_stats_join ON model_stats_join.stats = model_stats.id
+        WHERE models.name = "${model}"`
+        console.log(query)
+
+        var message = []
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                console.log(row)
+                message.push(row)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+        
+        //return this.models.library[model]
     }
 
     getArmy() {
@@ -168,41 +231,44 @@ class ArmyManager {
 
     dbtest(respond) {
         var message = ""
-        var error = ""
-        let db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READONLY, function (err) {
-            if (err) {
-                console.log("There was an error opening the Database. ")
-                error = err.message
-                console.log(error)
-                respond(null, error)
-            } else {
-                console.log("Database successfully opened.")
-            }
-        })
 
         let query = `SELECT * FROM models`
 
-        db.each(query, function (err, row) {
+        var callback = function (err, row) {
             if (err) {
                 console.log(err.message)
             }
             else {
-                message += "Name: " + row.name + ", Role: " + row.role + ", Faction: " + row.faction + "\n"
+                console.log(row)
+                message += "Name: " + row.name + ", Role: " + row.role + ", Faction: " + row.faction
             }
-        })
-    
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+                respond(err, err.message)
+            }
+            else {
+                respond(null, message)
+            }
+        }
+
+        this.db.each(query, callback, completion)
+    }
+
+    /*
+    closeDB() {
         db.close(function (err) {
             if (err) {
                 console.log("There was an error closing the Database.")
-                error = err.message
-                console.log(error)
-                respond(null, error)
+                console.log(err.message)
             } else {
                 console.log("Database successfully closed.")
-                respond(null, message)
             }
         })
     }
+    */
 }
 
 module.exports = ArmyManager
