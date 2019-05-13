@@ -70,7 +70,7 @@ app.post('/fetchModelList', function (req, res) {
 	})
 })
 
-app.post('/fetchModelStats', function (req, res) {
+app.post('/fetchModelGear', function (req, res) {
 	var model = req.body.model
 	/*
 	//console.log(model)
@@ -81,7 +81,7 @@ app.post('/fetchModelStats', function (req, res) {
 	res.send(JSON.stringify(modelStats))
 	*/
 
-	army.getModelStats(model, function (err, result) {
+	army.getModelGear(model, function (err, result) {
 		if (err) {
 			console.log(err.message)
 		}

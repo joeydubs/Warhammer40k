@@ -12,7 +12,7 @@ INSERT INTO unit_wargear_join (
 SELECT units.id, wargear.id
 FROM units, wargear
 WHERE units.name = "Overlord"
-AND wargear.name = "Staff of Light";
+AND wargear.name = "Staff of light";
 
 INSERT INTO unit_wargear_join (
     unit,

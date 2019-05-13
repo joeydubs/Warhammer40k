@@ -225,6 +225,39 @@ class ArmyManager {
         //return this.models.library[model]
     }
 
+    getModelGear(model, respond) {
+        let query =
+        `SELECT wargear.name
+        FROM wargear
+        INNER JOIN unit_wargear_join ON wargear.id = unit_wargear_join.wargear
+        INNER JOIN units ON unit_wargear_join.unit = units.id
+        WHERE units.name = "${model}"`
+        console.log(query)
+
+        var message = []
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                console.log(row)
+                message.push(row.name)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+        
+        //return this.models.library[model]
+    }
+
     getArmy() {
         return this.army.units
     }

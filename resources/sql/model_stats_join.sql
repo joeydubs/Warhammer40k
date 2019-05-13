@@ -30,7 +30,7 @@ INSERT INTO model_stats_join (model, stats)
 SELECT id, 8 FROM models WHERE name = "Triarch Stalker";
 
 INSERT INTO model_stats_join (model, stats)
-SELECT id, 9 FROM models WHERE name = "C'tan Shard of the Nightbringe";
+SELECT id, 9 FROM models WHERE name = "C'tan Shard of the Nightbringer";
 
 INSERT INTO model_stats_join (model, stats)
 SELECT id, 10 FROM models WHERE name = "Canoptek Wraith";

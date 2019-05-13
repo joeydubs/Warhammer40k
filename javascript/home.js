@@ -36,54 +36,56 @@ function fetchModelList() {
     request.send()
 }
 
-function fetchModelStats(index, model) {
+function fetchModelGear(index, model) {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Model Stats request received")
-            var modelStats = JSON.parse(request.responseText)
-            var row = document.getElementById("unit-models").rows[index]
-            for (option in modelStats.wargearoptions) {
-                var optionTD = document.createElement("td")
-                if (option == "or") {
-                    var wargearoption = modelStats.wargearoptions[option]
-                    wargearoption.forEach(element => {
-                        /*
-                        var radio = document.createElement("input")
-                        radio.type = "radio"
-                        radio.name = model + index
-                        radio.value = `${JSON.stringify([index, option, element])}`
-                        radio.onclick = updateModelGear
-                        optionTD.appendChild(radio)
-                        optionTD.append(JSON.stringify(element))
-                        */
-                        optionTD.innerHTML += `<p><input type="radio" name='${model + index}' value='${JSON.stringify([index, option, element])}' onclick="updateModelGear(this)"> ${JSON.stringify(element)}</p>`
-                    })
-                }
-                else if (option == "any") {
-                    var wargearoption = modelStats.wargearoptions[option]
-                    wargearoption.forEach(element => {
-                        /*
-                        var checkbox = document.createElement("input")
-                        checkbox.type = "checkbox"
-                        checkbox.value = `${JSON.stringify([index, option, element])}`
-                        checkbox.onclick = updateModelGear
-                        checkbox.innerText = element
-                        optionTD.appendChild(checkbox)
-                        optionTD.append(JSON.stringify(element))
-                        */
-                        optionTD.innerHTML += `<p><input type="checkbox" name='${model + index}' value='${JSON.stringify([index, option, element])}' onclick="updateModelGear(this)">${JSON.stringify(element)}</p>`
-                    })
-                }
-                else {
-                    console.log("Unknown option: " + option)
-                }
+            console.log("Fetch Model Gear request received")
+            var modelGear = JSON.parse(request.responseText)
+            console.log(modelGear)
+            
+            // var row = document.getElementById("unit-models").rows[index]
+            // for (option in modelGear.wargearoptions) {
+            //     var optionTD = document.createElement("td")
+            //     if (option == "or") {
+            //         var wargearoption = modelGear.wargearoptions[option]
+            //         wargearoption.forEach(element => {
+            //             /*
+            //             var radio = document.createElement("input")
+            //             radio.type = "radio"
+            //             radio.name = model + index
+            //             radio.value = `${JSON.stringify([index, option, element])}`
+            //             radio.onclick = updateModelGear
+            //             optionTD.appendChild(radio)
+            //             optionTD.append(JSON.stringify(element))
+            //             */
+            //             optionTD.innerHTML += `<p><input type="radio" name='${model + index}' value='${JSON.stringify([index, option, element])}' onclick="updateModelGear(this)"> ${JSON.stringify(element)}</p>`
+            //         })
+            //     }
+            //     else if (option == "any") {
+            //         var wargearoption = modelGear.wargearoptions[option]
+            //         wargearoption.forEach(element => {
+            //             /*
+            //             var checkbox = document.createElement("input")
+            //             checkbox.type = "checkbox"
+            //             checkbox.value = `${JSON.stringify([index, option, element])}`
+            //             checkbox.onclick = updateModelGear
+            //             checkbox.innerText = element
+            //             optionTD.appendChild(checkbox)
+            //             optionTD.append(JSON.stringify(element))
+            //             */
+            //             optionTD.innerHTML += `<p><input type="checkbox" name='${model + index}' value='${JSON.stringify([index, option, element])}' onclick="updateModelGear(this)">${JSON.stringify(element)}</p>`
+            //         })
+            //     }
+            //     else {
+            //         console.log("Unknown option: " + option)
+            //     }
                 row.appendChild(optionTD)
             }
 
         }
     }
-    request.open("POST", "/fetchModelStats")
+    request.open("POST", "/fetchModelGear")
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify({ "model": model }))
 }
@@ -116,6 +118,7 @@ function fetchStats() {
         if (this.readyState == 4 && this.status == 200) {
             console.log("Fetch Stats request received")
             var modelStats = JSON.parse(request.responseText)
+            console.log(modelStats)
             displayStats(modelStats)
         }
     }
@@ -263,7 +266,7 @@ function generateUnitTable(unit) {
         row.appendChild(remove)
         row.appendChild(name)
         table.appendChild(row)
-        fetchModelStats(i, model)
+        fetchModelGear(i, model)
     };
     document.getElementById("unit-models").replaceWith(table)
 }
