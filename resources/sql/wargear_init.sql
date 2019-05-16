@@ -43,6 +43,16 @@ INSERT INTO wargear
 VALUES
     (
         null,
+        "Tesla carbine",
+        null,
+        null,
+        null,
+        true
+);
+INSERT INTO wargear
+VALUES
+    (
+        null,
         "Gauss flayer",
         null,
         null,

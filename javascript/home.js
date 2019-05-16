@@ -13,7 +13,7 @@ function updateTroopTable() {
     request.send()
 }
 
-function fetchModelList() {
+function fetchUnitList() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -32,18 +32,33 @@ function fetchModelList() {
             document.getElementById("unit-builder").removeAttribute("hidden")
         }
     }
-    request.open("POST", "/fetchModelList")
+    request.open("POST", "/fetchUnitList")
     request.send()
 }
 
-function fetchModelGear(index, model) {
+function fetchUnit() {
     var request = new XMLHttpRequest()
+    var unit = document.getElementById("model-selector").value
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Model Gear request received")
-            var modelGear = JSON.parse(request.responseText)
-            console.log(modelGear)
-            
+            console.log("Fetch Unit request received")
+            var unit = JSON.parse(request.responseText)
+            console.log(unit)
+            for (key in unit) {
+                var model = unit[key]
+                var section = document.createElement("section")
+                var title = document.createElement("h1")
+                title.innerText = key
+                var description = document.createElement("p")
+                description.innerText = model.description
+                var options = document.createElement("p")
+                options.innerText = model.options
+                section.appendChild(title)
+                section.appendChild(description)
+                section.appendChild(options)
+                document.getElementById("unit-builder").appendChild(section)
+            }
+
             // var row = document.getElementById("unit-models").rows[index]
             // for (option in modelGear.wargearoptions) {
             //     var optionTD = document.createElement("td")
@@ -80,14 +95,13 @@ function fetchModelGear(index, model) {
             //     else {
             //         console.log("Unknown option: " + option)
             //     }
-                row.appendChild(optionTD)
+            //    row.appendChild(optionTD)
             }
-
         }
-    }
-    request.open("POST", "/fetchModelGear")
+
+    request.open("POST", "/fetchUnit")
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(JSON.stringify({ "model": model }))
+    request.send(JSON.stringify({ "unit": unit }))
 }
 
 function updateModelGear(sender) {

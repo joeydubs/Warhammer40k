@@ -4,6 +4,7 @@ CREATE TABLE units (
     id INTEGER PRIMARY KEY,
     name TEXT,
     description TEXT,
+    options TEXT,
     role TEXT,
     power INTEGER
 );
@@ -11,7 +12,8 @@ CREATE TABLE units (
 INSERT INTO units VALUES (
     NULL,
     "Overlord",
-    NULL,
+    "An Overlord is a single model armed with a staff of light.",
+    "This model may replace its staff of light with a voidscythe, a hyperphase sword, a voidblade or a warscythe. This model may take a resurrection orb.",
     "HQ",
     6
 );
@@ -19,6 +21,7 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Necron Warriors",
+    "This unit contains 10 Necron Warriors. It may include up to 10 additional Necron Warriors (Power Rating +6). Each model is armed with a gauss flayer.",
     NULL,
     "Troops",
     6
@@ -27,7 +30,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Immortals",
-    NULL,
+    "This unit contains 5 Immortals. It can include up to 5 additional Immortals (Power Rating +4). Each model is armed with a gauss blaster.",
+    "The entire unit may replace their gauss blasters with tesla carbines.",
     "Troops",
     4
 );
@@ -35,7 +39,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Lychguard",
-    NULL,
+    "This unit contains 5 Lychguard. It can include up to 5 additional Lychguard (Power Rating +8). Each model is armed with a warscythe.",
+    "The entire unit may replace their warscythes with hyperphase swords and dispersion shields.",
     "Troops",
     8
 );
@@ -43,6 +48,7 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Deathmarks",
+    "This unit contains 5 Deathmarks. It can include up to 5 additional Deathmarks (Power Rating +4). Each model is armed with a synaptic disintegrator.",
     NULL,
     "Troops",
     5
@@ -51,7 +57,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Triarch Stalker",
-    NULL,
+    "A Triarch Stalker is a single model equipped with a heat ray and massive forelimbs.",
+    "This model may replace its heat ray with a particle shredder or a twin heavy gauss cannon.",
     "Elites",
     8
 );
@@ -59,6 +66,7 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "C'tan Shard of the Nightbringer",
+    "The C’tan Shard of the Nightbringer is a single model that attacks with a gaze of death and the Scythe of the Nightbringer. Only one of this model may be included in your army.",
     NULL,
     "Elites",
     12
@@ -67,7 +75,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Canoptek Wraiths",
-    NULL,
+    "This unit contains 3 Canoptek Wraiths. It may include up to 3 additional Canoptek Wraiths (Power Rating +9). Each model is equipped with vicious claws.",
+    "Any model may take a particle caster, transdimensional beamer or whip coils.",
     "Fast Attack",
     9
 );
@@ -75,6 +84,7 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Canoptek Scarabs",
+    "This unit contains 3 Canoptek Scarab Swarms. It may include up to 3 additional Canoptek Scarab Swarms (Power Rating +2) or up to 6 additional Canoptek Scarab Swarms (Power Rating +4). Each swarm is equipped with feeder mandibles.",
     NULL,
     "Fast Attack",
     2
@@ -83,7 +93,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Canoptek Spyders",
-    NULL,
+    "This unit contains 1 Canoptek Spyder. It may include 1 additional Canoptek Spyder (Power Rating +4) or 2 additional Canoptek Spyders (Power Rating +8). Each model is equipped with automaton claws.",
+    "Any model may take a fabricator claw array. Any model may take a gloom prism. Any model may take two particle beamers.",
     "Heavy Support",
     4
 );
@@ -91,6 +102,7 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Monolith",
+    "A Monolith is a single model equipped with four gauss flux arcs and a particle whip.",
     NULL,
     "Heavy Support",
     19
@@ -99,6 +111,7 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Doomsday Ark",
+    "A Doomsday Ark is a single model equipped with a doomsday cannon and two gauss flayer arrays.",
     NULL,
     "Heavy Support",
     10

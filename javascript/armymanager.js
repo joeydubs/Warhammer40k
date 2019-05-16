@@ -165,8 +165,8 @@ class ArmyManager {
         this.army.removeUnit(index)
     }
 
-    getModelList(respond) {
-        let query = "SELECT name FROM models"
+    getUnitList(respond) {
+        let query = "SELECT name FROM units"
 
         var message = []
 
@@ -225,16 +225,18 @@ class ArmyManager {
         //return this.models.library[model]
     }
 
-    getModelGear(model, respond) {
+    getUnitDetails(unit, respond) {
         let query =
-        `SELECT wargear.name
+        `SELECT models.name AS name, wargear.name AS gear, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
         FROM wargear
-        INNER JOIN unit_wargear_join ON wargear.id = unit_wargear_join.wargear
-        INNER JOIN units ON unit_wargear_join.unit = units.id
-        WHERE units.name = "${model}"`
+        INNER JOIN model_wargear_join ON wargear.id = model_wargear_join.wargear
+        INNER JOIN models ON model_wargear_join.model = models.id
+        INNER JOIN model_unit_join ON model_unit_join.model = models.id
+        INNER JOIN units ON model_unit_join.unit = units.id
+        WHERE units.name = "${unit}"`
         console.log(query)
 
-        var message = []
+        var message = {}
 
         var callback = function (err, row) {
             if (err) {
@@ -242,7 +244,23 @@ class ArmyManager {
             }
             else {
                 console.log(row)
-                message.push(row.name)
+                var name = row.name
+                if(!message[name]) {
+                    var model = {
+                        gear: {}
+                    }
+                    message[name] = model
+                }
+                message[name]["description"] = row.description
+                message[name]["options"] = row.options
+                message[name]["min"] = row.min
+                message[name]["max"] = row.max
+                message[name]["cost"] = row.modelcost
+                message[name]["power"] = row.power
+                var gear = {
+                    cost: row.gearcost
+                }
+                message[name]["gear"][row.gear] = gear
             }
         }
 

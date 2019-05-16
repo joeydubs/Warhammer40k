@@ -14,7 +14,7 @@
 		<h1>Warhammer 40k Army Builder</h1>
 		<nav>
 			<button onclick="updateTroopTable()" disabled>Update Troop Table</button>
-			<button onclick="fetchModelList()">Model List</button>
+			<button onclick="fetchUnitList()">Unit List</button>
 			<button onclick="fetchArmy()">My Army</button>
 			<button onclick="fetchStratagems()">My Stratagems</button>
 			<button onclick="fetchWargear()">My Wargear</button>
@@ -33,7 +33,7 @@
 				<option>Sautekh</option>
 			</select>
 			<button onclick="fetchStats()">Get Stats</button>
-			<button onclick="addModel()">Add</button>
+			<button onclick="fetchUnit()">Add</button>
 			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
 			<table id="model-stats" hidden></table>
 			<table id="unit-models"></table>

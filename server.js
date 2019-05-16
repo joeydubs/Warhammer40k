@@ -51,7 +51,7 @@ app.post('/resources/models.json', function (req, res) {
 	res.send(JSON.stringify(payload))
 })
 
-app.post('/fetchModelList', function (req, res) {
+app.post('/fetchUnitList', function (req, res) {
 	/*
 	var modelList = army.getModelList();
 
@@ -60,7 +60,7 @@ app.post('/fetchModelList', function (req, res) {
 	res.send(JSON.stringify(modelList))
 	*/
 
-	army.getModelList(function (err, result) {
+	army.getUnitList(function (err, result) {
 		if (err) {
 			console.log(err.message)
 		}
@@ -70,7 +70,7 @@ app.post('/fetchModelList', function (req, res) {
 	})
 })
 
-app.post('/fetchModelGear', function (req, res) {
+app.post('/fetchModelStats', function (req, res) {
 	var model = req.body.model
 	/*
 	//console.log(model)
@@ -81,7 +81,29 @@ app.post('/fetchModelGear', function (req, res) {
 	res.send(JSON.stringify(modelStats))
 	*/
 
-	army.getModelGear(model, function (err, result) {
+	army.getModelStats(model, function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		console.log(result)
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
+})
+
+app.post('/fetchUnit', function (req, res) {
+	var unit = req.body.unit
+	/*
+	//console.log(model)
+	var modelStats = army.getModelStats(model);
+
+	res.status(200)
+	res.type('json')
+	res.send(JSON.stringify(modelStats))
+	*/
+
+	army.getUnitDetails(unit, function (err, result) {
 		if (err) {
 			console.log(err.message)
 		}
