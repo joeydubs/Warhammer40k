@@ -1,4 +1,4 @@
-var models = []
+var unit = {}
 
 function updateTroopTable() {
     var request = new XMLHttpRequest()
@@ -20,7 +20,7 @@ function fetchUnitList() {
             console.log("Get Model List request received")
             var modelList = JSON.parse(request.responseText)
             console.log(modelList)
-            document.getElementById("model-selector").innerHTML = ""
+            document.getElementById("model-selector").innerHTML = "<option>-- Select Unit --</option>"
             for (model in modelList) {
                 var option = document.createElement("option")
                 option.innerHTML = modelList[model]
@@ -38,26 +38,37 @@ function fetchUnitList() {
 
 function fetchUnit() {
     var request = new XMLHttpRequest()
-    var unit = document.getElementById("model-selector").value
+    var unitName = document.getElementById("model-selector").value
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log("Fetch Unit request received")
-            var unit = JSON.parse(request.responseText)
+            unit = JSON.parse(request.responseText)
             console.log(unit)
+            var modelsSection = document.createElement("section")
+            modelsSection.id = "unit-models"
+            var modelTable = document.createElement("table")
+            var titleRow = modelTable.insertRow(-1)
+            titleRow.insertCell(-1).innerText = "Model Details"
+            titleRow.insertCell(-1).innerText = "MinQty"
+            titleRow.insertCell(-1).innerText = "MaxQty"
+            titleRow.insertCell(-1).innerText = "Cost/Model"
+            titleRow.insertCell(-1).innerText = "Power"
+
             for (key in unit) {
                 var model = unit[key]
-                var section = document.createElement("section")
-                var title = document.createElement("h1")
-                title.innerText = key
-                var description = document.createElement("p")
-                description.innerText = model.description
-                var options = document.createElement("p")
-                options.innerText = model.options
-                section.appendChild(title)
-                section.appendChild(description)
-                section.appendChild(options)
-                document.getElementById("unit-builder").appendChild(section)
+                var row = modelTable.insertRow(-1)
+                row.insertCell(-1).innerText = key
+                row.insertCell(-1).innerText = model.min
+                row.insertCell(-1).innerText = model.max
+                row.insertCell(-1).innerText = model.cost
+                row.insertCell(-1).innerText = model.power
+                
+                modelTable.insertRow(-1).insertCell(-1).innerText = model.description
+                modelTable.insertRow(-1).insertCell(-1).innerText = model.options
             }
+
+            modelsSection.appendChild(modelTable)
+            document.getElementById("unit-models").replaceWith(modelsSection)
 
             // var row = document.getElementById("unit-models").rows[index]
             // for (option in modelGear.wargearoptions) {
@@ -101,7 +112,7 @@ function fetchUnit() {
 
     request.open("POST", "/fetchUnit")
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(JSON.stringify({ "unit": unit }))
+    request.send(JSON.stringify({ "unit": unitName }))
 }
 
 function updateModelGear(sender) {
