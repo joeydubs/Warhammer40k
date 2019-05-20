@@ -24,7 +24,7 @@
 	<main>
 		<section id="troops" hidden></section>
 		<section id="unit-builder" hidden>
-			<select id="model-selector" onchange="fetchUnit()">
+			<select id="unit-selector" onchange="fetchUnit()">
 				<option>Select unit</option>
 			</select>
 			<select id="dynasty-selector">
@@ -34,9 +34,8 @@
 				<option>Novokh</option>
 				<option>Sautekh</option>
 			</select>
-			<button onclick="fetchStats()">Get Stats</button>
-			<button onclick="fetchUnit()">Add</button>
-			<button id="submit-unit" onclick="createUnit()" disabled>Save Unit</button>
+			<button id="get-stats" onclick="fetchStats()">Get Stats</button>
+			<button id="submit-unit" onclick="createUnit()" disabled>Add Unit</button>
 			<table id="model-stats" hidden></table>
 			<section id="unit-models"></section>
 		</section>

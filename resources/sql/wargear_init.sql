@@ -16,7 +16,7 @@ VALUES
         "Staff of light",
         null,
         null,
-        null,
+        10,
         true
 );
 INSERT INTO wargear
@@ -26,7 +26,7 @@ VALUES
         "Doomsday cannon",
         null,
         null,
-        null,
+        0,
         true
 );
 INSERT INTO wargear
@@ -36,7 +36,7 @@ VALUES
         "Gauss blaster",
         null,
         null,
-        null,
+        9,
         true
 );
 INSERT INTO wargear
@@ -46,7 +46,7 @@ VALUES
         "Tesla carbine",
         null,
         null,
-        null,
+        9,
         true
 );
 INSERT INTO wargear
@@ -56,7 +56,7 @@ VALUES
         "Gauss flayer",
         null,
         null,
-        null,
+        0,
         true
 );
 INSERT INTO wargear
@@ -66,7 +66,7 @@ VALUES
         "Gauss flayer array",
         null,
         null,
-        null,
+        0,
         true
 );
 INSERT INTO wargear
@@ -76,6 +76,6 @@ VALUES
         "Resurrection Orb",
         null,
         null,
-        null,
+        35,
         false
 );

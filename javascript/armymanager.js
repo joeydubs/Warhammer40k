@@ -227,7 +227,7 @@ class ArmyManager {
 
     getUnitDetails(unit, respond) {
         let query =
-        `SELECT models.name AS name, wargear.name AS gear, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
+        `SELECT models.name AS name, models.id AS modelid, wargear.name AS gear, wargear.id AS gearid, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
         FROM wargear
         INNER JOIN model_wargear_join ON wargear.id = model_wargear_join.wargear
         INNER JOIN models ON model_wargear_join.model = models.id
@@ -251,6 +251,7 @@ class ArmyManager {
                     }
                     message[name] = model
                 }
+                message[name]["id"] = row.modelid
                 message[name]["description"] = row.description
                 message[name]["options"] = row.options
                 message[name]["min"] = row.min
@@ -258,7 +259,8 @@ class ArmyManager {
                 message[name]["cost"] = row.modelcost
                 message[name]["power"] = row.power
                 var gear = {
-                    cost: row.gearcost
+                    cost: row.gearcost,
+                    id: row.gearid
                 }
                 message[name]["gear"][row.gear] = gear
             }

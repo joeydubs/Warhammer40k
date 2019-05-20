@@ -20,11 +20,11 @@ function fetchUnitList() {
             console.log("Get Model List request received")
             var modelList = JSON.parse(request.responseText)
             console.log(modelList)
-            document.getElementById("model-selector").innerHTML = "<option>-- Select Unit --</option>"
+            document.getElementById("unit-selector").innerHTML = "<option>-- Select Unit --</option>"
             for (model in modelList) {
                 var option = document.createElement("option")
                 option.innerHTML = modelList[model]
-                document.getElementById("model-selector").add(option)
+                document.getElementById("unit-selector").add(option)
             }
             document.getElementById("my-army").setAttribute("hidden", true)
             document.getElementById("stratagems").setAttribute("hidden", true)
@@ -37,8 +37,11 @@ function fetchUnitList() {
 }
 
 function fetchUnit() {
+    document.getElementById("model-stats").setAttribute("hidden", true)
+    document.getElementById("get-stats").innerText = "Get Stats"
+
     var request = new XMLHttpRequest()
-    var unitName = document.getElementById("model-selector").value
+    var unitName = document.getElementById("unit-selector").value
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log("Fetch Unit request received")
@@ -48,27 +51,35 @@ function fetchUnit() {
             modelsSection.id = "unit-models"
             var modelTable = document.createElement("table")
             var titleRow = modelTable.insertRow(-1)
-            titleRow.insertCell(-1).innerText = "Model Details"
-            titleRow.insertCell(-1).innerText = "MinQty"
-            titleRow.insertCell(-1).innerText = "MaxQty"
-            titleRow.insertCell(-1).innerText = "Cost/Model"
+            titleRow.insertCell(-1)
+            titleRow.insertCell(-1).innerText = "Points"
             titleRow.insertCell(-1).innerText = "Power"
+            titleRow.insertCell(-1).innerText = "Min"
+            titleRow.insertCell(-1).innerText = "Max"
 
             for (key in unit) {
                 var model = unit[key]
                 var row = modelTable.insertRow(-1)
-                row.insertCell(-1).innerText = key
-                row.insertCell(-1).innerText = model.min
-                row.insertCell(-1).innerText = model.max
+                row.insertCell(-1).innerHTML = `<b>${key}</b>`
                 row.insertCell(-1).innerText = model.cost
                 row.insertCell(-1).innerText = model.power
-                
-                modelTable.insertRow(-1).insertCell(-1).innerText = model.description
-                modelTable.insertRow(-1).insertCell(-1).innerText = model.options
+                row.insertCell(-1).innerText = model.min
+                row.insertCell(-1).innerText = model.max
+
+                modelTable.insertRow(-1).insertCell(-1).innerHTML = `<em>${model.description}</em>`
+                modelTable.insertRow(-1).insertCell(-1).innerHTML = `<em>${model.options}</em>`
+
+                for (gear in model.gear) {
+                    var wargear = model.gear[gear]
+                    var gearRow = modelTable.insertRow(-1)
+                    gearRow.insertCell(-1).innerHTML = `<input class="selected-gear" type="checkbox" name="${model.id}" value="${wargear.id}"> ${gear}`
+                    gearRow.insertCell(-1).innerText = wargear.cost
+                }
             }
 
             modelsSection.appendChild(modelTable)
             document.getElementById("unit-models").replaceWith(modelsSection)
+            document.getElementById("submit-unit").removeAttribute("disabled")
 
             // var row = document.getElementById("unit-models").rows[index]
             // for (option in modelGear.wargearoptions) {
@@ -107,8 +118,8 @@ function fetchUnit() {
             //         console.log("Unknown option: " + option)
             //     }
             //    row.appendChild(optionTD)
-            }
         }
+    }
 
     request.open("POST", "/fetchUnit")
     request.setRequestHeader("Content-Type", "application/json");
@@ -138,18 +149,24 @@ function updateModelGear(sender) {
 }
 
 function fetchStats() {
-    var request = new XMLHttpRequest()
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Stats request received")
-            var modelStats = JSON.parse(request.responseText)
-            console.log(modelStats)
-            displayStats(modelStats)
+    if (document.getElementById("model-stats").hasAttribute("hidden")) {
+        var request = new XMLHttpRequest()
+        request.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Fetch Stats request received")
+                var modelStats = JSON.parse(request.responseText)
+                console.log(modelStats)
+                displayStats(modelStats)
+            }
         }
+        request.open("POST", "/fetchModelStats")
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify({ "model": document.getElementById("unit-selector").value }))
     }
-    request.open("POST", "/fetchModelStats")
-    request.setRequestHeader("Content-Type", "application/json");
-    request.send(JSON.stringify({ "model": document.getElementById("model-selector").value }))
+    else {
+        document.getElementById("model-stats").setAttribute("hidden", true)
+        document.getElementById("get-stats").innerText = "Get Stats"
+    }
 }
 
 function fetchArmy() {
@@ -206,7 +223,7 @@ function fetchWargear() {
 }
 
 function addModel() {
-    var model = document.getElementById("model-selector").value
+    var model = document.getElementById("unit-selector").value
     models.push({ "model": model })
     document.getElementById("model-stats").setAttribute("hidden", true)
     document.getElementById("submit-unit").removeAttribute("disabled")
@@ -245,7 +262,7 @@ function displayStats(modelStats) {
     */
     var table = document.createElement("table")
     table.id = "model-stats"
-    table.innerHTML = 
+    table.innerHTML =
         `<tr>
         <th>Name</th>
         <th>Remaining W</th>
@@ -276,6 +293,8 @@ function displayStats(modelStats) {
         table.appendChild(row)
     }
     document.getElementById("model-stats").replaceWith(table)
+    document.getElementById("model-stats").removeAttribute("hidden")
+    document.getElementById("get-stats").innerText = "Hide Stats"
 }
 
 function generateUnitTable(unit) {
@@ -391,6 +410,23 @@ function generateWargearTable(wargear) {
 }
 
 function createUnit() {
+    var unitSelected = document.getElementById("unit-selector").value
+    var myUnit = {}
+    myUnit[unitSelected] = {}
+    var boxes = document.getElementsByClassName("selected-gear")
+    for (box in boxes) {
+        var gear = boxes[box]
+        if (gear.checked) {
+            console.log(`Model: ${gear.name}, gear: ${gear.value}`)
+            if (!myUnit[unitSelected][gear.name]) {
+                myUnit[unitSelected][gear.name] = [gear.value]
+            }
+            else {
+                myUnit[unitSelected][gear.name].push(gear.value)
+            }
+        }
+    }
+    console.log(myUnit)
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
