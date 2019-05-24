@@ -139,11 +139,12 @@ app.post("/fetchWargear", function (req, res) {
 })
 
 app.post('/createUnit', function (req, res) {
-	var modelList = req.body.models
+	var unit = req.body.unit
 	var dynasty = req.body.dynasty
+	console.log(unit)
 	console.log(dynasty)
 
-	army.createUnit(modelList, dynasty)
+	//army.createUnit(modelList, dynasty)
 	res.status(200)
 	res.send()
 })

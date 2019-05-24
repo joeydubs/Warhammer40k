@@ -413,17 +413,20 @@ function createUnit() {
     var unitSelected = document.getElementById("unit-selector").value
     var myUnit = {}
     myUnit[unitSelected] = {}
+    for (key in unit) {
+        var model = unit[key]
+        myUnit[unitSelected][model.id] = {
+            gear: [],
+            quantity: null
+        }
+    }
     var boxes = document.getElementsByClassName("selected-gear")
     for (box in boxes) {
-        var gear = boxes[box]
-        if (gear.checked) {
-            console.log(`Model: ${gear.name}, gear: ${gear.value}`)
-            if (!myUnit[unitSelected][gear.name]) {
-                myUnit[unitSelected][gear.name] = [gear.value]
-            }
-            else {
-                myUnit[unitSelected][gear.name].push(gear.value)
-            }
+        var model = boxes[box].name
+        var wargear = boxes[box].value
+        if (boxes[box].checked) {
+            console.log(`Model: ${model}, gear: ${wargear}`)
+            myUnit[unitSelected][model].gear.push(wargear)
         }
     }
     console.log(myUnit)
@@ -438,7 +441,7 @@ function createUnit() {
     }
     request.open("POST", "/createUnit")
     request.setRequestHeader("Content-Type", "application/json")
-    request.send(JSON.stringify({ "models": models, "dynasty": document.getElementById("dynasty-selector").value }))
+    request.send(JSON.stringify({ "unit": myUnit, "dynasty": document.getElementById("dynasty-selector").value }))
 }
 
 function removeUnit(index) {
