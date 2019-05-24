@@ -72,6 +72,20 @@ INSERT INTO models VALUES (
 
 INSERT INTO models VALUES (
     NULL,
+    "Destroyer",
+    NULL,
+    30
+);
+
+INSERT INTO models VALUES (
+    NULL,
+    "Heavy Destroyer",
+    NULL,
+    30
+);
+
+INSERT INTO models VALUES (
+    NULL,
     "Canoptek Spyders",
     NULL,
     65

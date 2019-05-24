@@ -112,6 +112,39 @@ INSERT INTO model_unit_join (
     min,
     max
 )
+SELECT models.id, units.id, 1, 6
+FROM models, units
+WHERE models.name = "Destroyer"
+AND units.name = "Destroyers";
+
+INSERT INTO model_unit_join (
+    model,
+    unit,
+    min,
+    max
+)
+SELECT models.id, units.id, 1, 1
+FROM models, units
+WHERE models.name = "Heavy Destroyer"
+AND units.name = "Destroyers";
+
+INSERT INTO model_unit_join (
+    model,
+    unit,
+    min,
+    max
+)
+SELECT models.id, units.id, 1, 3
+FROM models, units
+WHERE models.name = "Heavy Destroyer"
+AND units.name = "Heavy Destroyers";
+
+INSERT INTO model_unit_join (
+    model,
+    unit,
+    min,
+    max
+)
 SELECT models.id, units.id, 1, 3
 FROM models, units
 WHERE models.name = "Canoptek Spyders"

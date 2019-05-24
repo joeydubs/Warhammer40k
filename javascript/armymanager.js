@@ -135,8 +135,7 @@ class ArmyManager {
         return this.army.wargear
     }
 
-    createUnit(modelArray, dynasty) {
-        var unit = new Unit()
+    createUnit(unit, dynasty, respond) {
         unit.setFaction(dynasty)
 
         modelArray.forEach(element => {
