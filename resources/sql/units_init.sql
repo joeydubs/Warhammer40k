@@ -94,6 +94,7 @@ INSERT INTO units VALUES (
     NULL,
     "Destroyers",
     "This unit contains 1 Destroyer. It can include up to 5 additional Destroyers (Power Rating +3 per model). If the unit contains at least three models, a Heavy Destroyer can take the place of a Destroyer. Each Destroyer is armed with a gauss cannon. The Heavy Destroyer is armed with a heavy gauss cannon.",
+    NULL,
     "Fast Attack",
     3
 );
@@ -102,6 +103,7 @@ INSERT INTO units VALUES (
     NULL,
     "Heavy Destroyers",
     "This unit contains 1 Heavy Destroyer. It may include 1 additional Heavy Destroyer (Power Rating +3) or 2 additional Heavy Destroyers (Power Rating +6). Each model is armed with a heavy gauss cannon.",
+    NULL,
     "Heavy Support",
     3
 );

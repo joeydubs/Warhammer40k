@@ -4,7 +4,11 @@
 .read "models_init.sql"
 .read "model_stats_init.sql"
 .read "keywords_init.sql"
+.read "subfactions_init.sql"
 .read "units_init.sql"
+.read "user_army_init.sql"
+.read "army_models_init.sql"
+.read "army_gear_init.sql"
 
 .read "model_stats_join.sql"
 .read "model_unit_join.sql"

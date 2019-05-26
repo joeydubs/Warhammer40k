@@ -50,3 +50,21 @@ FROM models, wargear
 WHERE models.name = "Immortal"
 AND wargear.name = "Tesla carbine";
 
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Destroyer"
+AND wargear.name = "Gauss cannon";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Heavy Destroyer"
+AND wargear.name = "Heavy gauss cannon";
+

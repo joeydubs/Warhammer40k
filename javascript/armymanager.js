@@ -22,7 +22,7 @@ class ArmyManager {
 
         this.army = new Army()
 
-        this.db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READONLY, function (err) {
+        this.db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READWRITE, function (err) {
             if (err) {
                 console.log("There was an error opening the Database. ")
                 error = err.message
@@ -135,28 +135,109 @@ class ArmyManager {
         return this.army.wargear
     }
 
-    createUnit(unit, dynasty, respond) {
-        unit.setFaction(dynasty)
+    createUnit(unit, dynasty) {
+        let db = this.db
+        let unitName = Object.keys(unit)[0]
 
-        modelArray.forEach(element => {
-            var model = this.models.getModel(element.model)
+        let query = `INSERT INTO user_army (
+                id,
+                unitID,
+                subfactionID
+            )
+            SELECT NULL, units.id, subfactions.id
+            FROM units, subfactions
+            WHERE units.name = "${unitName}"
+            AND subfactions.name = "${dynasty}";
+        )`
+        console.log(query)
 
-            if (element.any) {
-                model.wargear = model.wargear.concat(element.any)
 
+        var callback = function (err) {
+            if (err) {
+                console.log(err.message)
             }
-            if (element.or) {
-                model.wargear = model.wargear.concat(element.or)
+            else {
+                var unitID = this.lastID
+                console.log("Row added ID: " + unitID)
+                for (var key in unit[unitName]) {
+                    var model = unit[unitName][key]
+                    var modelID = parseInt(key)
+                    console.log(key + " " + model)
 
+                    var modelQuery = `INSERT INTO army_models VALUES (
+                        ${unitID},
+                        ${modelID},
+                        ${model.quantity}
+                    )`
+                    console.log(modelQuery)
+
+                    db.run(modelQuery, [], function (err) {
+                        if (err) {
+                            console.log(err.message)
+                        }
+                    })
+
+                    var gearQuery = "INSERT INTO army_gear VALUES "
+                    for (var item in model.gear) {
+                        var gearID = parseInt(model.gear[item])
+                        if (item == model.gear.length - 1) {
+                            gearQuery += `(${unitID}, ${modelID}, ${gearID})`
+                        }
+                        else {
+                            gearQuery += `(${unitID}, ${modelID}, ${gearID}), `
+                        }
+                    }
+                    console.log(gearQuery)
+
+                    db.run(gearQuery, [], function (err) {
+                        if (err) {
+                            console.log(err.message)
+                        }
+                    })
+                }
             }
+        }
 
-            unit.addModel(model)
-        })
+        db.run(query, [], callback)
+    }
 
-        this.army.addUnit(unit)
+    setupUnit(unitName, unitID) {
+        console.log("Row added ID: " + unitID)
+        for (var key in unit[unitName]) {
+            var model = unit[unitName][key]
+            var modelID = parseInt(model)
+            console.log(key + " " + model)
 
-        for (var key in this.army.wargear) {
-            this.army.wargear[key] = this.wargear.getWargear(key)
+            var modelQuery = `INSERT INTO army_models VALUES (
+                ${unitID},
+                ${modelID},
+                ${model.quantity}
+            )`
+            console.log(modelQuery)
+
+            this.db.run(modelQuery, [], function (err) {
+                if (err) {
+                    console.log(err.message)
+                }
+            })
+
+            var gearQuery = "INSERT INTO army_gear VALUES "
+            for (var item in model.gear) {
+                var gearID = parseInt(model.gear[item])
+                if (item == model.gear.length - 1) {
+                    gearQuery += `(${unitID}, ${modelID}, ${gearID})`
+                }
+                else {
+                    gearQuery += `(${unitID}, ${modelID}, ${gearID}), `
+                }
+            }
+            console.log(gearQuery)
+
+            this.db.run(gearQuery, [], function (err) {
+                if (err) {
+                    console.log(err.message)
+                }
+            })
         }
     }
 
@@ -193,7 +274,7 @@ class ArmyManager {
 
     getModelStats(model, respond) {
         let query =
-        `SELECT name, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+            `SELECT name, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
         FROM model_stats
         INNER JOIN models ON models.id = model_stats_join.model
         INNER JOIN model_stats_join ON model_stats_join.stats = model_stats.id
@@ -220,13 +301,13 @@ class ArmyManager {
         }
 
         this.db.each(query, callback, completion)
-        
+
         //return this.models.library[model]
     }
 
     getUnitDetails(unit, respond) {
         let query =
-        `SELECT models.name AS name, models.id AS modelid, wargear.name AS gear, wargear.id AS gearid, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
+            `SELECT models.name AS name, models.id AS modelid, wargear.name AS gear, wargear.id AS gearid, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
         FROM wargear
         INNER JOIN model_wargear_join ON wargear.id = model_wargear_join.wargear
         INNER JOIN models ON model_wargear_join.model = models.id
@@ -244,7 +325,7 @@ class ArmyManager {
             else {
                 console.log(row)
                 var name = row.name
-                if(!message[name]) {
+                if (!message[name]) {
                     var model = {
                         gear: {}
                     }
@@ -273,7 +354,7 @@ class ArmyManager {
         }
 
         this.db.each(query, callback, completion)
-        
+
         //return this.models.library[model]
     }
 
@@ -320,6 +401,15 @@ class ArmyManager {
             }
         })
     }
+
+    SELECT user_army.id, subfactions.name, models.name, wargear.name
+    FROM user_army
+    INNER JOIN army_models ON user_army.id = army_models.armyUnitID
+    INNER JOIN army_gear ON army_gear.armyUnitID = user_army.id
+    AND army_gear.modelID = army_models.modelID
+    INNER JOIN models ON army_models.modelID = models.id
+    INNER JOIN wargear ON army_gear.gearID = wargear.id
+    INNER JOIN subfactions ON user_army.subfactionID = subfactions.id;
     */
 }
 

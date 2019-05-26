@@ -144,14 +144,9 @@ app.post('/createUnit', function (req, res) {
 	console.log(unit)
 	console.log(dynasty)
 
-	army.createUnit(unit, dynasty, function (err, result) {
-		if (err) {
-			console.log(err.message)
-		}
-		console.log(result)
-		res.status(200)
-		res.send()
-		})
+	army.createUnit(unit, dynasty)
+	res.status(200)
+	res.send()
 })
 
 app.post("/removeUnit", function (req, res) {

@@ -1,10 +1,7 @@
 DROP TABLE user_army;
 
 CREATE TABLE user_army (
-    unitNumber INTEGER,
+    id INTEGER PRIMARY KEY,
     unitID INTEGER,
-    modelID INTEGER,
-    gearID INTEGER,
-    quantity INTEGER,
     subfactionID INTEGER
 );

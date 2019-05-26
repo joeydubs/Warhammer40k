@@ -79,3 +79,25 @@ VALUES
         35,
         false
 );
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Gauss cannon",
+        null,
+        null,
+        20,
+        false
+);
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Heavy gauss cannon",
+        null,
+        null,
+        27,
+        false
+);
