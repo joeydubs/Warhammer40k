@@ -115,11 +115,15 @@ app.post('/fetchUnit', function (req, res) {
 })
 
 app.post("/fetchArmy", function (req, res) {
-	var myArmy = army.getArmy()
-
-	res.status(200)
-	res.type("json")
-	res.send(JSON.stringify(myArmy))
+	army.getArmy(function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		console.log(result)
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
 })
 
 app.post("/fetchStratagems", function (req, res) {

@@ -179,6 +179,7 @@ function fetchArmy() {
             document.getElementById("wargear").setAttribute("hidden", true)
             document.getElementById("my-army").removeAttribute("hidden")
             var army = JSON.parse(request.responseText)
+            console.log(army)
             generateArmyTable(army)
         }
     }
@@ -314,30 +315,35 @@ function generateUnitTable(unit) {
     };
     document.getElementById("unit-models").replaceWith(table)
 }
+
 function generateArmyTable(army) {
-    var table = document.createElement("table")
-    table.id = "army-table"
-    army.forEach(unit => {
-        var index = army.indexOf(unit)
+    var section = document.createElement("section")
+    section.id = "my-army"
+    for (var key in army) {
+        var table = document.createElement("table")
+        var unit = army[key]
+        console.log(unit)
         var tr = document.createElement("tr")
         var th = document.createElement("th")
         var removeTH = document.createElement("th")
-        th.innerText = `Unit ${index + 1} - ${unit.role} (${unit.models.length})`
-        removeTH.innerHTML = `<button onclick="removeUnit(${index})">Remove</button>`
+        th.innerText = `${unit.name} - ${unit.subfaction} - ${unit.role}`
+        removeTH.innerHTML = `<button onclick="removeUnit(${key})">Remove</button>`
         tr.appendChild(th)
         tr.appendChild(removeTH)
         table.appendChild(tr)
-        unit.models.forEach(model => {
-            var tr = document.createElement("tr")
-            tr.insertCell(0)
-            var td = tr.insertCell(-1)
-            td.innerText = model.name
-            var td2 = tr.insertCell(-1)
-            td2.innerText = model.wargear
-            table.appendChild(tr)
-        })
-    })
-    document.getElementById("army-table").replaceWith(table)
+        for (var item in unit.models) {
+                var model = unit.models[item]
+                console.log(model)
+                var tr = document.createElement("tr")
+                var td = tr.insertCell(-1)
+                td.innerText = item
+                var td2 = tr.insertCell(-1)
+                td2.innerText = model.gear
+                table.appendChild(tr)
+        }
+        section.appendChild(table)
+    }
+    document.getElementById("my-army").replaceWith(section)
 }
 
 function generateStratagemsTable(stratagems) {

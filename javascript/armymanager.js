@@ -358,13 +358,14 @@ class ArmyManager {
         //return this.models.library[model]
     }
 
-    getArmy() {
+    getArmy(respond) {
         let query =
-            `SELECT user_army.id, subfactions.name AS subfaction, models.name AS model, army_models.quantity, wargear.name AS wargear
+            `SELECT user_army.id, units.name AS unit, units.role, subfactions.name AS subfaction, models.name AS model, army_models.quantity, wargear.name AS wargear
             FROM user_army
             INNER JOIN army_models ON user_army.id = army_models.armyUnitID
             INNER JOIN army_gear ON army_gear.armyUnitID = user_army.id
             AND army_gear.modelID = army_models.modelID
+            INNER JOIN units ON user_army.unitID = units.id
             INNER JOIN models ON army_models.modelID = models.id
             INNER JOIN wargear ON army_gear.gearID = wargear.id
             INNER JOIN subfactions ON user_army.subfactionID = subfactions.id;`
@@ -381,21 +382,27 @@ class ArmyManager {
                 console.log(row)
                 var id = row.id
                 if (!message[id]) {
-                    var model = {
-                        gear: {}
+                    message[id] = {
+                        models: {}
                     }
-                    message[id] = model
                 }
-                message[id]["id"] = row.modelid // Replace with unit name
+
+                if (!message[id]["models"]) {
+                    message[id]["models"] = {}
+                }
+
+                let model = row.model
+                if (!message[id]["models"][model]) {
+                    message[id]["models"][model] = {
+                        gear: []
+                    }
+                }
+
+                message[id]["name"] = row.unit
                 message[id]["subfaction"] = row.subfaction
-                message[id]["model"] = row.model
-                message[id]["quantity"] = row.quantity
-                message[id]["wargear"] = row.wargear
-                var gear = {
-                    cost: row.gearcost,
-                    id: row.gearid
-                }
-                message[name]["gear"][row.gear] = gear
+                message[id]["role"] = row.role
+                message[id]["models"][model]["quantity"] = row.quantity
+                message[id]["models"][model]["gear"].push(row.wargear)
             }
         }
 
@@ -450,15 +457,6 @@ class ArmyManager {
             }
         })
     }
-
-    SELECT user_army.id, subfactions.name, models.name, wargear.name
-    FROM user_army
-    INNER JOIN army_models ON user_army.id = army_models.armyUnitID
-    INNER JOIN army_gear ON army_gear.armyUnitID = user_army.id
-    AND army_gear.modelID = army_models.modelID
-    INNER JOIN models ON army_models.modelID = models.id
-    INNER JOIN wargear ON army_gear.gearID = wargear.id
-    INNER JOIN subfactions ON user_army.subfactionID = subfactions.id;
     */
 }
 
