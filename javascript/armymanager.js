@@ -359,7 +359,56 @@ class ArmyManager {
     }
 
     getArmy() {
-        return this.army.units
+        let query =
+            `SELECT user_army.id, subfactions.name AS subfaction, models.name AS model, army_models.quantity, wargear.name AS wargear
+            FROM user_army
+            INNER JOIN army_models ON user_army.id = army_models.armyUnitID
+            INNER JOIN army_gear ON army_gear.armyUnitID = user_army.id
+            AND army_gear.modelID = army_models.modelID
+            INNER JOIN models ON army_models.modelID = models.id
+            INNER JOIN wargear ON army_gear.gearID = wargear.id
+            INNER JOIN subfactions ON user_army.subfactionID = subfactions.id;`
+
+        console.log(query)
+
+        var message = {}
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                console.log(row)
+                var id = row.id
+                if (!message[id]) {
+                    var model = {
+                        gear: {}
+                    }
+                    message[id] = model
+                }
+                message[id]["id"] = row.modelid // Replace with unit name
+                message[id]["subfaction"] = row.subfaction
+                message[id]["model"] = row.model
+                message[id]["quantity"] = row.quantity
+                message[id]["wargear"] = row.wargear
+                var gear = {
+                    cost: row.gearcost,
+                    id: row.gearid
+                }
+                message[name]["gear"][row.gear] = gear
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+
+        //return this.army.units
     }
 
     dbtest(respond) {
