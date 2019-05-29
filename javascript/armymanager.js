@@ -241,8 +241,16 @@ class ArmyManager {
         }
     }
 
-    removeUnit(index) {
-        this.army.removeUnit(index)
+    removeUnit(id) {
+        let query = `DELETE FROM user_army WHERE id = ${id}; DELETE FROM army_models WHERE id = ${id}; DELETE FROM army_gear WHERE id = ${id}`
+
+        var callback = function (err) {
+            if (err) {
+                console.log(err.message)
+            }
+        }
+
+        this.db.each(query, callback)
     }
 
     getUnitList(respond) {

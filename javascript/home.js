@@ -321,6 +321,7 @@ function generateArmyTable(army) {
     section.id = "my-army"
     for (var key in army) {
         var table = document.createElement("table")
+        table.id = `unit-${key}`
         var unit = army[key]
         console.log(unit)
         var tr = document.createElement("tr")
@@ -450,16 +451,16 @@ function createUnit() {
     request.send(JSON.stringify({ "unit": myUnit, "dynasty": document.getElementById("dynasty-selector").value }))
 }
 
-function removeUnit(index) {
+function removeUnit(id) {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log("Remove Unit request received")
-            var army = JSON.parse(request.responseText)
-            generateArmyTable(army)
+            var unitTable = document.getElementById("unit-" + id)
+            unitTable.parentNode.removeChild(unitTable)
         }
     }
     request.open("POST", "/removeUnit")
     request.setRequestHeader("Content-Type", "application/json")
-    request.send(JSON.stringify({ "index": index }))
+    request.send(JSON.stringify({ "id": id }))
 }

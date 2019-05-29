@@ -154,14 +154,11 @@ app.post('/createUnit', function (req, res) {
 })
 
 app.post("/removeUnit", function (req, res) {
-	var index = req.body.index
-	army.removeUnit(index)
-
-	var myArmy = army.getArmy()
-
+	var id = req.body.id
+	army.removeUnit(id)
+	
 	res.status(200)
-	res.type("json")
-	res.send(JSON.stringify(myArmy))
+	res.send()
 })
 
 app.listen(port, function () {
