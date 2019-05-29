@@ -250,7 +250,7 @@ class ArmyManager {
             }
         }
 
-        this.db.each(query, callback)
+        this.db.exec(query, callback)
     }
 
     getUnitList(respond) {
