@@ -441,8 +441,8 @@ function createUnit() {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log("Save Unit request received")
-            models = []
             document.getElementById("unit-models").innerHTML = ""
+            document.getElementById("unit-selector").value = "-- Select Unit --"
             document.getElementById("submit-unit").setAttribute("disabled", true)
         }
     }

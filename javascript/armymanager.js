@@ -242,7 +242,7 @@ class ArmyManager {
     }
 
     removeUnit(id) {
-        let query = `DELETE FROM user_army WHERE id = ${id}; DELETE FROM army_models WHERE id = ${id}; DELETE FROM army_gear WHERE id = ${id}`
+        let query = `DELETE FROM user_army WHERE id = ${id}; DELETE FROM army_models WHERE armyUnitID = ${id}; DELETE FROM army_gear WHERE armyUnitID = ${id}`
 
         var callback = function (err) {
             if (err) {
@@ -370,13 +370,13 @@ class ArmyManager {
         let query =
             `SELECT user_army.id, units.name AS unit, units.role, subfactions.name AS subfaction, models.name AS model, army_models.quantity, wargear.name AS wargear
             FROM user_army
-            INNER JOIN army_models ON user_army.id = army_models.armyUnitID
-            INNER JOIN army_gear ON army_gear.armyUnitID = user_army.id
+            LEFT OUTER JOIN army_models ON user_army.id = army_models.armyUnitID
+            LEFT OUTER JOIN army_gear ON army_gear.armyUnitID = user_army.id
             AND army_gear.modelID = army_models.modelID
-            INNER JOIN units ON user_army.unitID = units.id
-            INNER JOIN models ON army_models.modelID = models.id
-            INNER JOIN wargear ON army_gear.gearID = wargear.id
-            INNER JOIN subfactions ON user_army.subfactionID = subfactions.id;`
+            LEFT OUTER JOIN units ON user_army.unitID = units.id
+            LEFT OUTER JOIN models ON army_models.modelID = models.id
+            LEFT OUTER JOIN wargear ON army_gear.gearID = wargear.id
+            LEFT OUTER JOIN subfactions ON user_army.subfactionID = subfactions.id;`
 
         console.log(query)
 
