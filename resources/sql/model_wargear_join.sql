@@ -21,6 +21,42 @@ INSERT INTO model_wargear_join (
 SELECT models.id, wargear.id
 FROM models, wargear
 WHERE models.name = "Overlord"
+AND wargear.name = "Hyperphase sword";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Overlord"
+AND wargear.name = "Voidblade";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Overlord"
+AND wargear.name = "Voidscythe";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Overlord"
+AND wargear.name = "Warscythe";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Overlord"
 AND wargear.name = "Resurrection Orb";
 
 INSERT INTO model_wargear_join (

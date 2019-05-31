@@ -88,7 +88,7 @@ function fetchUnit() {
                     gearRow.insertCell(-1)
                     gearRow.insertCell(-1).innerText = wargear.cost
                     gearRow.insertCell(-1).innerText = gear
-                    gearRow.insertCell(-1).innerHTML = `<input class="selected-gear" type="checkbox" name="${model.id}" value="${wargear.id}">`
+                    gearRow.insertCell(-1).innerHTML = `<input class="${key}-gear" type="checkbox" name="${gear}" value="${wargear.id}">`
                 }
             }
 
@@ -432,31 +432,41 @@ function generateWargearTable(wargear) {
 }
 
 function createUnit() {
-    var unitSelected = document.getElementById("unit-selector").value
-    var myUnit = {}
-    myUnit[unitSelected] = {}
+    var points = 0
+    var myUnit = {
+        name: document.getElementById("unit-selector").value,
+        details: {},
+    }
+    console.log(unit)
     for (let key in unit.models) {
-        let model = unit.models[key]
+        let modelID = unit.models[key].id
         let qty = parseInt(document.getElementById(`${key}-qty`).value)
         if (qty > 0) {
-            myUnit[unitSelected][model.id] = {
+            points += (qty * unit.models[key].cost)
+            myUnit.details[modelID] = {
                 gear: [],
                 quantity: qty
-            }    
-        }
-    }
-    var boxes = document.getElementsByClassName("selected-gear")
-    for (box in boxes) {
-        var model = boxes[box].name
-        var wargear = boxes[box].value
-        if (boxes[box].checked) {
-            console.log(`Model: ${model}, gear: ${wargear}`)
-            if (myUnit[unitSelected][model]) {
-                myUnit[unitSelected][model].gear.push(wargear)
             }
+
+            var boxes = document.getElementsByClassName(`${key}-gear`)
+            for (let box in boxes) {
+                let gearName = boxes[box].name
+                let gearID = boxes[box].value
+                if (boxes[box].checked) {
+                    console.log(`Gear: ${gearName}, ID: ${gearID}`)
+                    if (myUnit.details[modelID]) {
+                        points += (qty * unit.models[key].gear[gearName].cost)
+                        myUnit.details[modelID].gear.push(gearID)
+                    }
+                }
+            }
+        
         }
     }
+
+    myUnit["points"] = points
     console.log(myUnit)
+
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {

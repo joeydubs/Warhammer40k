@@ -23,6 +23,46 @@ INSERT INTO wargear
 VALUES
     (
         null,
+        "Hyperphase sword",
+        null,
+        null,
+        3,
+        true
+);
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Voidblade",
+        null,
+        null,
+        6,
+        true
+);
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Voidscythe",
+        null,
+        null,
+        20,
+        true
+);
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Warscythe",
+        null,
+        null,
+        11,
+        true
+);
+INSERT INTO wargear
+VALUES
+    (
+        null,
         "Doomsday cannon",
         null,
         null,

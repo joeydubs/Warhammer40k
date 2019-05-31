@@ -137,14 +137,15 @@ class ArmyManager {
 
     createUnit(unit, dynasty) {
         let db = this.db
-        let unitName = Object.keys(unit)[0]
+        let unitName = unit.name
 
         let query = `INSERT INTO user_army (
                 id,
                 unitID,
-                subfactionID
+                subfactionID,
+                points
             )
-            SELECT NULL, units.id, subfactions.id
+            SELECT NULL, units.id, subfactions.id, ${unit.points}
             FROM units, subfactions
             WHERE units.name = "${unitName}"
             AND subfactions.name = "${dynasty}";
@@ -159,8 +160,8 @@ class ArmyManager {
             else {
                 var unitID = this.lastID
                 console.log("Row added ID: " + unitID)
-                for (var key in unit[unitName]) {
-                    var model = unit[unitName][key]
+                for (var key in unit.details) {
+                    var model = unit.details[key]
                     var modelID = parseInt(key)
                     var modelQty = parseInt(model.quantity)
                     console.log(key + " " + model)
