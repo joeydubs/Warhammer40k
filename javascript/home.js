@@ -49,31 +49,46 @@ function fetchUnit() {
             console.log(unit)
             var modelsSection = document.createElement("section")
             modelsSection.id = "unit-models"
+
+            modelsSection.innerHTML = `<p><em>${unit.description}</em></p>`
+            if (unit.options != null) {
+                modelsSection.innerHTML += `<p><em>${unit.options}</em></p>`
+            }
+            else {
+                modelsSection.innerHTML += "<p><em>This unit has no wargear options.</em></p>"
+            }
+
             var modelTable = document.createElement("table")
             var titleRow = modelTable.insertRow(-1)
-            titleRow.insertCell(-1)
-            titleRow.insertCell(-1).innerText = "Points"
+            titleRow.insertCell(-1).innerText = "Name"
             titleRow.insertCell(-1).innerText = "Power"
             titleRow.insertCell(-1).innerText = "Min"
             titleRow.insertCell(-1).innerText = "Max"
+            titleRow.insertCell(-1).innerText = "Points"
+            titleRow.insertCell(-1).innerText = "Gear"
+            titleRow.insertCell(-1).innerText = "Include"
 
-            for (key in unit) {
-                var model = unit[key]
+            for (key in unit.models) {
+                var model = unit.models[key]
                 var row = modelTable.insertRow(-1)
                 row.insertCell(-1).innerHTML = `<b>${key}</b>`
-                row.insertCell(-1).innerText = model.cost
                 row.insertCell(-1).innerText = model.power
                 row.insertCell(-1).innerText = model.min
                 row.insertCell(-1).innerText = model.max
-
-                modelTable.insertRow(-1).insertCell(-1).innerHTML = `<em>${model.description}</em>`
-                modelTable.insertRow(-1).insertCell(-1).innerHTML = `<em>${model.options}</em>`
+                row.insertCell(-1).innerText = model.cost
+                row.insertCell(-1)
+                row.insertCell(-1).innerHTML = `<input id="${key}-qty" type="number" name="${model.id}" min="${model.min}" max="${model.max}" value="${model.min}">`
 
                 for (gear in model.gear) {
                     var wargear = model.gear[gear]
                     var gearRow = modelTable.insertRow(-1)
-                    gearRow.insertCell(-1).innerHTML = `<input class="selected-gear" type="checkbox" name="${model.id}" value="${wargear.id}"> ${gear}`
+                    gearRow.insertCell(-1)
+                    gearRow.insertCell(-1)
+                    gearRow.insertCell(-1)
+                    gearRow.insertCell(-1)
                     gearRow.insertCell(-1).innerText = wargear.cost
+                    gearRow.insertCell(-1).innerText = gear
+                    gearRow.insertCell(-1).innerHTML = `<input class="selected-gear" type="checkbox" name="${model.id}" value="${wargear.id}">`
                 }
             }
 
@@ -420,11 +435,14 @@ function createUnit() {
     var unitSelected = document.getElementById("unit-selector").value
     var myUnit = {}
     myUnit[unitSelected] = {}
-    for (key in unit) {
-        var model = unit[key]
-        myUnit[unitSelected][model.id] = {
-            gear: [],
-            quantity: null
+    for (let key in unit.models) {
+        let model = unit.models[key]
+        let qty = parseInt(document.getElementById(`${key}-qty`).value)
+        if (qty > 0) {
+            myUnit[unitSelected][model.id] = {
+                gear: [],
+                quantity: qty
+            }    
         }
     }
     var boxes = document.getElementsByClassName("selected-gear")
@@ -433,7 +451,9 @@ function createUnit() {
         var wargear = boxes[box].value
         if (boxes[box].checked) {
             console.log(`Model: ${model}, gear: ${wargear}`)
-            myUnit[unitSelected][model].gear.push(wargear)
+            if (myUnit[unitSelected][model]) {
+                myUnit[unitSelected][model].gear.push(wargear)
+            }
         }
     }
     console.log(myUnit)

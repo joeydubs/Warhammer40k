@@ -123,7 +123,7 @@ INSERT INTO model_unit_join (
     min,
     max
 )
-SELECT models.id, units.id, 1, 1
+SELECT models.id, units.id, 0, 1
 FROM models, units
 WHERE models.name = "Heavy Destroyer"
 AND units.name = "Destroyers";

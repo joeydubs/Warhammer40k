@@ -162,12 +162,13 @@ class ArmyManager {
                 for (var key in unit[unitName]) {
                     var model = unit[unitName][key]
                     var modelID = parseInt(key)
+                    var modelQty = parseInt(model.quantity)
                     console.log(key + " " + model)
 
                     var modelQuery = `INSERT INTO army_models VALUES (
                         ${unitID},
                         ${modelID},
-                        ${model.quantity}
+                        ${modelQty}
                     )`
                     console.log(modelQuery)
 
@@ -177,23 +178,25 @@ class ArmyManager {
                         }
                     })
 
-                    var gearQuery = "INSERT INTO army_gear VALUES "
-                    for (var item in model.gear) {
-                        var gearID = parseInt(model.gear[item])
-                        if (item == model.gear.length - 1) {
-                            gearQuery += `(${unitID}, ${modelID}, ${gearID})`
+                    if (model.gear.length > 0) {
+                        var gearQuery = "INSERT INTO army_gear VALUES "
+                        for (var item in model.gear) {
+                            var gearID = parseInt(model.gear[item])
+                            if (item == model.gear.length - 1) {
+                                gearQuery += `(${unitID}, ${modelID}, ${gearID})`
+                            }
+                            else {
+                                gearQuery += `(${unitID}, ${modelID}, ${gearID}), `
+                            }
                         }
-                        else {
-                            gearQuery += `(${unitID}, ${modelID}, ${gearID}), `
-                        }
-                    }
-                    console.log(gearQuery)
+                        console.log(gearQuery)
 
-                    db.run(gearQuery, [], function (err) {
-                        if (err) {
-                            console.log(err.message)
-                        }
-                    })
+                        db.run(gearQuery, [], function (err) {
+                            if (err) {
+                                console.log(err.message)
+                            }
+                        })
+                    }
                 }
             }
         }
@@ -316,15 +319,17 @@ class ArmyManager {
     getUnitDetails(unit, respond) {
         let query =
             `SELECT models.name AS name, models.id AS modelid, wargear.name AS gear, wargear.id AS gearid, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
-        FROM wargear
-        INNER JOIN model_wargear_join ON wargear.id = model_wargear_join.wargear
-        INNER JOIN models ON model_wargear_join.model = models.id
-        INNER JOIN model_unit_join ON model_unit_join.model = models.id
-        INNER JOIN units ON model_unit_join.unit = units.id
-        WHERE units.name = "${unit}"`
+            FROM wargear
+            INNER JOIN model_wargear_join ON wargear.id = model_wargear_join.wargear
+            INNER JOIN models ON model_wargear_join.model = models.id
+            INNER JOIN model_unit_join ON model_unit_join.model = models.id
+            INNER JOIN units ON model_unit_join.unit = units.id
+            WHERE units.name = "${unit}"`
         console.log(query)
 
-        var message = {}
+        var message = {
+            models: {}
+        }
 
         var callback = function (err, row) {
             if (err) {
@@ -332,25 +337,31 @@ class ArmyManager {
             }
             else {
                 console.log(row)
+
+                if (!message.description) {
+                    message["description"] = row.description
+                }
+                if (!message.options) {
+                    message["options"] = row.options
+                }
+
                 var name = row.name
-                if (!message[name]) {
+                if (!message.models[name]) {
                     var model = {
                         gear: {}
                     }
-                    message[name] = model
+                    message.models[name] = model
                 }
-                message[name]["id"] = row.modelid
-                message[name]["description"] = row.description
-                message[name]["options"] = row.options
-                message[name]["min"] = row.min
-                message[name]["max"] = row.max
-                message[name]["cost"] = row.modelcost
-                message[name]["power"] = row.power
+                message.models[name]["id"] = row.modelid
+                message.models[name]["min"] = row.min
+                message.models[name]["max"] = row.max
+                message.models[name]["cost"] = row.modelcost
+                message.models[name]["power"] = row.power
                 var gear = {
                     cost: row.gearcost,
                     id: row.gearid
                 }
-                message[name]["gear"][row.gear] = gear
+                message.models[name]["gear"][row.gear] = gear
             }
         }
 
