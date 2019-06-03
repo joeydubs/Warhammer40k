@@ -128,7 +128,7 @@ VALUES
         null,
         null,
         20,
-        false
+        true
 );
 
 INSERT INTO wargear
@@ -139,5 +139,50 @@ VALUES
         null,
         null,
         27,
-        false
+        true
 );
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Heat ray",
+        null,
+        null,
+        54,
+        true
+);
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Particle shredder",
+        null,
+        null,
+        41,
+        true
+);
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Twin heavy gauss cannon",
+        null,
+        null,
+        54,
+        true
+);
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Massive forelimbs",
+        null,
+        null,
+        0,
+        true
+);
+

@@ -104,3 +104,39 @@ FROM models, wargear
 WHERE models.name = "Heavy Destroyer"
 AND wargear.name = "Heavy gauss cannon";
 
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Triarch Stalker"
+AND wargear.name = "Heat ray";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Triarch Stalker"
+AND wargear.name = "Particle Shredder";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Triarch Stalker"
+AND wargear.name = "Twin heavy gauss cannon";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Triarch Stalker"
+AND wargear.name = "Massive forelimbs";
+

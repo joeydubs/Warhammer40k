@@ -255,27 +255,6 @@ function removeModel(index) {
 }
 
 function displayStats(modelStats) {
-    /*
-    document.getElementById("model-stats").innerHTML = ""
-    var row1 = document.createElement("tr")
-    var row2 = document.createElement("tr")
-    for (key in modelStats) {
-        var th = document.createElement("th")
-        th.innerText = key
-        row1.appendChild(th)
-        var td = document.createElement("td")
-        var data = modelStats[key]
-        if (Array.isArray(data)) {
-            console.log(true)
-            data = data.join("\n")
-        }
-        td.innerText = data
-        row2.appendChild(td)
-    }
-    document.getElementById("model-stats").appendChild(row1)
-    document.getElementById("model-stats").appendChild(row2)
-    document.getElementById("model-stats").removeAttribute("hidden")
-    */
     var table = document.createElement("table")
     table.id = "model-stats"
     table.innerHTML =
@@ -334,30 +313,77 @@ function generateUnitTable(unit) {
 function generateArmyTable(army) {
     var section = document.createElement("section")
     section.id = "my-army"
-    for (var key in army) {
-        var table = document.createElement("table")
-        table.id = `unit-${key}`
+    console.log(army)
+    for (let key in army) {
         var unit = army[key]
+        var unitDiv = document.createElement("div")
+        unitDiv.id = `unit-${key}`
+        var unitTable = document.createElement("table")
         console.log(unit)
         var tr = document.createElement("tr")
-        var th = document.createElement("th")
         var removeTH = document.createElement("th")
-        th.innerText = `${unit.name} - ${unit.subfaction} - ${unit.role}`
         removeTH.innerHTML = `<button onclick="removeUnit(${key})">Remove</button>`
-        tr.appendChild(th)
         tr.appendChild(removeTH)
-        table.appendChild(tr)
-        for (var item in unit.models) {
-                var model = unit.models[item]
-                console.log(model)
-                var tr = document.createElement("tr")
-                var td = tr.insertCell(-1)
-                td.innerText = item
-                var td2 = tr.insertCell(-1)
-                td2.innerText = model.gear
-                table.appendChild(tr)
+        var th = document.createElement("th")
+        th.innerText = `${unit.name} - ${unit.subfaction} - ${unit.role}`
+        th.colSpan = 10
+        tr.appendChild(th)
+        unitTable.appendChild(tr)
+        unitTable.insertRow(-1).innerHTML = "<td>Model</td><td>Gear</td><td>M</td><td>WS</td><td>BS</td><td>S</td><td>T</td><td>W</td><td>A</td><td>Ld</td><td>Sv</td>"
+        for (let modelName in unit.models) {
+            let model = unit.models[modelName]
+            console.log(model)
+            let modelRow = unitTable.insertRow(-1)
+            modelRow.insertCell(-1).innerText = modelName
+            modelRow.insertCell(-1)
+            modelRow.insertCell(-1).innerText = model.move
+            modelRow.insertCell(-1).innerText = model.weapon
+            modelRow.insertCell(-1).innerText = model.ballistic
+            modelRow.insertCell(-1).innerText = model.strength
+            modelRow.insertCell(-1).innerText = model.toughness
+            modelRow.insertCell(-1).innerText = model.wounds
+            modelRow.insertCell(-1).innerText = model.attacks
+            modelRow.insertCell(-1).innerText = model.leadership
+            modelRow.insertCell(-1).innerText = model.save
+
+            console.log(model.gear)
+            if (Object.keys(model.gear).length > 0) {
+                unitTable.insertRow(-1).innerHTML = '<td></td><td></td><td>Range</td><td>Type</td><td>S</td><td>AP</td><td>D</td><td colspan="4">Abilities</td>'
+                for (let gearName in model.gear) {
+                    let profiles = model.gear[gearName]
+                    console.log(profiles)
+                    for (let profile in profiles) {
+                        let gear = profiles[profile]
+                        console.log(profile)
+                        let gearRow = unitTable.insertRow(-1)
+                        gearRow.insertCell(-1)
+                        if (gearName == profile) {
+                            gearRow.insertCell(-1).innerText = gearName
+                        }
+                        else {
+                            gearRow.insertCell(-1).innerText = gearName + " " + profile
+                        }
+                        gearRow.insertCell(-1).innerText = gear.range
+                        gearRow.insertCell(-1).innerText = gear.type
+                        gearRow.insertCell(-1).innerText = gear.strength
+                        gearRow.insertCell(-1).innerText = gear.armorPen
+                        gearRow.insertCell(-1).innerText = gear.damage
+                        let abilitiesCell = gearRow.insertCell(-1)
+                        abilitiesCell.colSpan = 4
+                        abilitiesCell.innerText = gear.abilities
+                    }
+                }
+            }
         }
-        section.appendChild(table)
+        unitTable.insertRow(-1).innerHTML = '<td>Abilities</td>'
+        for (let abilityName in unit.abilities) {
+            let ability = unit.abilities[abilityName]
+            let abilitiesRow = unitTable.insertRow(-1)
+            abilitiesRow.insertCell(-1)
+            abilitiesRow.insertCell(-1).innerText = abilityName
+        }
+        unitDiv.appendChild(unitTable)
+        section.appendChild(unitDiv)
     }
     document.getElementById("my-army").replaceWith(section)
 }
@@ -460,7 +486,7 @@ function createUnit() {
                     }
                 }
             }
-        
+
         }
     }
 
