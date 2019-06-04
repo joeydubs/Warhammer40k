@@ -283,3 +283,34 @@ INSERT INTO model_stats VALUES (
     null,
     null
 );
+
+-- destroyer, 19
+INSERT INTO model_stats VALUES (
+    null,
+    null,
+    10,
+    3,
+    3,
+    4,
+    5,
+    3,
+    "2",
+    10,
+    3
+);
+
+-- heavy destroyer, 20
+INSERT INTO model_stats VALUES (
+    null,
+    null,
+    10,
+    3,
+    3,
+    4,
+    5,
+    3,
+    "2",
+    10,
+    3
+);
+

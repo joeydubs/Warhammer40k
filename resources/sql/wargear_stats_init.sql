@@ -207,3 +207,33 @@ SELECT null, wargear.id, "Massive forelimbs", "Melee", "Melee", "User", -1, "D3"
 FROM wargear
 WHERE wargear.name = "Massive forelimbs";
 
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Gauss cannon", "24", "Heavy 3", "6", -3, "D3", "-"
+FROM wargear
+WHERE wargear.name = "Gauss cannon";
+
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Heavy gauss cannon", "36", "Heavy 1", "9", -4, "D4", "-"
+FROM wargear
+WHERE wargear.name = "Heavy gauss cannon";
+

@@ -284,13 +284,15 @@ class ArmyManager {
         //return Object.keys(this.models.library)
     }
 
-    getModelStats(model, respond) {
+    getModelStats(unit, respond) {
         let query =
-            `SELECT name, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+            `SELECT models.name, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
         FROM model_stats
-        INNER JOIN models ON models.id = model_stats_join.model
         INNER JOIN model_stats_join ON model_stats_join.stats = model_stats.id
-        WHERE models.name = "${model}"`
+        INNER JOIN models ON models.id = model_stats_join.model
+        INNER JOIN model_unit_join ON models.id = model_unit_join.model
+        INNER JOIN units ON units.id = model_unit_join.unit
+        WHERE units.name = "${unit}"`
         console.log(query)
 
         var message = []

@@ -58,3 +58,9 @@ SELECT id, 17 FROM models WHERE name = "Doomsday Ark";
 
 INSERT INTO model_stats_join (model, stats)
 SELECT id, 18 FROM models WHERE name = "Doomsday Ark";
+
+INSERT INTO model_stats_join (model, stats)
+SELECT id, 19 FROM models WHERE name = "Destroyer";
+
+INSERT INTO model_stats_join (model, stats)
+SELECT id, 20 FROM models WHERE name = "Heavy Destroyer";
