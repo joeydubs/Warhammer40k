@@ -68,7 +68,7 @@ function fetchUnit() {
             titleRow.insertCell(-1).innerText = "Gear"
             titleRow.insertCell(-1).innerText = "Include"
 
-            for (key in unit.models) {
+            for (let key in unit.models) {
                 var model = unit.models[key]
                 var row = modelTable.insertRow(-1)
                 row.insertCell(-1).innerHTML = `<b>${key}</b>`
@@ -77,9 +77,9 @@ function fetchUnit() {
                 row.insertCell(-1).innerText = model.max
                 row.insertCell(-1).innerText = model.cost
                 row.insertCell(-1)
-                row.insertCell(-1).innerHTML = `<input id="${key}-qty" type="number" name="${model.id}" min="${model.min}" max="${model.max}" value="${model.min}">`
+                row.insertCell(-1).innerHTML = `<input id="${key.split(' ').join('-')}-qty" type="number" name="${model.id}" min="${model.min}" max="${model.max}" value="${model.min}">`
 
-                for (gear in model.gear) {
+                for (let gear in model.gear) {
                     var wargear = model.gear[gear]
                     var gearRow = modelTable.insertRow(-1)
                     gearRow.insertCell(-1)
@@ -88,51 +88,13 @@ function fetchUnit() {
                     gearRow.insertCell(-1)
                     gearRow.insertCell(-1).innerText = wargear.cost
                     gearRow.insertCell(-1).innerText = gear
-                    gearRow.insertCell(-1).innerHTML = `<input class="${key}-gear" type="checkbox" name="${gear}" value="${wargear.id}">`
+                    gearRow.insertCell(-1).innerHTML = `<input class="${key.split(' ').join('-')}-gear" type="checkbox" name="${gear}" value="${wargear.id}">`
                 }
             }
 
             modelsSection.appendChild(modelTable)
             document.getElementById("unit-models").replaceWith(modelsSection)
             document.getElementById("submit-unit").removeAttribute("disabled")
-
-            // var row = document.getElementById("unit-models").rows[index]
-            // for (option in modelGear.wargearoptions) {
-            //     var optionTD = document.createElement("td")
-            //     if (option == "or") {
-            //         var wargearoption = modelGear.wargearoptions[option]
-            //         wargearoption.forEach(element => {
-            //             /*
-            //             var radio = document.createElement("input")
-            //             radio.type = "radio"
-            //             radio.name = model + index
-            //             radio.value = `${JSON.stringify([index, option, element])}`
-            //             radio.onclick = updateModelGear
-            //             optionTD.appendChild(radio)
-            //             optionTD.append(JSON.stringify(element))
-            //             */
-            //             optionTD.innerHTML += `<p><input type="radio" name='${model + index}' value='${JSON.stringify([index, option, element])}' onclick="updateModelGear(this)"> ${JSON.stringify(element)}</p>`
-            //         })
-            //     }
-            //     else if (option == "any") {
-            //         var wargearoption = modelGear.wargearoptions[option]
-            //         wargearoption.forEach(element => {
-            //             /*
-            //             var checkbox = document.createElement("input")
-            //             checkbox.type = "checkbox"
-            //             checkbox.value = `${JSON.stringify([index, option, element])}`
-            //             checkbox.onclick = updateModelGear
-            //             checkbox.innerText = element
-            //             optionTD.appendChild(checkbox)
-            //             optionTD.append(JSON.stringify(element))
-            //             */
-            //             optionTD.innerHTML += `<p><input type="checkbox" name='${model + index}' value='${JSON.stringify([index, option, element])}' onclick="updateModelGear(this)">${JSON.stringify(element)}</p>`
-            //         })
-            //     }
-            //     else {
-            //         console.log("Unknown option: " + option)
-            //     }
-            //    row.appendChild(optionTD)
         }
     }
 
@@ -466,7 +428,7 @@ function createUnit() {
     console.log(unit)
     for (let key in unit.models) {
         let modelID = unit.models[key].id
-        let qty = parseInt(document.getElementById(`${key}-qty`).value)
+        let qty = parseInt(document.getElementById(`${key.split(' ').join('-')}-qty`).value)
         if (qty > 0) {
             points += (qty * unit.models[key].cost)
             myUnit.details[modelID] = {
@@ -474,12 +436,13 @@ function createUnit() {
                 quantity: qty
             }
 
-            var boxes = document.getElementsByClassName(`${key}-gear`)
+            var boxes = document.getElementsByClassName(`${key.split(' ').join('-')}-gear`)
+            console.log(boxes)
             for (let box in boxes) {
                 let gearName = boxes[box].name
                 let gearID = boxes[box].value
                 if (boxes[box].checked) {
-                    console.log(`Gear: ${gearName}, ID: ${gearID}`)
+                    console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
                     if (myUnit.details[modelID]) {
                         points += (qty * unit.models[key].gear[gearName].cost)
                         myUnit.details[modelID].gear.push(gearID)
