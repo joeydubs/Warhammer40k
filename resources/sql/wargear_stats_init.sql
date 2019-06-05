@@ -237,3 +237,33 @@ SELECT null, wargear.id, "Heavy gauss cannon", "36", "Heavy 1", "9", -4, "D4", "
 FROM wargear
 WHERE wargear.name = "Heavy gauss cannon";
 
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Tesla carbine", "24", "Assault 2", "5", 0, "1", "Each hit roll of 6+ with this weapon causes 3 hits instead of 1."
+FROM wargear
+WHERE wargear.name = "Tesla carbine";
+
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Hyperphase sword", "Melee", "Melee", "+1", -3, "1", "-"
+FROM wargear
+WHERE wargear.name = "Hyperphase sword";
+
