@@ -267,3 +267,48 @@ SELECT null, wargear.id, "Hyperphase sword", "Melee", "Melee", "+1", -3, "1", "-
 FROM wargear
 WHERE wargear.name = "Hyperphase sword";
 
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Voidblade", "Melee", "Melee", "User", -3, "1", "Each time the bearer fights, it can make 1 additional attack with this weapon."
+FROM wargear
+WHERE wargear.name = "Voidblade";
+
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Voidscythe", "Melee", "Melee", "x2", -4, "3", "When attacking with this weapon, subtract 1 from the hit roll."
+FROM wargear
+WHERE wargear.name = "Voidscythe";
+
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Warscythe", "Melee", "Melee", "+2", -4, "2", "-"
+FROM wargear
+WHERE wargear.name = "Warscythe";
+
