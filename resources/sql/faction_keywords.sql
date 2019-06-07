@@ -15,3 +15,33 @@ INSERT INTO faction_keywords VALUES (
     "C'tan Shards"
 );
 
+INSERT INTO faction_keywords VALUES (
+    null,
+    "Sautekh"
+);
+
+INSERT INTO faction_keywords VALUES (
+    null,
+    "Nihilakh"
+);
+
+INSERT INTO faction_keywords VALUES (
+    null,
+    "Canoptek"
+);
+
+INSERT INTO faction_keywords VALUES (
+    null,
+    "Mephrit"
+);
+
+INSERT INTO faction_keywords VALUES (
+    null,
+    "Novokh"
+);
+
+INSERT INTO faction_keywords VALUES (
+    null,
+    "Nephrikh"
+);
+

@@ -330,8 +330,8 @@ INSERT INTO stratagem_conditions (
 SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
 FROM stratagems, keywords, factionkeywords, wargear
 WHERE stratagems.name = "REPAIR SUBROUTINES"
-AND keywords.name = "Canoptek"
-AND faction_keywords.name = null
+AND keywords.name = null
+AND faction_keywords.name = "Canoptek"
 AND wargear.name = null
 AND abilities.name = null;
 
@@ -533,15 +533,237 @@ AND faction_keywords.name = null
 AND wargear.name = null
 AND abilities.name = null;
 
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "ADAPTIVE SUBROUTINES"
+AND keywords.name = null
+AND faction_keywords.name = "Canoptek"
+AND wargear.name = null
+AND abilities.name = null;
 
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "DIMENSIONAL CORRIDOR"
+AND keywords.name = "Infantry"
+AND faction_keywords.name = null
+AND wargear.name = null
+AND abilities.name = null;
 
-"ADAPTIVE SUBROUTINES"
-"DIMENSIONAL CORRIDOR"
-"JUDGEMENT OF THE TRIARCH"
-"GRAVITIC SINGULARITY"
-"COSMIC POWERS"
-"METHODICAL DESTRUCTION"
-"RECLAIM A LOST EMPIRE"
-"TRANSLOCATION CRYPT"
-"BLOOD RITES"
-"TALENT FOR ANNIHILATION"
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "DIMENSIONAL CORRIDOR"
+AND keywords.name = "Monolith"
+AND faction_keywords.name = null
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "JUDGEMENT OF THE TRIARCH"
+AND keywords.name = "Triarch Praetorians"
+AND faction_keywords.name = null
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "GRAVITIC SINGULARITY"
+AND keywords.name = "Obelisk"
+AND faction_keywords.name = null
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "COSMIC POWERS"
+AND keywords.name = null
+AND faction_keywords.name = "C'tan Shards"
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "METHODICAL DESTRUCTION"
+AND keywords.name = null
+AND faction_keywords.name = "Sautekh"
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "RECLAIM A LOST EMPIRE"
+AND keywords.name = null
+AND faction_keywords.name = "Nihilakh"
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "TRANSLOCATION CRYPT"
+AND keywords.name = null
+AND faction_keywords.name = "Nephrekh"
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, false, false, true
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "TRANSLOCATION CRYPT"
+AND keywords.name = "Infantry"
+AND faction_keywords.name = null
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, false, false, true
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "TRANSLOCATION CRYPT"
+AND keywords.name = "Swarm"
+AND faction_keywords.name = null
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "BLOOD RITES"
+AND keywords.name = null
+AND faction_keywords.name = "Novokh"
+AND wargear.name = null
+AND abilities.name = null;
+
+INSERT INTO stratagem_conditions (
+    stratagemID,
+    keywordsID,
+    factionKeywordsID,
+    wargearID,
+    abilitiesID,
+    includes,
+    excludes,
+    any
+)
+SELECT stratagems.id, keywords.id, factionkeywords.id, wargear.id, abilities.id, true, false, false
+FROM stratagems, keywords, factionkeywords, wargear
+WHERE stratagems.name = "TALENT FOR ANNIHILATION"
+AND keywords.name = null
+AND faction_keywords.name = "Mephrit"
+AND wargear.name = null
+AND abilities.name = null;
+
