@@ -131,6 +131,34 @@ class ArmyManager {
         return stratagems
     }
 
+    getStratagems(respond) {
+        let db = this.db
+
+        let strategemQuery = "SELECT * FROM stratagems"
+
+        var message = {}
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                console.log(row.name)
+                message.push(row.name)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+
+    }
+
     getWargear() {
         return this.army.wargear
     }
