@@ -312,3 +312,18 @@ SELECT null, wargear.id, "Warscythe", "Melee", "Melee", "+2", -4, "2", "-"
 FROM wargear
 WHERE wargear.name = "Warscythe";
 
+INSERT INTO wargear_stats (
+    id,
+    wargearID,
+    profile,
+    range,
+    type,
+    strength,
+    armorPen,
+    damage,
+    abilities
+)
+SELECT null, wargear.id, "Dispersion Shield", null, null, null, null, null, "A model equipped with a dispersion shield has a 4+ invulnerable save."
+FROM wargear
+WHERE wargear.name = "Dispersion Shield";
+

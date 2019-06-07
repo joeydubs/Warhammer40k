@@ -42,6 +42,6 @@ INSERT INTO faction_keywords VALUES (
 
 INSERT INTO faction_keywords VALUES (
     null,
-    "Nephrikh"
+    "Nephrekh"
 );
 

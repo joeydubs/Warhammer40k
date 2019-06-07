@@ -110,3 +110,33 @@ INSERT INTO keywords VALUES (
     "Trazyn the Infinite"
 );
 
+INSERT INTO keywords VALUES (
+    null,
+    "Doom Scythe"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Destroyer Lord"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Destroyers"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Heavy Destroyers"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Triarch Praetorians"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Obelisk"
+);
+

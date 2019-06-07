@@ -196,3 +196,14 @@ VALUES
         false
 );
 
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Dispersion Shield",
+        null,
+        null,
+        35,
+        false
+);
+
