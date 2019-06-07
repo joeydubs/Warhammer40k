@@ -9,6 +9,8 @@
 .read "user_army_init.sql"
 .read "army_models_init.sql"
 .read "army_gear_init.sql"
+.read "factions_init.sql"
+.read "stratagems_init.sql"
 
 .read "model_stats_join.sql"
 .read "model_unit_join.sql"

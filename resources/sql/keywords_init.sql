@@ -105,3 +105,8 @@ INSERT INTO keywords VALUES (
     "Doomsday Ark"
 );
 
+INSERT INTO keywords VALUES (
+    null,
+    "Trazyn the Infinite"
+);
+
