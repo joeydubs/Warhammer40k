@@ -134,29 +134,64 @@ class ArmyManager {
     getStratagems(respond) {
         let db = this.db
 
-        let strategemQuery = "SELECT * FROM stratagems"
+        let stratagemQuery = "SELECT * FROM stratagem_conditions"
+        let keywordsQuery = `SELECT * FROM user_army
+            LEFT OUTER JOIN unit_keywords_join ON user_army.unitID = unit_keywords_join.unitID
+            LEFT OUTER JOIN keywords ON unit_keywords_join.keywordID = keywords.id`
+        let factionKeywordsQuery = `SELECT * FROM user_army
+            LEFT OUTER JOIN unit_faction_keywords_join ON user_army.unitID = unit_faction_keywords_join.unitID
+            LEFT OUTER JOIN faction_keywords ON unit_faction_keywords_join.factionKeywordID = faction_keywords.id`
+        let wargearQuery = "SELECT * FROM army_gear"
+        let abilitiesQuery = `SELECT * FROM user_army
+            LEFT OUTER JOIN unit_abilities_join ON user_army.unitID = unit_abilities_join.unitID
+            LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id`
 
         var message = {}
 
-        var callback = function (err, row) {
-            if (err) {
-                console.log(err.message)
-            }
-            else {
+        var stratagems = {}
+        var gotStratagems = false
+        var keywords = []
+        var gotKeywords = false
+        var factionKeywords = []
+        var gotFactionKeywords = false
+        var wargear = []
+        var gotWargear = false
+        var abilities = []
+        var gotAbilities = false
+
+        db.each(
+            stratagemQuery,
+            function (err, row) {
+                if (err) {
+                    console.log(err.message)
+                }
                 console.log(row.name)
-                message.push(row.name)
+
+                if (stratagems[row.stratagemID]) {
+                    stratagems[row.stratagemID] = {}
+                }
+
+                if (row.includes) {
+
+                }
+                else if (row.excludes) {
+
+                }
+                else if (row.any) {
+
+                }
+            },
+            function (err, rows) {
+                if (err) {
+                    console.log(err.message)
+                }
+                gotStratagems = true
             }
+        )
+
+        while (!gotStratagems && !gotKeywords && !gotFactionKeywords && !gotWargear && !gotAbilities) {
+            filterStrats(stratagems, keywords, factionKeywords, wargear, abilities, respond)
         }
-
-        var completion = function (err, rows) {
-            if (err) {
-                console.log(err.message)
-            }
-            respond(err, message)
-        }
-
-        this.db.each(query, callback, completion)
-
     }
 
     getWargear() {
@@ -465,7 +500,7 @@ class ArmyManager {
                 message[id]["models"][model]["leadership"] = row.leadership
                 message[id]["models"][model]["save"] = row.save
 
-                if (row.wargear != null ) {
+                if (row.wargear != null) {
                     if (!message[id]["models"][model]["gear"][row.wargear]) {
                         message[id]["models"][model]["gear"][row.wargear] = {}
                     }
@@ -532,6 +567,17 @@ class ArmyManager {
             }
         })
     }
+
+    SELECT user_army.id AS armyUnitID, user_army.unitID, keywords.id AS keywordID, faction_keywords.id AS factionKeywordID, army_gear.gearID, abilities.id AS abilityID
+    FROM user_army
+    LEFT OUTER JOIN unit_keywords_join ON user_army.unitID = unit_keywords_join.unitID
+    LEFT OUTER JOIN keywords ON unit_keywords_join.keywordID = keywords.id
+    LEFT OUTER JOIN unit_faction_keywords_join ON user_army.unitID = unit_faction_keywords_join.unitID
+    LEFT OUTER JOIN faction_keywords ON unit_faction_keywords_join.factionKeywordID = faction_keywords.id
+    LEFT OUTER JOIN army_gear ON user_army.id = army_gear.armyUnitID
+    LEFT OUTER JOIN unit_abilities_join ON user_army.unitID = unit_abilities_join.unitID
+    LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id;
+
     */
 }
 

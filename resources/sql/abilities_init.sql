@@ -28,7 +28,7 @@ VALUES
     (
         NULL,
         "Explodes",
-        'If this model is reduced to 0 wounds, roll a D6 before removing it from the battlefield. On a 6 it explodes, and each unit within 6" suffers D3 mortal wounds.'
+        'If this model is reduced to 0 wounds, roll a D6 before removing it from the battlefield. On a 6 it explodes, and each unit within 6" suffers D6 mortal wounds.'
 );
 
 INSERT INTO abilities
