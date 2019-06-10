@@ -135,6 +135,7 @@ class ArmyManager {
         let db = this.db
 
         let stratagemQuery = "SELECT * FROM stratagem_conditions"
+        /*
         let keywordsQuery = `SELECT * FROM user_army
             LEFT OUTER JOIN unit_keywords_join ON user_army.unitID = unit_keywords_join.unitID
             LEFT OUTER JOIN keywords ON unit_keywords_join.keywordID = keywords.id`
@@ -145,53 +146,99 @@ class ArmyManager {
         let abilitiesQuery = `SELECT * FROM user_army
             LEFT OUTER JOIN unit_abilities_join ON user_army.unitID = unit_abilities_join.unitID
             LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id`
+        */
+       let unitInfoQuery = `SELECT user_army.id AS armyUnitID, user_army.unitID, keywords.id AS keywordID, faction_keywords.id AS factionKeywordID, army_gear.gearID, abilities.id AS abilityID
+       FROM user_army
+       LEFT OUTER JOIN unit_keywords_join ON user_army.unitID = unit_keywords_join.unitID
+       LEFT OUTER JOIN keywords ON unit_keywords_join.keywordID = keywords.id
+       LEFT OUTER JOIN unit_faction_keywords_join ON user_army.unitID = unit_faction_keywords_join.unitID
+       LEFT OUTER JOIN faction_keywords ON unit_faction_keywords_join.factionKeywordID = faction_keywords.id
+       LEFT OUTER JOIN army_gear ON user_army.id = army_gear.armyUnitID
+       LEFT OUTER JOIN unit_abilities_join ON user_army.unitID = unit_abilities_join.unitID
+       LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id;`
+   
 
         var message = {}
 
         var stratagems = {}
-        var gotStratagems = false
-        var keywords = []
-        var gotKeywords = false
-        var factionKeywords = []
-        var gotFactionKeywords = false
-        var wargear = []
-        var gotWargear = false
-        var abilities = []
-        var gotAbilities = false
+        var unitInfo = {}
 
-        db.each(
-            stratagemQuery,
-            function (err, row) {
-                if (err) {
-                    console.log(err.message)
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            console.log(row.name)
+
+            if (stratagems[row.stratagemID]) {
+                stratagems[row.stratagemID] = {
+                    includes: [],
+                    excludes: [],
+                    any: []
                 }
-                console.log(row.name)
+            }
 
-                if (stratagems[row.stratagemID]) {
-                    stratagems[row.stratagemID] = {}
-                }
-
+            if (row.keywordsID) {
                 if (row.includes) {
-
+                    stratagems[row.stratagemID].includes.push(row.keywordsID)
                 }
                 else if (row.excludes) {
-
+                    stratagems[row.stratagemID].excludes.push(row.keywordsID)
                 }
-                else if (row.any) {
-
+                else {
+                    stratagems[row.stratagemID].any.push(row.keywordsID)
                 }
-            },
-            function (err, rows) {
+            }
+            else if (row.faction_keywordsID) {
+                if (row.includes) {
+                    stratagems[row.stratagemID].includes.push(row.faction_keywordsID)
+                }
+                else if (row.excludes) {
+                    stratagems[row.stratagemID].excludes.push(row.faction_keywordsID)
+                }
+                else {
+                    stratagems[row.stratagemID].any.push(row.faction_keywordsID)
+                }
+            }
+            else if (row.wargearID) {
+                if (row.includes) {
+                    stratagems[row.stratagemID].includes.push(row.wargearID)
+                }
+                else if (row.excludes) {
+                    stratagems[row.stratagemID].excludes.push(row.wargearID)
+                }
+                else {
+                    stratagems[row.stratagemID].any.push(row.wargearID)
+                }
+            }
+            else if (row.abilitiesID) {
+                if (row.includes) {
+                    stratagems[row.stratagemID].includes.push(row.abilitiesID)
+                }
+                else if (row.excludes) {
+                    stratagems[row.stratagemID].excludes.push(row.abilitiesID)
+                }
+                else {
+                    stratagems[row.stratagemID].any.push(row.abilitiesID)
+                }
+            }
+        }
+
+        var complete = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            
+            var callback = function(err, row) {
                 if (err) {
                     console.log(err.message)
                 }
-                gotStratagems = true
-            }
-        )
 
-        while (!gotStratagems && !gotKeywords && !gotFactionKeywords && !gotWargear && !gotAbilities) {
-            filterStrats(stratagems, keywords, factionKeywords, wargear, abilities, respond)
+                
+            }
         }
+
+
+        db.each(stratagemQuery, callback, complete)
     }
 
     getWargear() {
