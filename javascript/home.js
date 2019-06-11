@@ -175,7 +175,7 @@ function fetchStratagems() {
             document.getElementById("stratagems").removeAttribute("hidden")
             var stratagems = JSON.parse(request.responseText)
             console.log(stratagems)
-            generateStratagemsTable(stratagems)
+            //generateStratagemsTable(stratagems)
         }
     }
     request.open("POST", "/fetchStratagems")

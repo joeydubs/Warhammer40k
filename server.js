@@ -127,11 +127,15 @@ app.post("/fetchArmy", function (req, res) {
 })
 
 app.post("/fetchStratagems", function (req, res) {
-	var stratagems = army.getStratagems()
+	army.getStratagems(function(err, result) {
+		if (err) {
+			console.log(err.message)
+		}
 
-	res.status(200)
-	res.type("json")
-	res.send(JSON.stringify(stratagems))
+		res.status(200)
+		res.type("json")
+		res.send(JSON.stringify(result))	
+	})
 })
 
 app.post("/fetchWargear", function (req, res) {
