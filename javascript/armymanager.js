@@ -180,7 +180,11 @@ class ArmyManager {
 
                 // console.log(stratagems)
                 // console.log(unitInfo)
-                let filterStratagems = filterStratagems(stratagems, unitInfo)
+                //let filterStratagems = filterStratagems(stratagems, unitInfo)
+                let filteredStratagems = {
+                    stratagems: stratagems,
+                    unitInfo: unitInfo
+                }
                 respond(err, filteredStratagems)
             }
 
@@ -193,89 +197,141 @@ class ArmyManager {
     filterStratagems(stratagems, unitInfo) {
         var filteredStratagems = []
 
-        for (let key in stratagems) {
-            var stratagemConditions = stratagems[key]
+        // for (let key in stratagems) {
+        //     var stratagemConditions = stratagems[key]
 
-            var includesOK = false
+        //     var includesOK = false
+        //     var excludesOK = true
+        //     var anyOK = false
+
+        //     var addStratagem = false
+
+        //     if (!addStratagem) {
+        //         for (let condition in stratagemConditions) {
+        //             let subcondition = stratagemConditions[condition]
+
+        for (let key in stratagems) {
+            let stratagem = stratagems[key]
+            console.log(key)
+
+            var includesOK = (
+                stratagem.includes.keywords.length == 0 ?
+                    stratagem.includes.factionkeywords.length == 0 ?
+                        stratagem.includes.wargear.length == 0 ?
+                            stratagem.includes.abilities.length == 0 ?
+                                true : false : false : false : false
+            )
+            var excludesOK = (
+                stratagem.excludes.keywords.length == 0 ?
+                    stratagem.excludes.factionkeywords.length == 0 ?
+                        stratagem.excludes.wargear.length == 0 ?
+                            stratagem.excludes.abilities.length == 0 ?
+                                true : false : false : false : false
+            )
+            var anyOK = (
+                stratagem.any.keywords.length == 0 ?
+                    stratagem.any.factionkeywords.length == 0 ?
+                        stratagem.any.wargear.length == 0 ?
+                            stratagem.any.abilities.length == 0 ?
+                                true : false : false : false : false
+            )
+
+            var keywordsOK = true
+            var factionkeywordsOK = true
+            var wargearOK = true
+            var abilitiesOK = true
             var excludesOK = true
-            var anyOK = false
 
             var addStratagem = false
 
-            if (!addStratagem) {
-                for (let condition in stratagemConditions) {
-                    let subcondition = stratagemConditions[condition]
+            for (let unit in unitInfo) {
+                let info = unitInfo[unit]
 
-                    switch (switchValue) {
-                        case "keywords":
-                            console.log("keywords case")
-                            if (keywords)
-                                var keywordsArray = stratagem[switchValue]
-                            if (all) {
-                                //console.log("all is true")
-                                keywordsArray.forEach(function (arrayVal) {
-                                    (army.keywords.includes(arrayVal) && keywordsOK) ? keywordsOK = true : keywordsOK = false
-                                    //console.log("Array value: " + arrayVal)
-                                    //console.log("keywordsOK: " + keywordsOK)
-                                })
-                            }
-                            else {
-                                //console.log("all is false")
-                                keywordsOK = false
-                                keywordsArray.forEach(function (arrayVal) {
-                                    if (army.keywords.includes(arrayVal)) {
-                                        keywordsOK = true
-                                    }
-                                    //console.log("Array value: " + arrayVal)
-                                    //console.log("keywordsOK: " + keywordsOK)
-                                })
-                            }
-                            break
-                        case "wargear":
-                            //console.log("wargear case")
-                            var wargearArray = stratagem[switchValue]
-                            wargearArray.forEach(function (arrayVal) {
-                                (army.wargear[arrayVal]) ? wargearOK = true : wargearOK = false
-                                //console.log("Array value: " + arrayVal)
-                                //console.log("wargearOK: " + wargearOK)
-                            })
-                            break
-                        case "factionkeywords":
-                            //console.log("factionkeywords Case")
-                            var factionkeywordsArray = stratagem[switchValue]
-                            factionkeywordsArray.forEach(function (arrayVal) {
-                                (army.factionkeywords.includes(arrayVal)) ? factionkeywordsOK = true : factionkeywordsOK = false
-                                //console.log("Array value: " + arrayVal)
-                                //console.log("factionkeywordsOK: " + factionkeywordsOK)
-                            })
-                            break
-                        case "excludes":
-                            //console.log("excludes Case")
-                            var excludesArray = stratagem[switchValue]
-                            excludesArray.forEach(function (arrayVal) {
-                                if (excludesOK) {
-                                    if (army.factionkeywords.includes(arrayVal)) {
-                                        excludesOK = false
-                                    }
-                                    if (army.keywords.includes(arrayVal)) {
-                                        excludesOK = false
-                                    }
-                                    if (army.wargear[arrayVal]) {
-                                        excludesOK = false
-                                    }
 
-                                    //console.log("Array value: " + arrayVal)
-                                    //console.log("excludesOK: " + excludesOK)
-                                }
-                            })
-                            break
-                        default:
-                            console.log("Default Case. Switch value: " + switchValue)
-                    }
-                }
-                addStratagem = keywordsOK && factionkeywordsOK && wargearOK && excludesOK
-                console.log("Switches complete - addStratagem: " + addStratagem)
             }
+
+            /*
+            for each condition in includes, excludes, any
+                for each unit
+                    if match and not in excludes
+                        remove condition from array
+                    if array is empty
+                        condition success
+            */
+
+            // if (!addStratagem) {
+            //     let conditions = stratagem.conditions
+            //     conditions.forEach(function (switchValue) {
+            //         switch (switchValue) {
+            //             case "keywords":
+            //                 console.log("keywords case")
+            //                 if (keywords)
+            //                     var keywordsArray = stratagem[switchValue]
+            //                 if (all) {
+            //                     //console.log("all is true")
+            //                     keywordsArray.forEach(function (arrayVal) {
+            //                         (army.keywords.includes(arrayVal) && keywordsOK) ? keywordsOK = true : keywordsOK = false
+            //                         //console.log("Array value: " + arrayVal)
+            //                         //console.log("keywordsOK: " + keywordsOK)
+            //                     })
+            //                 }
+            //                 else {
+            //                     //console.log("all is false")
+            //                     keywordsOK = false
+            //                     keywordsArray.forEach(function (arrayVal) {
+            //                         if (army.keywords.includes(arrayVal)) {
+            //                             keywordsOK = true
+            //                         }
+            //                         //console.log("Array value: " + arrayVal)
+            //                         //console.log("keywordsOK: " + keywordsOK)
+            //                     })
+            //                 }
+            //                 break
+            //             case "wargear":
+            //                 //console.log("wargear case")
+            //                 var wargearArray = stratagem[switchValue]
+            //                 wargearArray.forEach(function (arrayVal) {
+            //                     (army.wargear[arrayVal]) ? wargearOK = true : wargearOK = false
+            //                     //console.log("Array value: " + arrayVal)
+            //                     //console.log("wargearOK: " + wargearOK)
+            //                 })
+            //                 break
+            //             case "factionkeywords":
+            //                 //console.log("factionkeywords Case")
+            //                 var factionkeywordsArray = stratagem[switchValue]
+            //                 factionkeywordsArray.forEach(function (arrayVal) {
+            //                     (army.factionkeywords.includes(arrayVal)) ? factionkeywordsOK = true : factionkeywordsOK = false
+            //                     //console.log("Array value: " + arrayVal)
+            //                     //console.log("factionkeywordsOK: " + factionkeywordsOK)
+            //                 })
+            //                 break
+            //             case "excludes":
+            //                 //console.log("excludes Case")
+            //                 var excludesArray = stratagem[switchValue]
+            //                 excludesArray.forEach(function (arrayVal) {
+            //                     if (excludesOK) {
+            //                         if (army.factionkeywords.includes(arrayVal)) {
+            //                             excludesOK = false
+            //                         }
+            //                         if (army.keywords.includes(arrayVal)) {
+            //                             excludesOK = false
+            //                         }
+            //                         if (army.wargear[arrayVal]) {
+            //                             excludesOK = false
+            //                         }
+
+            //                         //console.log("Array value: " + arrayVal)
+            //                         //console.log("excludesOK: " + excludesOK)
+            //                     }
+            //                 })
+            //                 break
+            //             default:
+            //                 console.log("Default Case. Switch value: " + switchValue)
+            //         }
+            //     }
+            //     addStratagem = keywordsOK && factionkeywordsOK && wargearOK && excludesOK
+            //     console.log("Switches complete - addStratagem: " + addStratagem)
+            // }
 
             if (addStratagem) {
                 stratagems[key] = stratagem
