@@ -240,14 +240,19 @@ class ArmyManager {
             var factionkeywordsOK = true
             var wargearOK = true
             var abilitiesOK = true
-            var excludesOK = true
 
             var addStratagem = false
 
             for (let unit in unitInfo) {
                 let info = unitInfo[unit]
 
+                if (!includesOK) {
+                    if (keywords)
+                }
 
+                if (!anyOK) {
+
+                }
             }
 
             /*
