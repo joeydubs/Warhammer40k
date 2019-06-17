@@ -230,6 +230,7 @@ class ArmyManager {
                 if (!includesOK) {
                     for (let group in stratagem.includes) {
                         let conditionGroup = stratagem.includes[group]
+                        let conditionsMet = []
 
                         for (let cond in conditionGroup) {
                             console.log("Condition Group: " + conditionGroup)
@@ -254,18 +255,22 @@ class ArmyManager {
                                     }
 
                                     if (excludesOK) {
-                                        stratagem.includes[group].splice(cond, 1)
-
-                                        includesOK = (
-                                            stratagem.includes.keywords.length == 0 ?
-                                                stratagem.includes.factionkeywords.length == 0 ?
-                                                    stratagem.includes.wargear.length == 0 ?
-                                                        stratagem.includes.abilities.length == 0 ?
-                                                            true : false : false : false : false
-                                        )    
+                                        conditionsMet.push(condition)
                                     }
                                 }
                             }
+                        }
+
+                        for (let con in conditionsMet) {
+                            let conditionMet = conditionsMet[con]
+                            stratagem.includes[group].splice(stratagem.includes[group].indexOf(conditionMet), 1)
+                            includesOK = (
+                                stratagem.includes.keywords.length == 0 ?
+                                    stratagem.includes.factionkeywords.length == 0 ?
+                                        stratagem.includes.wargear.length == 0 ?
+                                            stratagem.includes.abilities.length == 0 ?
+                                                true : false : false : false : false
+                            )    
                         }
                     }
                 }
