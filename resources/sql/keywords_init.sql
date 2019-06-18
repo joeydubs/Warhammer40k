@@ -22,6 +22,11 @@ INSERT INTO keywords VALUES (
 
 INSERT INTO keywords VALUES (
     null,
+    "Lord"
+);
+
+INSERT INTO keywords VALUES (
+    null,
     "Warriors"
 );
 
@@ -63,6 +68,11 @@ INSERT INTO keywords VALUES (
 INSERT INTO keywords VALUES (
     null,
     "C'tan Shard of the Nightbringer"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "C'tan Shard of the Deceiver"
 );
 
 INSERT INTO keywords VALUES (
@@ -138,5 +148,90 @@ INSERT INTO keywords VALUES (
 INSERT INTO keywords VALUES (
     null,
     "Obelisk"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Imotekh the Stormlord"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Nemesor Zahndrekh"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Vargard Obyron"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Cryptek"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Illuminor Szeras"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Orikan the Diviner"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Anrakyr the Traveller"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Catacomb Command Barge"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Flayed Ones"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Biker"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Tomb Blades"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Annihilation Barge"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Transcendent C'tan"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Ghost Ark"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Transport"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Night Scythe"
+);
+
+INSERT INTO keywords VALUES (
+    null,
+    "Tesseract Vault"
 );
 

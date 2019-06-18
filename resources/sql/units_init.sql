@@ -11,11 +11,110 @@ CREATE TABLE units (
 
 INSERT INTO units VALUES (
     NULL,
+    "Imotekh the Stormlord",
+    "",
+    "",
+    "HQ",
+    10
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Nemesor Zahndrekh",
+    "",
+    "",
+    "HQ",
+    9
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Vargard Obyron",
+    "",
+    "",
+    "HQ",
+    7
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Illuminor Szeras",
+    "",
+    "",
+    "HQ",
+    8
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Orikan the Diviner",
+    "",
+    "",
+    "HQ",
+    10
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Anrakyr the Traveller",
+    "",
+    "",
+    "HQ",
+    9
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Trazyn the Infinite",
+    "",
+    "",
+    "HQ",
+    5
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Catacomb Command Barge",
+    "",
+    "",
+    "HQ",
+    9
+);
+
+INSERT INTO units VALUES (
+    NULL,
     "Overlord",
     "An Overlord is a single model armed with a staff of light.",
     "This model may replace its staff of light with a voidscythe, a hyperphase sword, a voidblade or a warscythe. This model may take a resurrection orb.",
     "HQ",
     6
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Lord",
+    "A Lord is a single model armed with a staff of light.",
+    "",
+    "HQ",
+    5
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Cryptek",
+    "A Cryptek is a single model armed with a staff of light.",
+    "",
+    "HQ",
+    5
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Destroyer Lord",
+    "A Destroyer Lord is a single model armed with a staff of light.",
+    "",
+    "HQ",
+    7
 );
 
 INSERT INTO units VALUES (
@@ -41,7 +140,7 @@ INSERT INTO units VALUES (
     "Lychguard",
     "This unit contains 5 Lychguard. It can include up to 5 additional Lychguard (Power Rating +8). Each model is armed with a warscythe.",
     "The entire unit may replace their warscythes with hyperphase swords and dispersion shields.",
-    "Troops",
+    "Elites",
     8
 );
 
@@ -50,8 +149,26 @@ INSERT INTO units VALUES (
     "Deathmarks",
     "This unit contains 5 Deathmarks. It can include up to 5 additional Deathmarks (Power Rating +4). Each model is armed with a synaptic disintegrator.",
     NULL,
-    "Troops",
+    "Elites",
     5
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Flayed Ones",
+    "",
+    "",
+    "Elites",
+    4
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Triarch Praetorians",
+    "",
+    "",
+    "Elites",
+    8
 );
 
 INSERT INTO units VALUES (
@@ -61,6 +178,15 @@ INSERT INTO units VALUES (
     "This model may replace its heat ray with a particle shredder or a twin heavy gauss cannon.",
     "Elites",
     8
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "C'tan Shard of the Deceiver",
+    "",
+    "",
+    "Elites",
+    12
 );
 
 INSERT INTO units VALUES (
@@ -88,6 +214,15 @@ INSERT INTO units VALUES (
     NULL,
     "Fast Attack",
     2
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Tomb Blades",
+    "",
+    "",
+    "Fast Attack",
+    150
 );
 
 INSERT INTO units VALUES (
@@ -128,9 +263,72 @@ INSERT INTO units VALUES (
 
 INSERT INTO units VALUES (
     NULL,
+    "Annihilation Barge",
+    "",
+    "",
+    "Heavy Support",
+    8
+);
+
+INSERT INTO units VALUES (
+    NULL,
     "Doomsday Ark",
     "A Doomsday Ark is a single model equipped with a doomsday cannon and two gauss flayer arrays.",
     NULL,
     "Heavy Support",
     10
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Transcendent C'tan",
+    "",
+    "",
+    "Heavy Support",
+    12
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Ghost Ark",
+    "",
+    "",
+    "",
+    8
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Doom Scythe",
+    "",
+    "",
+    "",
+    11
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Night Scythe",
+    "",
+    "",
+    "",
+    8
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Obelisk",
+    "",
+    "",
+    "",
+    22
+);
+
+INSERT INTO units VALUES (
+    NULL,
+    "Tesseract Vault",
+    "",
+    "",
+    "",
+    25
 );
