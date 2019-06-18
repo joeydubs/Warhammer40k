@@ -138,6 +138,23 @@ app.post("/fetchStratagems", function (req, res) {
 	})
 })
 
+app.post("/fetchStratagemDetails", function (req, res) {
+	console.log("Fetching Stratagem Details...")
+	let stratagemID = req.body.stratagemID
+	console.log("StratagemID: " + stratagemID)
+	console.log(req.body)
+
+	army.getStratagemDetails(stratagemID, function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+
+		res.status(200)
+		res.type("json")
+		res.send(JSON.stringify(result))
+	})
+})
+
 app.post("/fetchWargear", function (req, res) {
 	var wargear = army.getWargear()
 

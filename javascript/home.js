@@ -175,12 +175,28 @@ function fetchStratagems() {
             document.getElementById("stratagems").removeAttribute("hidden")
             var stratagems = JSON.parse(request.responseText)
             console.log(stratagems)
-            //generateStratagemsTable(stratagems)
+            generateStratagemsTable(stratagems)
         }
     }
     request.open("POST", "/fetchStratagems")
     request.send()
 }
+
+function fetchStratagemDetails(stratagemID, callback) {
+    var request = new XMLHttpRequest()
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Fetch Stratagem Details request received")
+            var stratagemDetails = JSON.parse(request.responseText)
+            console.log(stratagemDetails)
+            callback(stratagemDetails)
+        }
+    }
+    request.open("POST", "/fetchStratagemDetails")
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(JSON.stringify({ "stratagemID": parseInt(stratagemID) }))
+}
+
 
 function fetchWargear() {
     var request = new XMLHttpRequest()
@@ -351,21 +367,22 @@ function generateArmyTable(army) {
 }
 
 function generateStratagemsTable(stratagems) {
-    var stratSection = document.getElementById("stratagems")
-    stratSection.innerHTML = ""
-    for (key in stratagems) {
-        var stratagem = stratagems[key]
-        var header = document.createElement("p")
-        var description = document.createElement("p")
-        description.className = "indent"
-        var effect = document.createElement("p")
-        effect.className = "indent"
-        header.innerHTML = `<em>${stratagem["cost"]}cp - ${key}</em>`
-        description.innerText = stratagem["description"]
-        effect.innerText = stratagem["stratagem"]
-        stratSection.appendChild(header)
-        stratSection.appendChild(description)
-        stratSection.appendChild(effect)
+    document.getElementById("stratagems").innerHTML = ""
+    for (let key in stratagems) {
+        fetchStratagemDetails(stratagems[key], function(stratagemDetails) {
+            var stratSection = document.getElementById("stratagems")
+            var header = document.createElement("p")
+            var description = document.createElement("p")
+            description.className = "indent"
+            var effect = document.createElement("p")
+            effect.className = "indent"
+            header.innerHTML = `<em>${stratagemDetails.commandPts}cp - ${stratagemDetails.name}</em>`
+            description.innerText = stratagemDetails.flavor
+            effect.innerText = stratagemDetails.description
+            stratSection.appendChild(header)
+            stratSection.appendChild(description)
+            stratSection.appendChild(effect)    
+        })
     }
 }
 

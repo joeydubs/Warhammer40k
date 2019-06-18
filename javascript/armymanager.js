@@ -181,11 +181,12 @@ class ArmyManager {
 
                 // console.log(stratagems)
                 // console.log(unitInfo)
-                filterStratagems(stratagems, unitInfo)
-                let filteredStratagems = {
-                    stratagems: stratagems,
-                    unitInfo: unitInfo
-                }
+                let filteredStratagems = filterStratagems(stratagems, unitInfo)
+                // let filteredStratagems = {
+                //     stratagems: stratagems,
+                //     unitInfo: unitInfo
+                // }
+                console.log(filteredStratagems)
                 respond(err, filteredStratagems)
             }
 
@@ -302,7 +303,25 @@ class ArmyManager {
 
         console.log(filteredStratagems)
 
-        //return filteredStratagems
+        return filteredStratagems
+    }
+
+    getStratagemDetails(stratagemID, respond) {
+        console.log(stratagemID)
+        let query = `SELECT * FROM stratagems WHERE id = ${stratagemID}`
+        console.log(query)
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                console.log(row)
+                respond(err, row)
+            }
+        }
+
+        this.db.get(query, callback)
     }
 
     getWargear() {
