@@ -263,7 +263,10 @@ class ArmyManager {
 
                         for (let con in conditionsMet) {
                             let conditionMet = conditionsMet[con]
-                            stratagem.includes[group].splice(stratagem.includes[group].indexOf(conditionMet), 1)
+                            let toRemove = stratagem.includes[group].indexOf(conditionMet)
+                            if (toRemove >= 0) {
+                                stratagem.includes[group].splice(toRemove, 1)
+                            }
                             includesOK = (
                                 stratagem.includes.keywords.length == 0 ?
                                     stratagem.includes.factionkeywords.length == 0 ?
