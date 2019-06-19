@@ -316,7 +316,7 @@ class ArmyManager {
                 console.log(err.message)
             }
             else {
-                console.log(row)
+                //console.log(row)
                 respond(err, row)
             }
         }
@@ -582,8 +582,7 @@ class ArmyManager {
             AND army_gear.modelID = army_models.modelID
             LEFT OUTER JOIN units ON user_army.unitID = units.id
             LEFT OUTER JOIN models ON army_models.modelID = models.id
-            LEFT OUTER JOIN model_stats_join ON models.id = model_stats_join.model
-            LEFT OUTER JOIN model_stats ON model_stats_join.stats = model_stats.id
+            LEFT OUTER JOIN model_stats ON models.id = model_stats.modelID
             LEFT OUTER JOIN wargear ON army_gear.gearID = wargear.id
             LEFT OUTER JOIN wargear_stats ON wargear.id = wargear_stats.wargearID
             LEFT OUTER JOIN subfactions ON user_army.subfactionID = subfactions.id;`
