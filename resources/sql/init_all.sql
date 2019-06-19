@@ -14,7 +14,7 @@
 .read "stratagems_init.sql"
 .read "stratagem_conditions_init.sql"
 
-.read "model_stats_join.sql"
+--.read "model_stats_join.sql"
 .read "model_unit_join.sql"
 .read "model_wargear_join.sql"
 .read "unit_keywords_join.sql"

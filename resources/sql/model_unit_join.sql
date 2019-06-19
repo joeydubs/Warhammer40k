@@ -71,7 +71,7 @@ INSERT INTO model_unit_join (
 SELECT models.id, units.id, 1, 1
 FROM models, units
 WHERE models.name = "Anrakyr the Traveller"
-AND units.name = "Anakyr the Traveller";
+AND units.name = "Anrakyr the Traveller";
 
 INSERT INTO model_unit_join (
     model,
@@ -379,6 +379,17 @@ INSERT INTO model_unit_join (
 SELECT models.id, units.id, 1, 1
 FROM models, units
 WHERE models.name = "Doom Scythe"
+AND units.name = "Doom Scythe";
+
+INSERT INTO model_unit_join (
+    model,
+    unit,
+    min,
+    max
+)
+SELECT models.id, units.id, 1, 1
+FROM models, units
+WHERE models.name = "Night Scythe"
 AND units.name = "Night Scythe";
 
 INSERT INTO model_unit_join (
