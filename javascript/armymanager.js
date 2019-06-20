@@ -1,32 +1,11 @@
-const FileImport = require('./fileimport')
-const ModelsLib = require('./modellib')
-const WargearLib = require('./wargearlib')
-const Unit = require('./unit')
-const Army = require('./army')
 const sqlite = require('sqlite3')
-//const model = require('./model.js')
-const pathToResources = "/../resources/"
 
 class ArmyManager {
     constructor() {
-        this.newImport = new FileImport()
-
-        this.newImport.importJson("stratagems.json", true, pathToResources)
-        this.allStratagems = this.newImport.library
-
-        this.newImport.importJson("models.json", true, pathToResources)
-        this.models = new ModelsLib(this.newImport.library)
-
-        this.newImport.importJson("wargear.json", true, pathToResources)
-        this.wargear = new WargearLib(this.newImport.library)
-
-        this.army = new Army()
-
         this.db = new sqlite.Database("./resources/sql/warhammerdb.db", sqlite.OPEN_READWRITE, function (err) {
             if (err) {
                 console.log("There was an error opening the Database. ")
-                error = err.message
-                console.log(error)
+                console.log(err.message)
             } else {
                 console.log("Database successfully opened.")
             }
@@ -59,7 +38,7 @@ class ArmyManager {
        LEFT OUTER JOIN faction_keywords ON unit_faction_keywords_join.factionKeywordID = faction_keywords.id
        LEFT OUTER JOIN army_gear ON user_army.id = army_gear.armyUnitID
        LEFT OUTER JOIN unit_abilities_join ON user_army.unitID = unit_abilities_join.unitID
-       LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id;`
+       LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id`
 
 
         var message = {}
@@ -71,7 +50,6 @@ class ArmyManager {
             if (err) {
                 console.log(err.message)
             }
-            console.log(row.name)
 
             if (!stratagems[row.stratagemID]) {
                 stratagems[row.stratagemID] = {
@@ -151,7 +129,7 @@ class ArmyManager {
                 if (err) {
                     console.log(err.message)
                 }
-                // armyUnitID, keywordID, factionKeywordID, army_gear.gearID, abilityID
+
                 if (!unitInfo[row.armyUnitID]) {
                     unitInfo[row.armyUnitID] = {
                         keywords: [],
@@ -179,14 +157,7 @@ class ArmyManager {
                     console.log(err.message)
                 }
 
-                // console.log(stratagems)
-                // console.log(unitInfo)
                 let filteredStratagems = filterStratagems(stratagems, unitInfo)
-                // let filteredStratagems = {
-                //     stratagems: stratagems,
-                //     unitInfo: unitInfo
-                // }
-                console.log(filteredStratagems)
                 respond(err, filteredStratagems)
             }
 
@@ -201,7 +172,6 @@ class ArmyManager {
 
         for (let key in stratagems) {
             let stratagem = stratagems[key]
-            console.log(key)
 
             var includesOK = (
                 stratagem.includes.keywords.length == 0 ?
@@ -210,13 +180,6 @@ class ArmyManager {
                             stratagem.includes.abilities.length == 0 ?
                                 true : false : false : false : false
             )
-            // var excludesOK = (
-            //     stratagem.excludes.keywords.length == 0 ?
-            //         stratagem.excludes.factionkeywords.length == 0 ?
-            //             stratagem.excludes.wargear.length == 0 ?
-            //                 stratagem.excludes.abilities.length == 0 ?
-            //                     true : false : false : false : false
-            // )
             var anyOK = (
                 stratagem.any.keywords.length == 0 ?
                     stratagem.any.factionkeywords.length == 0 ?
@@ -232,32 +195,20 @@ class ArmyManager {
                     for (let group in stratagem.includes) {
                         let conditionGroup = stratagem.includes[group]
                         let conditionsMet = []
-                        console.log("Group: " + group)
-                        console.log("Condition Group: " + conditionGroup)
-                        console.log("Conditions Met: " + conditionsMet)
 
                         for (let cond in conditionGroup) {
                             let condition = conditionGroup[cond]
-                            console.log("Condition: " + condition)
-                            console.log("Info[group]: " + info[group])
 
                             if (info[group].includes(condition)) {
-                                console.log("Info includes group/condition: " + group + " / " + condition)
-                                
                                 var excludesOK = true
 
                                 for (let exGroup in stratagem.excludes) {
                                     let excludesGroup = stratagem.excludes[exGroup]
-                                    console.log("exGroup: " + exGroup)
-                                    console.log("Excludes Group: " + excludesGroup)            
 
                                     for (let exCon in excludesGroup) {
                                         let excludesCondition = excludesGroup[exCon]
-                                        console.log("Excludes Condition: " + excludesCondition)
-                                        console.log("Info[exGroup]: " + info[exGroup])
-            
+
                                         if (info[exGroup].includes(excludesCondition)) {
-                                            console.log("Info excludes group/condition: " + exGroup + " / " + excludesCondition)
                                             excludesOK = false
                                         }
                                     }
@@ -281,7 +232,7 @@ class ArmyManager {
                                         stratagem.includes.wargear.length == 0 ?
                                             stratagem.includes.abilities.length == 0 ?
                                                 true : false : false : false : false
-                            )    
+                            )
                         }
                     }
                 }
@@ -298,7 +249,7 @@ class ArmyManager {
                             }
                         }
                     }
-                }    
+                }
             }
 
             var addStratagem = includesOK && anyOK
@@ -308,31 +259,22 @@ class ArmyManager {
             }
         }
 
-        console.log(filteredStratagems)
-
         return filteredStratagems
     }
 
     getStratagemDetails(stratagemID, respond) {
-        console.log(stratagemID)
         let query = `SELECT * FROM stratagems WHERE id = ${stratagemID}`
-        console.log(query)
 
         var callback = function (err, row) {
             if (err) {
                 console.log(err.message)
             }
             else {
-                //console.log(row)
                 respond(err, row)
             }
         }
 
         this.db.get(query, callback)
-    }
-
-    getWargear() {
-        return this.army.wargear
     }
 
     createUnit(unit, dynasty) {
@@ -348,9 +290,7 @@ class ArmyManager {
             SELECT NULL, units.id, subfactions.id, ${unit.points}
             FROM units, subfactions
             WHERE units.name = "${unitName}"
-            AND subfactions.name = "${dynasty}";
-        )`
-        console.log(query)
+            AND subfactions.name = "${dynasty}"`
 
 
         var callback = function (err) {
@@ -359,19 +299,15 @@ class ArmyManager {
             }
             else {
                 var unitID = this.lastID
-                console.log("Row added ID: " + unitID)
                 for (var key in unit.details) {
                     var model = unit.details[key]
                     var modelID = parseInt(key)
                     var modelQty = parseInt(model.quantity)
-                    console.log(key + " " + model)
 
                     var modelQuery = `INSERT INTO army_models VALUES (
                         ${unitID},
                         ${modelID},
-                        ${modelQty}
-                    )`
-                    console.log(modelQuery)
+                        ${modelQty})`
 
                     db.run(modelQuery, [], function (err) {
                         if (err) {
@@ -390,7 +326,6 @@ class ArmyManager {
                                 gearQuery += `(${unitID}, ${modelID}, ${gearID}), `
                             }
                         }
-                        console.log(gearQuery)
 
                         db.run(gearQuery, [], function (err) {
                             if (err) {
@@ -406,18 +341,14 @@ class ArmyManager {
     }
 
     setupUnit(unitName, unitID) {
-        console.log("Row added ID: " + unitID)
         for (var key in unit[unitName]) {
             var model = unit[unitName][key]
             var modelID = parseInt(model)
-            console.log(key + " " + model)
 
             var modelQuery = `INSERT INTO army_models VALUES (
                 ${unitID},
                 ${modelID},
-                ${model.quantity}
-            )`
-            console.log(modelQuery)
+                ${model.quantity})`
 
             this.db.run(modelQuery, [], function (err) {
                 if (err) {
@@ -435,7 +366,6 @@ class ArmyManager {
                     gearQuery += `(${unitID}, ${modelID}, ${gearID}), `
                 }
             }
-            console.log(gearQuery)
 
             this.db.run(gearQuery, [], function (err) {
                 if (err) {
@@ -467,7 +397,6 @@ class ArmyManager {
                 console.log(err.message)
             }
             else {
-                console.log(row.name)
                 message.push(row.name)
             }
         }
@@ -480,8 +409,6 @@ class ArmyManager {
         }
 
         this.db.each(query, callback, completion)
-
-        //return Object.keys(this.models.library)
     }
 
     getModelStats(unit, respond) {
@@ -493,7 +420,6 @@ class ArmyManager {
         INNER JOIN units ON units.id = model_unit_join.unit
         WHERE units.name = "${unit}"
         ORDER BY model_stats.id`
-        console.log(query)
 
         var message = []
 
@@ -502,7 +428,6 @@ class ArmyManager {
                 console.log(err.message)
             }
             else {
-                console.log(row)
                 message.push(row)
             }
         }
@@ -515,8 +440,6 @@ class ArmyManager {
         }
 
         this.db.each(query, callback, completion)
-
-        //return this.models.library[model]
     }
 
     getUnitDetails(unit, respond) {
@@ -528,7 +451,6 @@ class ArmyManager {
             INNER JOIN model_unit_join ON model_unit_join.model = models.id
             INNER JOIN units ON model_unit_join.unit = units.id
             WHERE units.name = "${unit}"`
-        console.log(query)
 
         var message = {
             models: {}
@@ -539,8 +461,6 @@ class ArmyManager {
                 console.log(err.message)
             }
             else {
-                console.log(row)
-
                 if (!message.description) {
                     message["description"] = row.description
                 }
@@ -576,8 +496,6 @@ class ArmyManager {
         }
 
         this.db.each(query, callback, completion)
-
-        //return this.models.library[model]
     }
 
     getArmy(respond) {
@@ -592,9 +510,7 @@ class ArmyManager {
             LEFT OUTER JOIN model_stats ON models.id = model_stats.modelID
             LEFT OUTER JOIN wargear ON army_gear.gearID = wargear.id
             LEFT OUTER JOIN wargear_stats ON wargear.id = wargear_stats.wargearID
-            LEFT OUTER JOIN subfactions ON user_army.subfactionID = subfactions.id;`
-
-        console.log(query)
+            LEFT OUTER JOIN subfactions ON user_army.subfactionID = subfactions.id`
 
         var message = {}
 
@@ -603,7 +519,6 @@ class ArmyManager {
                 console.log(err.message)
             }
             else {
-                console.log(row)
                 var id = row.id
                 if (!message[id]) {
                     message[id] = {
@@ -660,61 +575,7 @@ class ArmyManager {
         }
 
         this.db.each(query, callback, completion)
-
-        //return this.army.units
     }
-
-    dbtest(respond) {
-        var message = ""
-
-        let query = `SELECT * FROM models`
-
-        var callback = function (err, row) {
-            if (err) {
-                console.log(err.message)
-            }
-            else {
-                console.log(row)
-                message += "Name: " + row.name + ", Role: " + row.role + ", Faction: " + row.faction
-            }
-        }
-
-        var completion = function (err, rows) {
-            if (err) {
-                console.log(err.message)
-                respond(err, err.message)
-            }
-            else {
-                respond(null, message)
-            }
-        }
-
-        this.db.each(query, callback, completion)
-    }
-
-    /*
-    closeDB() {
-        db.close(function (err) {
-            if (err) {
-                console.log("There was an error closing the Database.")
-                console.log(err.message)
-            } else {
-                console.log("Database successfully closed.")
-            }
-        })
-    }
-
-    SELECT user_army.id AS armyUnitID, user_army.unitID, keywords.id AS keywordID, faction_keywords.id AS factionKeywordID, army_gear.gearID, abilities.id AS abilityID
-    FROM user_army
-    LEFT OUTER JOIN unit_keywords_join ON user_army.unitID = unit_keywords_join.unitID
-    LEFT OUTER JOIN keywords ON unit_keywords_join.keywordID = keywords.id
-    LEFT OUTER JOIN unit_faction_keywords_join ON user_army.unitID = unit_faction_keywords_join.unitID
-    LEFT OUTER JOIN faction_keywords ON unit_faction_keywords_join.factionKeywordID = faction_keywords.id
-    LEFT OUTER JOIN army_gear ON user_army.id = army_gear.armyUnitID
-    LEFT OUTER JOIN unit_abilities_join ON user_army.unitID = unit_abilities_join.unitID
-    LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id;
-
-    */
 }
 
 module.exports = ArmyManager

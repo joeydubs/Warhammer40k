@@ -1,35 +1,21 @@
 var unit = {}
 
-function updateTroopTable() {
-    var request = new XMLHttpRequest()
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var response = JSON.parse(request.responseText)
-            console.log(typeof response.value)
-            document.getElementById("troops").innerHTML = response.value
-        }
-    }
-    request.open("POST", "resources/models.json", true)
-    request.send()
-}
-
 function fetchUnitList() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Get Model List request received")
+            //console.log("Get Model List request received")
             var modelList = JSON.parse(request.responseText)
-            console.log(modelList)
+            //console.log(modelList)
             document.getElementById("unit-selector").innerHTML = "<option>-- Select Unit --</option>"
             for (model in modelList) {
                 var option = document.createElement("option")
                 option.innerHTML = modelList[model]
                 document.getElementById("unit-selector").add(option)
             }
+            document.getElementById("unit-builder").removeAttribute("hidden")
             document.getElementById("my-army").setAttribute("hidden", true)
             document.getElementById("stratagems").setAttribute("hidden", true)
-            document.getElementById("wargear").setAttribute("hidden", true)
-            document.getElementById("unit-builder").removeAttribute("hidden")
         }
     }
     request.open("POST", "/fetchUnitList")
@@ -44,9 +30,9 @@ function fetchUnit() {
     var unitName = document.getElementById("unit-selector").value
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Unit request received")
+            //console.log("Fetch Unit request received")
             unit = JSON.parse(request.responseText)
-            console.log(unit)
+            //console.log(unit)
             var modelsSection = document.createElement("section")
             modelsSection.id = "unit-models"
 
@@ -103,36 +89,14 @@ function fetchUnit() {
     request.send(JSON.stringify({ "unit": unitName }))
 }
 
-function updateModelGear(sender) {
-    var value = JSON.parse(sender.value)
-    var index = value[0]
-    var option = value[1]
-    var element = value[2]
-    if (option == "or") {
-        models[index][option] = element
-    }
-    else {
-        if (sender.checked) {
-            if (!models[index][option]) {
-                models[index][option] = []
-            }
-            models[index][option].push(element)
-        }
-        else {
-            var elementIndex = models[index][option].indexOf(element)
-            models[index][option].splice(elementIndex, 1)
-        }
-    }
-}
-
 function fetchStats() {
     if (document.getElementById("model-stats").hasAttribute("hidden")) {
         var request = new XMLHttpRequest()
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                console.log("Fetch Stats request received")
+                //console.log("Fetch Stats request received")
                 var modelStats = JSON.parse(request.responseText)
-                console.log(modelStats)
+                //console.log(modelStats)
                 displayStats(modelStats)
             }
         }
@@ -150,13 +114,12 @@ function fetchArmy() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Army request received")
+            //console.log("Fetch Army request received")
             document.getElementById("unit-builder").setAttribute("hidden", true)
-            document.getElementById("stratagems").setAttribute("hidden", true)
-            document.getElementById("wargear").setAttribute("hidden", true)
             document.getElementById("my-army").removeAttribute("hidden")
+            document.getElementById("stratagems").setAttribute("hidden", true)
             var army = JSON.parse(request.responseText)
-            console.log(army)
+            //console.log(army)
             generateArmyTable(army)
         }
     }
@@ -168,13 +131,12 @@ function fetchStratagems() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Stratagems request received")
-            document.getElementById("my-army").setAttribute("hidden", true)
+            //console.log("Fetch Stratagems request received")
             document.getElementById("unit-builder").setAttribute("hidden", true)
-            document.getElementById("wargear").setAttribute("hidden", true)
+            document.getElementById("my-army").setAttribute("hidden", true)
             document.getElementById("stratagems").removeAttribute("hidden")
             var stratagems = JSON.parse(request.responseText)
-            console.log(stratagems)
+            //console.log(stratagems)
             generateStratagemsTable(stratagems)
         }
     }
@@ -186,9 +148,9 @@ function fetchStratagemDetails(stratagemID, callback) {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Stratagem Details request received")
+            //console.log("Fetch Stratagem Details request received")
             var stratagemDetails = JSON.parse(request.responseText)
-            console.log(stratagemDetails)
+            //console.log(stratagemDetails)
             callback(stratagemDetails)
         }
     }
@@ -197,39 +159,73 @@ function fetchStratagemDetails(stratagemID, callback) {
     request.send(JSON.stringify({ "stratagemID": parseInt(stratagemID) }))
 }
 
+function createUnit() {
+    var points = 0
+    var myUnit = {
+        name: document.getElementById("unit-selector").value,
+        details: {},
+    }
+    //console.log(unit)
+    for (let key in unit.models) {
+        let modelID = unit.models[key].id
+        let qty = parseInt(document.getElementById(`${key.split(' ').join('-')}-qty`).value)
+        if (qty > 0) {
+            points += (qty * unit.models[key].cost)
+            myUnit.details[modelID] = {
+                gear: [],
+                quantity: qty
+            }
 
-function fetchWargear() {
+            var boxes = document.getElementsByClassName(`${key.split(' ').join('-')}-gear`)
+            //console.log(boxes)
+            for (let box in boxes) {
+                let gearName = boxes[box].name
+                let gearID = boxes[box].value
+                if (boxes[box].checked) {
+                    //console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
+                    if (myUnit.details[modelID]) {
+                        points += (qty * unit.models[key].gear[gearName].cost)
+                        myUnit.details[modelID].gear.push(gearID)
+                    }
+                }
+            }
+
+        }
+    }
+
+    myUnit["points"] = points
+    //console.log(myUnit)
+
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log("Fetch Wargear request received")
-            document.getElementById("my-army").setAttribute("hidden", true)
-            document.getElementById("unit-builder").setAttribute("hidden", true)
-            document.getElementById("stratagems").setAttribute("hidden", true)
-            document.getElementById("wargear").removeAttribute("hidden")
-            var wargear = JSON.parse(request.responseText)
-            console.log(wargear)
-            generateWargearTable(wargear)
+            //console.log("Save Unit request received")
+            document.getElementById("unit-models").innerHTML = ""
+            document.getElementById("unit-selector").value = "-- Select Unit --"
+            document.getElementById("submit-unit").setAttribute("disabled", true)
+            if (!document.getElementById("model-stats").hasAttribute("hidden")) {
+                document.getElementById("model-stats").setAttribute("hidden", true)
+                document.getElementById("get-stats").innerText = "Get Stats"
+            }
         }
     }
-    request.open("POST", "/fetchWargear")
-    request.send()
+    request.open("POST", "/createUnit")
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(JSON.stringify({ "unit": myUnit, "dynasty": document.getElementById("dynasty-selector").value }))
 }
 
-function addModel() {
-    var model = document.getElementById("unit-selector").value
-    models.push({ "model": model })
-    document.getElementById("model-stats").setAttribute("hidden", true)
-    document.getElementById("submit-unit").removeAttribute("disabled")
-    generateUnitTable(models)
-}
-
-function removeModel(index) {
-    models.splice(index, 1)
-    if (models.length == 0) {
-        document.getElementById("submit-unit").setAttribute("disabled", true)
+function removeUnit(id) {
+    var request = new XMLHttpRequest()
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            //console.log("Remove Unit request received")
+            var unitTable = document.getElementById("unit-" + id)
+            unitTable.parentNode.removeChild(unitTable)
+        }
     }
-    generateUnitTable(models)
+    request.open("POST", "/removeUnit")
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(JSON.stringify({ "id": id }))
 }
 
 function displayStats(modelStats) {
@@ -270,34 +266,16 @@ function displayStats(modelStats) {
     document.getElementById("get-stats").innerText = "Hide Stats"
 }
 
-function generateUnitTable(unit) {
-    var table = document.createElement("table")
-    table.id = "unit-models"
-    for (i = 0; i < unit.length; i++) {
-        var model = unit[i].model
-        var row = document.createElement("tr")
-        var remove = document.createElement("td")
-        var name = document.createElement("td")
-        remove.innerHTML = `<button onclick='removeModel(${i})'>Remove</button>`
-        name.innerHTML = model
-        row.appendChild(remove)
-        row.appendChild(name)
-        table.appendChild(row)
-        fetchModelGear(i, model)
-    };
-    document.getElementById("unit-models").replaceWith(table)
-}
-
 function generateArmyTable(army) {
     var section = document.createElement("section")
     section.id = "my-army"
-    console.log(army)
+    //console.log(army)
     for (let key in army) {
         var unit = army[key]
         var unitDiv = document.createElement("div")
         unitDiv.id = `unit-${key}`
         var unitTable = document.createElement("table")
-        console.log(unit)
+        //console.log(unit)
         var tr = document.createElement("tr")
         var removeTH = document.createElement("th")
         removeTH.innerHTML = `<button onclick="removeUnit(${key})">Remove</button>`
@@ -310,7 +288,7 @@ function generateArmyTable(army) {
         unitTable.insertRow(-1).innerHTML = "<td>Model</td><td>Gear</td><td>M</td><td>WS</td><td>BS</td><td>S</td><td>T</td><td>W</td><td>A</td><td>Ld</td><td>Sv</td>"
         for (let modelName in unit.models) {
             let model = unit.models[modelName]
-            console.log(model)
+            //console.log(model)
             let modelRow = unitTable.insertRow(-1)
             modelRow.insertCell(-1).innerText = modelName
             modelRow.insertCell(-1)
@@ -324,15 +302,15 @@ function generateArmyTable(army) {
             modelRow.insertCell(-1).innerText = model.leadership
             modelRow.insertCell(-1).innerText = model.save
 
-            console.log(model.gear)
+            //console.log(model.gear)
             if (Object.keys(model.gear).length > 0) {
                 unitTable.insertRow(-1).innerHTML = '<td></td><td></td><td>Range</td><td>Type</td><td>S</td><td>AP</td><td>D</td><td colspan="4">Abilities</td>'
                 for (let gearName in model.gear) {
                     let profiles = model.gear[gearName]
-                    console.log(profiles)
+                    //console.log(profiles)
                     for (let profile in profiles) {
                         let gear = profiles[profile]
-                        console.log(profile)
+                        //console.log(profile)
                         let gearRow = unitTable.insertRow(-1)
                         gearRow.insertCell(-1)
                         if (gearName == profile) {
@@ -375,129 +353,14 @@ function generateStratagemsTable(stratagems) {
         description.className = "indent"
         let effect = document.createElement("p")
         effect.className = "indent"
+        stratSection.appendChild(header)
+        stratSection.appendChild(description)
+        stratSection.appendChild(effect)
 
-        fetchStratagemDetails(stratagems[key], function(stratagemDetails) {
+        fetchStratagemDetails(stratagems[key], function (stratagemDetails) {
             header.innerHTML = `<em>${stratagemDetails.commandPts}cp - ${stratagemDetails.name}</em>`
             description.innerText = stratagemDetails.flavor
             effect.innerText = stratagemDetails.description
-            stratSection.appendChild(header)
-            stratSection.appendChild(description)
-            stratSection.appendChild(effect)    
         })
     }
-}
-
-function generateWargearTable(wargear) {
-    var properties = ["range", "type", "s", "ap", "d", "ability"]
-    var wtbody = document.createElement("tbody")
-    var atbody = document.createElement("tbody")
-    wtbody.id = "weapons-tbody"
-    atbody.id = "abilities-tbody"
-    var tr, td
-    for (item in wargear) {
-        var gear = wargear[item]
-        tr = document.createElement("tr")
-        td = document.createElement("td")
-        td.innerText = item
-        tr.appendChild(td)
-        if (gear["isweapon"]) {
-            if ("profiles" in gear) {
-                wtbody.appendChild(tr)
-                var profiles = gear["profiles"]
-                for (profile in profiles) {
-                    tr = document.createElement("tr")
-                    td = document.createElement("td")
-                    td.innerText = profile
-                    tr.appendChild(td)
-                    for (i = 0; i < properties.length; i++) {
-                        td = document.createElement("td")
-                        td.innerText = profiles[profile][properties[i]]
-                        tr.appendChild(td)
-                    }
-                    wtbody.appendChild(tr)
-                }
-            }
-            else {
-                for (i = 0; i < properties.length; i++) {
-                    td = document.createElement("td")
-                    td.innerText = gear[properties[i]]
-                    tr.appendChild(td)
-                }
-                wtbody.appendChild(tr)
-            }
-        }
-        else {
-            td = document.createElement("td")
-            td.innerText = gear["ability"]
-            tr.appendChild(td)
-            atbody.appendChild(tr)
-        }
-    }
-    document.getElementById("weapons-tbody").replaceWith(wtbody)
-    document.getElementById("abilities-tbody").replaceWith(atbody)
-}
-
-function createUnit() {
-    var points = 0
-    var myUnit = {
-        name: document.getElementById("unit-selector").value,
-        details: {},
-    }
-    console.log(unit)
-    for (let key in unit.models) {
-        let modelID = unit.models[key].id
-        let qty = parseInt(document.getElementById(`${key.split(' ').join('-')}-qty`).value)
-        if (qty > 0) {
-            points += (qty * unit.models[key].cost)
-            myUnit.details[modelID] = {
-                gear: [],
-                quantity: qty
-            }
-
-            var boxes = document.getElementsByClassName(`${key.split(' ').join('-')}-gear`)
-            console.log(boxes)
-            for (let box in boxes) {
-                let gearName = boxes[box].name
-                let gearID = boxes[box].value
-                if (boxes[box].checked) {
-                    console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
-                    if (myUnit.details[modelID]) {
-                        points += (qty * unit.models[key].gear[gearName].cost)
-                        myUnit.details[modelID].gear.push(gearID)
-                    }
-                }
-            }
-
-        }
-    }
-
-    myUnit["points"] = points
-    console.log(myUnit)
-
-    var request = new XMLHttpRequest()
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log("Save Unit request received")
-            document.getElementById("unit-models").innerHTML = ""
-            document.getElementById("unit-selector").value = "-- Select Unit --"
-            document.getElementById("submit-unit").setAttribute("disabled", true)
-        }
-    }
-    request.open("POST", "/createUnit")
-    request.setRequestHeader("Content-Type", "application/json")
-    request.send(JSON.stringify({ "unit": myUnit, "dynasty": document.getElementById("dynasty-selector").value }))
-}
-
-function removeUnit(id) {
-    var request = new XMLHttpRequest()
-    request.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log("Remove Unit request received")
-            var unitTable = document.getElementById("unit-" + id)
-            unitTable.parentNode.removeChild(unitTable)
-        }
-    }
-    request.open("POST", "/removeUnit")
-    request.setRequestHeader("Content-Type", "application/json")
-    request.send(JSON.stringify({ "id": id }))
 }
