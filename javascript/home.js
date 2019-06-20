@@ -369,13 +369,14 @@ function generateArmyTable(army) {
 function generateStratagemsTable(stratagems) {
     document.getElementById("stratagems").innerHTML = ""
     for (let key in stratagems) {
+        let stratSection = document.getElementById("stratagems")
+        let header = document.createElement("p")
+        let description = document.createElement("p")
+        description.className = "indent"
+        let effect = document.createElement("p")
+        effect.className = "indent"
+
         fetchStratagemDetails(stratagems[key], function(stratagemDetails) {
-            var stratSection = document.getElementById("stratagems")
-            var header = document.createElement("p")
-            var description = document.createElement("p")
-            description.className = "indent"
-            var effect = document.createElement("p")
-            effect.className = "indent"
             header.innerHTML = `<em>${stratagemDetails.commandPts}cp - ${stratagemDetails.name}</em>`
             description.innerText = stratagemDetails.flavor
             effect.innerText = stratagemDetails.description
