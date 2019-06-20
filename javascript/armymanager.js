@@ -232,32 +232,39 @@ class ArmyManager {
                     for (let group in stratagem.includes) {
                         let conditionGroup = stratagem.includes[group]
                         let conditionsMet = []
+                        console.log("Group: " + group)
+                        console.log("Condition Group: " + conditionGroup)
+                        console.log("Conditions Met: " + conditionsMet)
 
                         for (let cond in conditionGroup) {
-                            console.log("Condition Group: " + conditionGroup)
                             let condition = conditionGroup[cond]
+                            console.log("Condition: " + condition)
+                            console.log("Info[group]: " + info[group])
 
                             if (info[group].includes(condition)) {
                                 console.log("Info includes group/condition: " + group + " / " + condition)
+                                
+                                var excludesOK = true
+
                                 for (let exGroup in stratagem.excludes) {
                                     let excludesGroup = stratagem.excludes[exGroup]
-                                    console.log("Excludes Group: " + excludesGroup)
-
-                                    var excludesOK = true
+                                    console.log("exGroup: " + exGroup)
+                                    console.log("Excludes Group: " + excludesGroup)            
 
                                     for (let exCon in excludesGroup) {
                                         let excludesCondition = excludesGroup[exCon]
-                                        console.log("Excludes Group: " + excludesGroup)
-
+                                        console.log("Excludes Condition: " + excludesCondition)
+                                        console.log("Info[exGroup]: " + info[exGroup])
+            
                                         if (info[exGroup].includes(excludesCondition)) {
-                                            console.log("Info includes group/condition: " + exGroup + " / " + excludesCondition)
+                                            console.log("Info excludes group/condition: " + exGroup + " / " + excludesCondition)
                                             excludesOK = false
                                         }
                                     }
+                                }
 
-                                    if (excludesOK) {
-                                        conditionsMet.push(condition)
-                                    }
+                                if (excludesOK) {
+                                    conditionsMet.push(condition)
                                 }
                             }
                         }
