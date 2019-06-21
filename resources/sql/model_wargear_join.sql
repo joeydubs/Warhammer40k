@@ -461,7 +461,7 @@ INSERT INTO model_wargear_join (
 )
 SELECT models.id, wargear.id
 FROM models, wargear
-WHERE models.name = "C’tan Shard of the Deceiver"
+WHERE models.name = "C'tan Shard of the Deceiver"
 AND wargear.name = "Star-god fists";
 
 INSERT INTO model_wargear_join (
@@ -470,7 +470,7 @@ INSERT INTO model_wargear_join (
 )
 SELECT models.id, wargear.id
 FROM models, wargear
-WHERE models.name = "C’tan Shard of the Nightbringer"
+WHERE models.name = "C'tan Shard of the Nightbringer"
 AND wargear.name = "Gaze of death";
 
 INSERT INTO model_wargear_join (
@@ -479,7 +479,7 @@ INSERT INTO model_wargear_join (
 )
 SELECT models.id, wargear.id
 FROM models, wargear
-WHERE models.name = "C’tan Shard of the Nightbringer"
+WHERE models.name = "C'tan Shard of the Nightbringer"
 AND wargear.name = "Scythe of the Nightbringer";
 
 INSERT INTO model_wargear_join (
@@ -704,7 +704,7 @@ INSERT INTO model_wargear_join (
 )
 SELECT models.id, wargear.id
 FROM models, wargear
-WHERE models.name = "Transcendent C’tan"
+WHERE models.name = "Transcendent C'tan"
 AND wargear.name = "Crackling tendrils";
 
 INSERT INTO model_wargear_join (
