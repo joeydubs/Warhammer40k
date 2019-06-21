@@ -520,6 +520,28 @@ INSERT INTO wargear
 VALUES
     (
         null,
+        "Fabricator Claw Array",
+        null,
+        null,
+        35,
+        false
+);
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
+        "Gloom Prism",
+        null,
+        null,
+        35,
+        false
+);
+
+INSERT INTO wargear
+VALUES
+    (
+        null,
         "Nebuloscope",
         null,
         null,
