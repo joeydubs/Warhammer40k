@@ -341,7 +341,7 @@ VALUES
     (
         NULL,
         "Dread",
-        `Your opponent must add 1 to Morale tests for any enemy units within 12" of the C'tan Shard of the Deceiver.`
+        "Your opponent must add 1 to Morale tests for any enemy units within 12 inches of the C'tan Shard of the Deceiver."
 );
 
 INSERT INTO abilities
@@ -349,7 +349,7 @@ VALUES
     (
         NULL,
         "Grand Illusion",
-        `At the beginning of the first battle round, but before the first turn begins, you can remove the C’tan Shard of the Deceiver and/or up to D3 other friendly NECRONS units from the battlefield, then set them up again more than 12" from any enemy models. If you do so, these units cannot charge in your first turn.`
+        "At the beginning of the first battle round, but before the first turn begins, you can remove the C’tan Shard of the Deceiver and/or up to D3 other friendly NECRONS units from the battlefield, then set them up again more than 12 inches from any enemy models. If you do so, these units cannot charge in your first turn."
 );
 
 INSERT INTO abilities
@@ -357,7 +357,7 @@ VALUES
     (
         NULL,
         "Powers of the C'tan (2)",
-        `This C'tan Shard knows two Powers of the C'tan. It can use one of its powers at the end of each of its Movement phases.`
+        "This C'tan Shard knows two Powers of the C'tan. It can use one of its powers at the end of each of its Movement phases."
 );
 
 INSERT INTO abilities
@@ -365,7 +365,7 @@ VALUES
     (
         NULL,
         "Powers of the C'tan (4)",
-        `This model knows four Powers of the C'tan. It can use a number of different Powers of the C'tan equal to the number in the damage table at the end of each of its Movement phases.`
+        "This model knows four Powers of the C'tan. It can use a number of different Powers of the C'tan equal to the number in the damage table at the end of each of its Movement phases."
 );
 
 INSERT INTO abilities
@@ -373,7 +373,7 @@ VALUES
     (
         NULL,
         "Reality Unravels",
-        `If this C’tan Shard is ever reduced to 0 wounds, roll a D6 before removing it from the battlefield; on a 4+ its necrodermis tears a hole in reality, and each unit within 3" suffers D3 mortal wounds.`
+        "If this C’tan Shard is ever reduced to 0 wounds, roll a D6 before removing it from the battlefield; on a 4+ its necrodermis tears a hole in reality, and each unit within 3 inches suffers D3 mortal wounds."
 );
 
 INSERT INTO abilities
@@ -381,7 +381,7 @@ VALUES
     (
         NULL,
         "Enslaved Star God",
-        `This model can never have a Warlord Trait.`
+        "This model can never have a Warlord Trait."
 );
 
 INSERT INTO abilities
@@ -389,7 +389,7 @@ VALUES
     (
         NULL,
         "Wraith Form",
-        `Models in the unit have a 3+ invulnerable save, and can move across models and terrain as if they were not there. Models in this unit can shoot and charge even if they Fell Back this turn.`
+        "Models in the unit have a 3+ invulnerable save, and can move across models and terrain as if they were not there. Models in this unit can shoot and charge even if they Fell Back this turn."
 );
 
 INSERT INTO abilities
@@ -397,7 +397,7 @@ VALUES
     (
         NULL,
         "Evasion Engrams",
-        `Your opponent must subtract 1 from hit rolls that target this unit in the Shooting Phase.`
+        "Your opponent must subtract 1 from hit rolls that target this unit in the Shooting Phase."
 );
 
 INSERT INTO abilities
@@ -405,7 +405,7 @@ VALUES
     (
         NULL,
         "Repulsor Platform",
-        `This unit can move and fire Heavy weapons without suffering the penalty to its hit rolls.`
+        "This unit can move and fire Heavy weapons without suffering the penalty to its hit rolls."
 );
 
 INSERT INTO abilities
@@ -413,7 +413,7 @@ VALUES
     (
         NULL,
         "Scarab Hive",
-        `At the beginning of your turn, you can roll a D6 for each <DYNASTY> Canoptek Scarabs unit from your army that is below its starting number of models and within 6" of any friendly <DYNASTY> Canoptek Spyders units. On a 1, one of those Canoptek Spyders units within 6" of the unit being rolled for suffers a mortal wound. On a 2+ one of those Canoptek Spyders units within 6" of the unit being rolled for unleashes reinforcements: return a Canoptek Scarab Swarm to the depleted unit, in unit coherency and more than 1" from enemy models. If you cannot do this because there is no room to place the model, do not set it up.`
+        "At the beginning of your turn, you can roll a D6 for each <DYNASTY> Canoptek Scarabs unit from your army that is below its starting number of models and within 6 inches of any friendly <DYNASTY> Canoptek Spyders units. On a 1, one of those Canoptek Spyders units within 6 inches of the unit being rolled for suffers a mortal wound. On a 2+ one of those Canoptek Spyders units within 6 inches of the unit being rolled for unleashes reinforcements: return a Canoptek Scarab Swarm to the depleted unit, in unit coherency and more than 1 inches from enemy models. If you cannot do this because there is no room to place the model, do not set it up."
 );
 
 INSERT INTO abilities
@@ -620,5 +620,5 @@ VALUES
     (
         NULL,
         "Vengeance of the Enchained",
-        `If this model is reduced to 0 wounds, roll a D6 before removing it from the battlefield. On a 4+ the Transcendent C'tan contained within takes their vengeance, and each unit within 2D6" suffers D6 mortal wounds.`
+        "If this model is reduced to 0 wounds, roll a D6 before removing it from the battlefield. On a 4+ the Transcendent C'tan contained within takes their vengeance, and each unit within 2D6 inches suffers D6 mortal wounds."
 );
