@@ -372,7 +372,16 @@ INSERT INTO model_wargear_join (
 SELECT models.id, wargear.id
 FROM models, wargear
 WHERE models.name = "Lychguard"
-AND wargear.name = "warscythe";
+AND wargear.name = "Warscythe";
+
+INSERT INTO model_wargear_join (
+    model,
+    wargear
+)
+SELECT models.id, wargear.id
+FROM models, wargear
+WHERE models.name = "Lychguard"
+AND wargear.name = "Dispersion Shield";
 
 INSERT INTO model_wargear_join (
     model,

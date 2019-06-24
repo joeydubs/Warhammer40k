@@ -32,7 +32,7 @@ function fetchUnit() {
         if (this.readyState == 4 && this.status == 200) {
             //console.log("Fetch Unit request received")
             unit = JSON.parse(request.responseText)
-            //console.log(unit)
+            console.log(unit)
             var modelsSection = document.createElement("section")
             modelsSection.id = "unit-models"
 
@@ -119,7 +119,7 @@ function fetchArmy() {
             document.getElementById("my-army").removeAttribute("hidden")
             document.getElementById("stratagems").setAttribute("hidden", true)
             var army = JSON.parse(request.responseText)
-            //console.log(army)
+            console.log(army)
             generateArmyTable(army)
         }
     }
@@ -333,10 +333,13 @@ function generateArmyTable(army) {
         }
         unitTable.insertRow(-1).innerHTML = '<td>Abilities</td>'
         for (let abilityName in unit.abilities) {
-            let ability = unit.abilities[abilityName]
+            let abilityDescription = unit.abilities[abilityName]
             let abilitiesRow = unitTable.insertRow(-1)
             abilitiesRow.insertCell(-1)
             abilitiesRow.insertCell(-1).innerText = abilityName
+            let descriptionCell = abilitiesRow.insertCell(-1)
+            descriptionCell.colSpan = 9
+            descriptionCell.innerText = abilityDescription
         }
         unitDiv.appendChild(unitTable)
         section.appendChild(unitDiv)

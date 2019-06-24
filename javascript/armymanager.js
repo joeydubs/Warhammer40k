@@ -500,7 +500,7 @@ class ArmyManager {
 
     getArmy(respond) {
         let query =
-            `SELECT user_army.id, units.name AS unit, units.role, subfactions.name AS subfaction, models.name AS model, army_models.quantity, model_stats.move, model_stats.weapon, model_stats.ballistic, model_stats.strength, model_stats.toughness, model_stats.wounds, model_stats.attacks, model_stats.leadership, model_stats.save, wargear.name AS wargear, wargear_stats.profile AS wargearProfile, wargear_stats.range AS wargearRange, wargear_stats.type AS wargearType, wargear_stats.strength AS wargearStrength, wargear_stats.armorPen AS wargearArmorPen, wargear_stats.damage AS wargearDamage,wargear_stats.abilities AS wargearAbilities
+            `SELECT user_army.id, units.name AS unit, units.role, subfactions.name AS subfaction, models.name AS model, army_models.quantity, model_stats.move, model_stats.weapon, model_stats.ballistic, model_stats.strength, model_stats.toughness, model_stats.wounds, model_stats.attacks, model_stats.leadership, model_stats.save, wargear.name AS wargear, wargear_stats.profile AS wargearProfile, wargear_stats.range AS wargearRange, wargear_stats.type AS wargearType, wargear_stats.strength AS wargearStrength, wargear_stats.armorPen AS wargearArmorPen, wargear_stats.damage AS wargearDamage, wargear_stats.abilities AS wargearAbilities, abilities.name as abilityName, abilities.ability as abilityDescription
             FROM user_army
             LEFT OUTER JOIN army_models ON user_army.id = army_models.armyUnitID
             LEFT OUTER JOIN army_gear ON army_gear.armyUnitID = user_army.id
@@ -510,6 +510,8 @@ class ArmyManager {
             LEFT OUTER JOIN model_stats ON models.id = model_stats.modelID
             LEFT OUTER JOIN wargear ON army_gear.gearID = wargear.id
             LEFT OUTER JOIN wargear_stats ON wargear.id = wargear_stats.wargearID
+            LEFT OUTER JOIN unit_abilities_join ON unit_abilities_join.unitID =units.id
+            LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id
             LEFT OUTER JOIN subfactions ON user_army.subfactionID = subfactions.id`
 
         var message = {}
@@ -522,7 +524,8 @@ class ArmyManager {
                 var id = row.id
                 if (!message[id]) {
                     message[id] = {
-                        models: {}
+                        models: {},
+                        abilities: {}
                     }
                 }
 
@@ -540,6 +543,9 @@ class ArmyManager {
                 message[id]["name"] = row.unit
                 message[id]["subfaction"] = row.subfaction
                 message[id]["role"] = row.role
+
+                message[id].abilities[row.abilityName] = row.abilityDescription
+
                 message[id]["models"][model]["quantity"] = row.quantity
                 message[id]["models"][model]["move"] = row.move
                 message[id]["models"][model]["weapon"] = row.weapon
@@ -550,6 +556,7 @@ class ArmyManager {
                 message[id]["models"][model]["attacks"] = row.attacks
                 message[id]["models"][model]["leadership"] = row.leadership
                 message[id]["models"][model]["save"] = row.save
+
 
                 if (row.wargear != null) {
                     if (!message[id]["models"][model]["gear"][row.wargear]) {
