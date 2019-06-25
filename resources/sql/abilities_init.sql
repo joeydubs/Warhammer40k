@@ -111,7 +111,7 @@ INSERT INTO abilities
 VALUES
     (
         NULL,
-        "The Vargarad's Duty",
+        "The Vargard's Duty",
         'Roll a D6 each time Nemesor Zahndrekh loses a wound whilst he is within 3" of Vargard Obyron; on a 2+ Obyron can intercept that hit – Zahndrekh does not lose a wound but Obyron suffers a mortal wound.'
 );
 
@@ -156,7 +156,7 @@ INSERT INTO abilities
 VALUES
     (
         NULL,
-        "The Starts Are Right",
+        "The Stars Are Right",
         'Roll a D6 at the start of each of your turns. If the result is less than the current battle round number, Orikan uses the Orikan Empowered profile for the rest of the game (though any damage he has sustained is carried over).'
 );
 
@@ -587,7 +587,7 @@ INSERT INTO abilities
 VALUES
     (
         NULL,
-        "Hovering Sentinal",
+        "Hovering Sentinel",
         'During deployment, you can set up this model in the upper atmosphere instead of placing it on the battlefield. At the end of any of your Movement phases the Obelisk can plummet to the battlefield – set it up anywhere on the battlefield that is more than 12" from any enemy models.'
 );
 
@@ -611,7 +611,7 @@ INSERT INTO abilities
 VALUES
     (
         NULL,
-        "Temporal Force Field",
+        "Transtemporal Force Field",
         "This model has a 4+ invulnerable save."
 );
 

@@ -111,7 +111,7 @@ INSERT INTO unit_abilities_join (
 SELECT units.id, abilities.id
 FROM units, abilities
 WHERE units.name = "Nemesor Zahndrekh"
-AND abilities.name = "My Will Be Done";
+AND abilities.name = "My Will Be Done (Nemesor)";
 
 INSERT INTO unit_abilities_join (
     unitID,
@@ -336,6 +336,15 @@ INSERT INTO unit_abilities_join (
 SELECT units.id, abilities.id
 FROM units, abilities
 WHERE units.name = "Catacomb Command Barge"
+AND abilities.name = "Explodes (Catacomb)";
+
+INSERT INTO unit_abilities_join (
+    unitID,
+    abilityID
+)
+SELECT units.id, abilities.id
+FROM units, abilities
+WHERE units.name = "Catacomb Command Barge"
 AND abilities.name = "Quantum Shielding";
 
 INSERT INTO unit_abilities_join (
@@ -354,7 +363,7 @@ INSERT INTO unit_abilities_join (
 SELECT units.id, abilities.id
 FROM units, abilities
 WHERE units.name = "Overlord"
-AND abilities.name = "My Will Be Done";
+AND abilities.name = "My Will Be Done (Overlord)";
 
 INSERT INTO unit_abilities_join (
     unitID,
@@ -409,6 +418,15 @@ SELECT units.id, abilities.id
 FROM units, abilities
 WHERE units.name = "Destroyer Lord"
 AND abilities.name = "Living Metal";
+
+INSERT INTO unit_abilities_join (
+    unitID,
+    abilityID
+)
+SELECT units.id, abilities.id
+FROM units, abilities
+WHERE units.name = "Destroyer Lord"
+AND abilities.name = "Phase Shifter";
 
 INSERT INTO unit_abilities_join (
     unitID,
@@ -480,7 +498,7 @@ INSERT INTO unit_abilities_join (
 SELECT units.id, abilities.id
 FROM units, abilities
 WHERE units.name = "Deathmarks"
-AND abilities.name = "Hunters from Hyerspace";
+AND abilities.name = "Hunters from Hyperspace";
 
 INSERT INTO unit_abilities_join (
     unitID,
@@ -894,7 +912,7 @@ INSERT INTO unit_abilities_join (
 SELECT units.id, abilities.id
 FROM units, abilities
 WHERE units.name = "Transcendent C'tan"
-AND abilities.name = "Powers of the C'tan";
+AND abilities.name = "Powers of the C'tan (2)";
 
 INSERT INTO unit_abilities_join (
     unitID,

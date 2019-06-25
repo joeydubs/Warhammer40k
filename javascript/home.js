@@ -269,9 +269,14 @@ function displayStats(modelStats) {
 function generateArmyTable(army) {
     var section = document.createElement("section")
     section.id = "my-army"
-    //console.log(army)
+    console.log(army)
+    var div = document.createElement("p")
+    var pointTotal = 0;
+    section.appendChild(div)
+
     for (let key in army) {
         var unit = army[key]
+        pointTotal += unit.points
         var unitDiv = document.createElement("div")
         unitDiv.id = `unit-${key}`
         var unitTable = document.createElement("table")
@@ -344,6 +349,7 @@ function generateArmyTable(army) {
         unitDiv.appendChild(unitTable)
         section.appendChild(unitDiv)
     }
+    div.innerText = "Army point total: " + pointTotal
     document.getElementById("my-army").replaceWith(section)
 }
 

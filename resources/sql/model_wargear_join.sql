@@ -444,7 +444,7 @@ INSERT INTO model_wargear_join (
 SELECT models.id, wargear.id
 FROM models, wargear
 WHERE models.name = "Triarch Stalker"
-AND wargear.name = "Particle Shredder";
+AND wargear.name = "Particle shredder";
 
 INSERT INTO model_wargear_join (
     model,
