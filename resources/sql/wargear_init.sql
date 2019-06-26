@@ -149,7 +149,7 @@ VALUES
         "Particle beamer",
         null,
         null,
-        0,
+        10,
         true
 );
 
@@ -160,7 +160,7 @@ VALUES
         "Particle caster",
         null,
         null,
-        0,
+        4,
         true
 );
 
@@ -193,7 +193,7 @@ VALUES
         "Rod of covenant",
         null,
         null,
-        0,
+        10,
         true
 );
 
@@ -248,7 +248,7 @@ VALUES
         "Tesla cannon",
         null,
         null,
-        0,
+        13,
         true
 );
 
@@ -292,7 +292,7 @@ VALUES
         "Transdimensional beamer",
         null,
         null,
-        0,
+        14,
         true
 );
 
@@ -479,7 +479,7 @@ VALUES
         "Whip coils",
         null,
         null,
-        0,
+        9,
         true
 );
 
@@ -490,8 +490,8 @@ VALUES
         "Canoptek Cloak",
         null,
         null,
-        0,
-        true
+        5,
+        false
 );
 
 INSERT INTO wargear
@@ -501,8 +501,8 @@ VALUES
         "Chronometron",
         null,
         null,
-        0,
-        true
+        15,
+        false
 );
 
 INSERT INTO wargear
@@ -512,7 +512,7 @@ VALUES
         "Dispersion Shield",
         null,
         null,
-        35,
+        12,
         false
 );
 
@@ -523,7 +523,7 @@ VALUES
         "Fabricator Claw Array",
         null,
         null,
-        35,
+        5,
         false
 );
 
@@ -534,7 +534,7 @@ VALUES
         "Gloom Prism",
         null,
         null,
-        35,
+        5,
         false
 );
 
@@ -545,7 +545,7 @@ VALUES
         "Nebuloscope",
         null,
         null,
-        35,
+        2,
         false
 );
 
@@ -556,8 +556,8 @@ VALUES
         "Phylactery",
         null,
         null,
-        0,
-        true
+        10,
+        false
 );
 
 INSERT INTO wargear
@@ -578,7 +578,7 @@ VALUES
         "Shadowloom",
         null,
         null,
-        35,
+        5,
         false
 );
 
@@ -589,6 +589,6 @@ VALUES
         "Shieldvanes",
         null,
         null,
-        35,
+        3,
         false
 );

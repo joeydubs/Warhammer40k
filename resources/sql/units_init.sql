@@ -12,8 +12,8 @@ CREATE TABLE units (
 INSERT INTO units VALUES (
     NULL,
     "Imotekh the Stormlord",
-    "",
-    "",
+    "Imotekh the Stormlord is a single model armed with the Staff of the Destroyer and a gauntlet of fire. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
     10
 );
@@ -21,8 +21,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Nemesor Zahndrekh",
-    "",
-    "",
+    "Nemesor Zahndrekh is a single model armed with a staff of light. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
     9
 );
@@ -30,8 +30,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Vargard Obyron",
-    "",
-    "",
+    "Vargard Obyron is a single model armed with a warscythe. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
     7
 );
@@ -39,8 +39,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Illuminor Szeras",
-    "",
-    "",
+    "Illuminor Szeras is a single model armed with the Eldritch Lance. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
     8
 );
@@ -48,17 +48,17 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Orikan the Diviner",
-    "",
-    "",
+    "Orikan the Diviner is a single model armed with the Staff of Tomorrow. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
-    10
+    6
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Anrakyr the Traveller",
-    "",
-    "",
+    "Anrakyr the Traveller is a single model armed with a tachyon arrow and warscythe. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
     9
 );
@@ -66,8 +66,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Trazyn the Infinite",
-    "",
-    "",
+    "Trazyn the Infinite is a single model armed with the Empathic Obliterator. Only one of this model may be included in your army.",
+    NULL,
     "HQ",
     5
 );
@@ -75,8 +75,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Catacomb Command Barge",
-    "",
-    "",
+    "A Catacomb Command Barge is a single model equipped with a gauss cannon. It is ridden by an Overlord armed with a staff of light.",
+    "The Overlord may replace their staff of light with a hyperphase sword, a voidblade or a warscythe. The Overlord may take a resurrection orb. The Catacomb Command Barge may replace its gauss cannon with a tesla cannon.",
     "HQ",
     9
 );
@@ -94,7 +94,7 @@ INSERT INTO units VALUES (
     NULL,
     "Lord",
     "A Lord is a single model armed with a staff of light.",
-    "",
+    "This model may replace its staff of light with a hyperphase sword, a voidblade or a warscythe. This model may take a resurrection orb.",
     "HQ",
     5
 );
@@ -103,7 +103,7 @@ INSERT INTO units VALUES (
     NULL,
     "Cryptek",
     "A Cryptek is a single model armed with a staff of light.",
-    "",
+    "This model may take either a chronometron or a Canoptek cloak.",
     "HQ",
     5
 );
@@ -112,7 +112,7 @@ INSERT INTO units VALUES (
     NULL,
     "Destroyer Lord",
     "A Destroyer Lord is a single model armed with a staff of light.",
-    "",
+    "This model may replace its staff of light with a hyperphase sword, a voidblade or a warscythe. This model may take either a phylactery or a resurrection orb.",
     "HQ",
     7
 );
@@ -156,8 +156,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Flayed Ones",
-    "",
-    "",
+    "This unit contains 5 Flayed Ones. It can include up to 5 additional Flayed Ones (Power Rating +4), up to 10 additional Flayed Ones (Power Rating +8) or up to 15 additional Flayed Ones (Power Rating +12). Each model attacks with their flayer claws.",
+    NULL,
     "Elites",
     4
 );
@@ -165,8 +165,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Triarch Praetorians",
-    "",
-    "",
+    "This unit contains 5 Triarch Praetorians. It can include up to 5 additional Triarch Praetorians (Power Rating +8). Each model is armed with a rod of covenant.",
+    "The entire unit may replace their rods of covenant with voidblades and particle casters.",
     "Elites",
     8
 );
@@ -183,8 +183,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "C'tan Shard of the Deceiver",
-    "",
-    "",
+    "The C’tan Shard of the Deceiver is a single model that attacks with its star-god fists. Only one of this model may be included in your army.",
+    NULL,
     "Elites",
     12
 );
@@ -219,10 +219,10 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Tomb Blades",
-    "",
-    "",
+    "This unit contains 3 Tomb Blades. It can include up to 3 additional Tomb Blades (Power Rating +5) or up to 6 additional Tomb Blades (Power Rating +9). Each model is equipped with two gauss blasters.",
+    "Any model may replace its two gauss blasters with two tesla carbines or a particle beamer. Any model may take shieldvanes. Any model may take a nebuloscope or a shadowloom.",
     "Fast Attack",
-    150
+    5
 );
 
 INSERT INTO units VALUES (
@@ -264,8 +264,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Annihilation Barge",
-    "",
-    "",
+    "An Annihilation Barge is a single model equipped with a gauss cannon and a twin tesla destructor.",
+    "This model may replace its gauss cannon with a tesla cannon.",
     "Heavy Support",
     8
 );
@@ -282,8 +282,8 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Transcendent C'tan",
-    "",
-    "",
+    "A Transcendent C’tan is a single model that attacks with its crackling tendrils.",
+    NULL,
     "Heavy Support",
     12
 );
@@ -291,44 +291,44 @@ INSERT INTO units VALUES (
 INSERT INTO units VALUES (
     NULL,
     "Ghost Ark",
-    "",
-    "",
-    "",
+    "A Ghost Ark is a single model equipped with two gauss flayer arrays.",
+    NULL,
+    "Transport",
     8
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Doom Scythe",
-    "",
-    "",
-    "",
+    "A Doom Scythe is a single model equipped with a death ray and two tesla destructors.",
+    NULL,
+    "Flyer",
     11
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Night Scythe",
-    "",
-    "",
-    "",
+    "A Night Scythe is a single model equipped with two tesla destructors.",
+    NULL,
+    "Flyer",
     8
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Obelisk",
-    "",
-    "",
-    "",
+    "An Obelisk is a single model equipped with four tesla spheres.",
+    NULL,
+    "Lord of War",
     22
 );
 
 INSERT INTO units VALUES (
     NULL,
     "Tesseract Vault",
-    "",
-    "",
-    "",
+    "A Tesseract Vault is a single model equipped with four tesla spheres.",
+    NULL,
+    "Lord of War",
     25
 );

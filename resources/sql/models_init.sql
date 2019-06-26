@@ -11,56 +11,56 @@ INSERT INTO models VALUES (
     NULL,
     "Imotekh the Stormlord",
     NULL,
-    84
+    200
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Nemesor Zahndrekh",
     NULL,
-    84
+    180
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Vargard Obyron",
     NULL,
-    84
+    140
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Illuminor Szeras",
     NULL,
-    84
+    143
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Orikan the Diviner",
     NULL,
-    84
+    115
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Anrakyr the Traveller",
     NULL,
-    84
+    167
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Trazyn the Infinite",
     NULL,
-    84
+    100
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Catacomb Command Barge",
     NULL,
-    84
+    138
 );
 
 INSERT INTO models VALUES (
@@ -74,21 +74,21 @@ INSERT INTO models VALUES (
     NULL,
     "Lord",
     NULL,
-    84
+    73
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Cryptek",
     NULL,
-    84
+    70
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Destroyer Lord",
     NULL,
-    84
+    110
 );
 
 INSERT INTO models VALUES (
@@ -123,14 +123,14 @@ INSERT INTO models VALUES (
     NULL,
     "Flayed One",
     NULL,
-    84
+    17
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Triarch Praetorian",
     NULL,
-    84
+    22
 );
 
 INSERT INTO models VALUES (
@@ -144,7 +144,7 @@ INSERT INTO models VALUES (
     NULL,
     "C'tan Shard of the Deceiver",
     NULL,
-    84
+    225
 );
 
 INSERT INTO models VALUES (
@@ -172,7 +172,7 @@ INSERT INTO models VALUES (
     NULL,
     "Tomb Blades",
     NULL,
-    84
+    14
 );
 
 INSERT INTO models VALUES (
@@ -207,7 +207,7 @@ INSERT INTO models VALUES (
     NULL,
     "Annihilation Barge",
     NULL,
-    84
+    133
 );
 
 INSERT INTO models VALUES (
@@ -221,40 +221,40 @@ INSERT INTO models VALUES (
     NULL,
     "Transcendent C'tan",
     NULL,
-    84
+    225
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Ghost Ark",
     NULL,
-    84
+    160
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Doom Scythe",
     NULL,
-    84
+    205
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Night Scythe",
     NULL,
-    84
+    160
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Obelisk",
     NULL,
-    84
+    426
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Tesseract Vault",
     NULL,
-    84
+    496
 );

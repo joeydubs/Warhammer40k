@@ -189,7 +189,7 @@ INSERT INTO model_unit_join (
     min,
     max
 )
-SELECT models.id, units.id, 1, 1
+SELECT models.id, units.id, 5, 20
 FROM models, units
 WHERE models.name = "Flayed One"
 AND units.name = "Flayed Ones";
@@ -200,7 +200,7 @@ INSERT INTO model_unit_join (
     min,
     max
 )
-SELECT models.id, units.id, 1, 1
+SELECT models.id, units.id, 5, 10
 FROM models, units
 WHERE models.name = "Triarch Praetorian"
 AND units.name = "Triarch Praetorians";
@@ -266,7 +266,7 @@ INSERT INTO model_unit_join (
     min,
     max
 )
-SELECT models.id, units.id, 1, 1
+SELECT models.id, units.id, 3, 9
 FROM models, units
 WHERE models.name = "Tomb Blades"
 AND units.name = "Tomb Blades";
