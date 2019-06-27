@@ -1,4 +1,4 @@
-<h1>Warhammer 40k Army Builder<h1>
+<h1>Warhammer 40k Army Builder</h1>
 
 This application is for managing an army in 40k. You can select a Unit and Wargear to add to your army.
 
