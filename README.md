@@ -9,3 +9,7 @@ All units in your army can be viewed in one list, which displays:
 - Unit abilities
 
 You can view Stratagems for your army, which are filtered to only show the ones relavent to the Units you selected.
+
+
+Draw.io ER Diagram for the database:
+https://drive.google.com/file/d/1BYeGbBglvvEurzl99jVwkIUiaU4JltRO/view?usp=sharing
