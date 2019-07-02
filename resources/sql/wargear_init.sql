@@ -61,7 +61,7 @@ VALUES
         "Gauss blaster",
         null,
         null,
-        9,
+        7,
         true
 );
 
@@ -127,7 +127,7 @@ VALUES
         "Heat ray",
         null,
         null,
-        54,
+        40,
         true
 );
 
@@ -138,7 +138,7 @@ VALUES
         "Heavy gauss cannon",
         null,
         null,
-        27,
+        20,
         true
 );
 
@@ -171,7 +171,7 @@ VALUES
         "Particle shredder",
         null,
         null,
-        41,
+        30,
         true
 );
 
@@ -259,7 +259,7 @@ VALUES
         "Tesla carbine",
         null,
         null,
-        9,
+        7,
         true
 );
 
@@ -303,7 +303,7 @@ VALUES
         "Twin heavy gauss cannon",
         null,
         null,
-        54,
+        40,
         true
 );
 
@@ -468,7 +468,7 @@ VALUES
         "Warscythe",
         null,
         null,
-        11,
+        9,
         true
 );
 
@@ -512,7 +512,7 @@ VALUES
         "Dispersion Shield",
         null,
         null,
-        12,
+        6,
         false
 );
 
