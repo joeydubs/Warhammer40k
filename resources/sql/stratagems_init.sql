@@ -263,7 +263,7 @@ SELECT
     null,
     factions.id,
     "REPAIR SUBROUTINES",
-    "When engaged in a battle of attrition, Canoptek constructs react by enabling a series of repairing adaptive subroutines.",
+    "When engaged in a battle of attrition, Canoptek constructs react by enabling a series of adaptive subroutines, allowing them to better focus on self-repair.",
     "Use this Stratagem at the start of your turn, before making any Reanimation Protocols rolls. Select a CANOPTEK unit from your army that is on the battlefield. That unit gains the Reanimation Protocols ability until the end of your turn.",
     2,
     true
