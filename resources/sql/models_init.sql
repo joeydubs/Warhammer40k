@@ -11,28 +11,28 @@ INSERT INTO models VALUES (
     NULL,
     "Imotekh the Stormlord",
     NULL,
-    200
+    160
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Nemesor Zahndrekh",
     NULL,
-    180
+    150
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Vargard Obyron",
     NULL,
-    140
+    125
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Illuminor Szeras",
     NULL,
-    143
+    120
 );
 
 INSERT INTO models VALUES (
@@ -53,14 +53,14 @@ INSERT INTO models VALUES (
     NULL,
     "Trazyn the Infinite",
     NULL,
-    100
+    90
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Catacomb Command Barge",
     NULL,
-    138
+    1242
 );
 
 INSERT INTO models VALUES (
@@ -74,7 +74,7 @@ INSERT INTO models VALUES (
     NULL,
     "Lord",
     NULL,
-    73
+    65
 );
 
 INSERT INTO models VALUES (
@@ -95,7 +95,7 @@ INSERT INTO models VALUES (
     NULL,
     "Necron Warrior",
     NULL,
-    12
+    11
 );
 
 INSERT INTO models VALUES (
@@ -116,7 +116,7 @@ INSERT INTO models VALUES (
     NULL,
     "Deathmarks",
     NULL,
-    19
+    17
 );
 
 INSERT INTO models VALUES (
@@ -130,14 +130,14 @@ INSERT INTO models VALUES (
     NULL,
     "Triarch Praetorian",
     NULL,
-    22
+    16
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Triarch Stalker",
     NULL,
-    117
+    85
 );
 
 INSERT INTO models VALUES (
@@ -151,14 +151,14 @@ INSERT INTO models VALUES (
     NULL,
     "C'tan Shard of the Nightbringer",
     NULL,
-    210
+    180
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Canoptek Wraith",
     NULL,
-    55
+    48
 );
 
 INSERT INTO models VALUES (
@@ -200,61 +200,61 @@ INSERT INTO models VALUES (
     NULL,
     "Monolith",
     NULL,
-    381
+    320
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Annihilation Barge",
     NULL,
-    133
+    100
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Doomsday Ark",
     NULL,
-    193
+    160
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Transcendent C'tan",
     NULL,
-    225
+    200
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Ghost Ark",
     NULL,
-    160
+    145
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Doom Scythe",
     NULL,
-    205
+    150
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Night Scythe",
     NULL,
-    160
+    135
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Obelisk",
     NULL,
-    426
+    380
 );
 
 INSERT INTO models VALUES (
     NULL,
     "Tesseract Vault",
     NULL,
-    496
+    566
 );
