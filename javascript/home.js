@@ -295,7 +295,7 @@ function generateArmyTable(army) {
             let model = unit.models[modelName]
             //console.log(model)
             let modelRow = unitTable.insertRow(-1)
-            modelRow.insertCell(-1).innerText = modelName
+            modelRow.insertCell(-1).innerText = modelName + " (" + model.quantity + ")"
             modelRow.insertCell(-1)
             modelRow.insertCell(-1).innerText = model.move
             modelRow.insertCell(-1).innerText = model.weapon
