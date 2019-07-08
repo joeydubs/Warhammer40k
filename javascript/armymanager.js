@@ -387,8 +387,35 @@ class ArmyManager {
         this.db.exec(query, callback)
     }
 
-    getUnitList(respond) {
-        let query = "SELECT name FROM units"
+    getFactionList(respond) {
+        let query = "SELECT name FROM factions"
+
+        var message = []
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                message.push(row.name)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+    }
+
+    getUnitList(faction, respond) {
+        let query = `SELECT name
+            FROM units
+            INNER JOIN factions ON units.factionID = factions.id
+            WHERE factions.name = ${faction}`
 
         var message = []
 

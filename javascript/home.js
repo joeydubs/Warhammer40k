@@ -1,25 +1,50 @@
 var unit = {}
 
-function fetchUnitList() {
+function fetchFactionList() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Get Model List request received")
-            var modelList = JSON.parse(request.responseText)
-            //console.log(modelList)
-            document.getElementById("unit-selector").innerHTML = "<option>-- Select Unit --</option>"
-            for (model in modelList) {
+            console.log("Fetch Faction List request received")
+            let factionList = JSON.parse(request.responseText)
+            console.log(factionList)
+            document.getElementById("faction-selector").innerHTML = "<option>-- Select Faction --</option>"
+            for (let faction in factionList) {
                 var option = document.createElement("option")
-                option.innerHTML = modelList[model]
-                document.getElementById("unit-selector").add(option)
+                option.innerHTML = factionList[faction]
+                document.getElementById("faction-selector").add(option)
             }
             document.getElementById("unit-builder").removeAttribute("hidden")
             document.getElementById("my-army").setAttribute("hidden", true)
             document.getElementById("stratagems").setAttribute("hidden", true)
+            document.getElementById("unit-selector").setAttribute("disabled", true)
+        }
+    }
+
+    request.open("POST", "/fetchFactionList")
+    request.send()
+}
+
+function fetchUnitList() {
+    var request = new XMLHttpRequest()
+    let selectedFaction = document.getElementById("faction-selector").value
+    let selectedRole = document.getElementById("role-selector").value
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            //console.log("Get Model List request received")
+            let unitList = JSON.parse(request.responseText)
+            //console.log(modelList)
+            document.getElementById("unit-selector").innerHTML = "<option>-- Select Unit --</option>"
+            for (unit in unitList) {
+                var option = document.createElement("option")
+                option.innerHTML = unitList[unit]
+                document.getElementById("unit-selector").add(option)
+            }
+            document.getElementById("unit-selector").removeAttribute("disabled")
         }
     }
     request.open("POST", "/fetchUnitList")
-    request.send()
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(JSON.stringify({"faction": selectedFaction, "role": selectedRole}))
 }
 
 function fetchUnit() {

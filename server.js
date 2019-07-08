@@ -21,8 +21,20 @@ app.get('/home.css', function (req, res) {
 	res.sendFile(path.join(__dirname + "/pages/css/home.css"))
 })
 
+app.post('/fetchFactionList', function (req, res) {
+	army.getFactionList(function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
+})
+
 app.post('/fetchUnitList', function (req, res) {
-	army.getUnitList(function (err, result) {
+	let faction = req.body.faction
+	army.getUnitList(faction, function (err, result) {
 		if (err) {
 			console.log(err.message)
 		}
