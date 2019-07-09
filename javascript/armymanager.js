@@ -287,10 +287,10 @@ class ArmyManager {
                 subfactionID,
                 points
             )
-            SELECT NULL, units.id, subfactions.id, ${unit.points}
-            FROM units, subfactions
-            WHERE units.name = "${unitName}"
-            AND subfactions.name = "${dynasty}"`
+            SELECT NULL, units.id, NULL, ${unit.points}
+            FROM units
+            WHERE units.name = "${unitName}"`
+            //AND subfactions.name = "${dynasty}"`
 
 
         var callback = function (err) {
