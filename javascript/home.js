@@ -54,7 +54,7 @@ function fetchUnitList() {
     }
     request.open("POST", "/fetchUnitList")
     request.setRequestHeader("Content-Type", "application/json")
-    request.send(JSON.stringify({"faction": selectedFaction, "role": selectedRole}))
+    request.send(JSON.stringify({ "faction": selectedFaction, "role": selectedRole }))
 }
 
 function fetchUnit() {
@@ -309,80 +309,13 @@ function generateArmyTable(army) {
     var pointTotal = 0;
     section.appendChild(div)
 
-    for (let key in army) {
-        var unit = army[key]
+    for (let unitID in army) {
+        let unit = army[unitID]
         pointTotal += unit.points
-        var unitDiv = document.createElement("div")
-        unitDiv.id = `unit-${key}`
-        var unitTable = document.createElement("table")
-        console.log(unit)
-        var tr = document.createElement("tr")
-        var removeTH = document.createElement("th")
-        removeTH.innerHTML = `<button onclick="removeUnit(${key})">Remove</button>`
-        tr.appendChild(removeTH)
-        var th = document.createElement("th")
-        th.innerText = `${unit.name} - ${unit.subfaction} - ${unit.role}`
-        th.colSpan = 10
-        tr.appendChild(th)
-        unitTable.appendChild(tr)
-        unitTable.insertRow(-1).innerHTML = "<td>Model</td><td>Gear</td><td>M</td><td>WS</td><td>BS</td><td>S</td><td>T</td><td>W</td><td>A</td><td>Ld</td><td>Sv</td>"
-        for (let modelName in unit.models) {
-            let model = unit.models[modelName]
-            console.log(model)
-            let modelRow = unitTable.insertRow(-1)
-            modelRow.insertCell(-1).innerText = modelName + " (" + model.quantity + ")"
-            modelRow.insertCell(-1)
-            modelRow.insertCell(-1).innerText = model.move
-            modelRow.insertCell(-1).innerText = model.weapon
-            modelRow.insertCell(-1).innerText = model.ballistic
-            modelRow.insertCell(-1).innerText = model.strength
-            modelRow.insertCell(-1).innerText = model.toughness
-            modelRow.insertCell(-1).innerText = model.wounds
-            modelRow.insertCell(-1).innerText = model.attacks
-            modelRow.insertCell(-1).innerText = model.leadership
-            modelRow.insertCell(-1).innerText = model.save
-
-            console.log(model.gear)
-            if (Object.keys(model.gear).length > 0) {
-                unitTable.insertRow(-1).innerHTML = '<td></td><td></td><td>Range</td><td>Type</td><td>S</td><td>AP</td><td>D</td><td colspan="4">Abilities</td>'
-                for (let gearName in model.gear) {
-                    let profiles = model.gear[gearName]
-                    console.log(profiles)
-                    for (let profile in profiles) {
-                        let gear = profiles[profile]
-                        console.log(profile)
-                        let gearRow = unitTable.insertRow(-1)
-                        gearRow.insertCell(-1)
-                        if (gearName == profile) {
-                            gearRow.insertCell(-1).innerText = gearName
-                        }
-                        else {
-                            gearRow.insertCell(-1).innerText = gearName + " " + profile
-                        }
-                        gearRow.insertCell(-1).innerText = gear.range
-                        gearRow.insertCell(-1).innerText = gear.type
-                        gearRow.insertCell(-1).innerText = gear.strength
-                        gearRow.insertCell(-1).innerText = gear.armorPen
-                        gearRow.insertCell(-1).innerText = gear.damage
-                        let abilitiesCell = gearRow.insertCell(-1)
-                        abilitiesCell.colSpan = 4
-                        abilitiesCell.innerText = gear.abilities
-                    }
-                }
-            }
-        }
-        unitTable.insertRow(-1).innerHTML = '<td>Abilities</td>'
-        for (let abilityName in unit.abilities) {
-            let abilityDescription = unit.abilities[abilityName]
-            let abilitiesRow = unitTable.insertRow(-1)
-            abilitiesRow.insertCell(-1)
-            abilitiesRow.insertCell(-1).innerText = abilityName
-            let descriptionCell = abilitiesRow.insertCell(-1)
-            descriptionCell.colSpan = 9
-            descriptionCell.innerText = abilityDescription
-        }
-        unitDiv.appendChild(unitTable)
-        section.appendChild(unitDiv)
+        let unitSection = document.createElement("section")
+        unitSection.id = `unit-${unitID}`
+        section.appendChild(unitSection)
+        generateUnitCard(unit, unitID, unitSection)
     }
     div.innerText = "Army point total: " + pointTotal
     document.getElementById("my-army").replaceWith(section)
@@ -407,4 +340,109 @@ function generateStratagemsTable(stratagems) {
             effect.innerText = stratagemDetails.description
         })
     }
+}
+
+function generateUnitCard(unit, unitID, unitSection) {
+    var unitTable = document.createElement("table")
+    unitTable.innerHTML = "<col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col>"
+    console.log(unit)
+    var tr = document.createElement("tr")
+    var removeTH = document.createElement("th")
+    removeTH.innerHTML = `<button onclick="removeUnit(${unitID})">Remove</button>`
+    removeTH.colSpan = 2
+    tr.appendChild(removeTH)
+    var th = document.createElement("th")
+    th.innerText = `${unit.name} - ${unit.subfaction} - ${unit.role}`
+    th.colSpan = 14
+    tr.appendChild(th)
+    unitTable.appendChild(tr)
+    unitTable.insertRow(-1).innerHTML =
+        `<td>Qty</td>
+        <td colspan="5">Model</td>
+        <td>M</td>
+        <td>WS</td>
+        <td>BS</td>
+        <td>S</td>
+        <td>T</td>
+        <td>W</td>
+        <td>A</td>
+        <td>Ld</td>
+        <td>Sv</td>
+        <td></td>`
+    for (let modelName in unit.models) {
+        let model = unit.models[modelName]
+        console.log(model)
+        let modelRow = unitTable.insertRow(-1)
+        modelRow.insertCell(-1).innerText = model.quantity
+        let nameCell = modelRow.insertCell(-1)
+        nameCell.innerText = modelName
+        nameCell.colSpan = 5
+        modelRow.insertCell(-1).innerText = model.move
+        modelRow.insertCell(-1).innerText = model.weapon
+        modelRow.insertCell(-1).innerText = model.ballistic
+        modelRow.insertCell(-1).innerText = model.strength
+        modelRow.insertCell(-1).innerText = model.toughness
+        modelRow.insertCell(-1).innerText = model.wounds
+        modelRow.insertCell(-1).innerText = model.attacks
+        modelRow.insertCell(-1).innerText = model.leadership
+        modelRow.insertCell(-1).innerText = model.save
+        modelRow.insertCell(-1)
+
+        console.log(model.gear)
+        if (Object.keys(model.gear).length > 0) {
+            unitTable.insertRow(-1).innerHTML =
+                `<td colspan="2"></td>
+                <td colspan="3">Wargear</td>
+                <td colspan="2">Range</td>
+                <td colspan="2">Type</td>
+                <td>S</td>
+                <td>AP</td>
+                <td>D</td>
+                <td colspan="4">Abilities</td>`
+            for (let gearName in model.gear) {
+                let profiles = model.gear[gearName]
+                console.log(profiles)
+                for (let profile in profiles) {
+                    let gear = profiles[profile]
+                    console.log(profile)
+                    let gearRow = unitTable.insertRow(-1)
+                    gearRow.insertCell(-1).colSpan = 2
+                    let gearNameCell = gearRow.insertCell(-1)
+                    gearNameCell.colSpan = 3
+                    if (gearName == profile) {
+                        gearNameCell.innerText = gearName
+                    }
+                    else {
+                        gearNameCell.innerText = gearName + " " + profile
+                    }
+                    let rangeCell = gearRow.insertCell(-1)
+                    rangeCell.innerText = gear.range
+                    rangeCell.colSpan = 2
+                    typeCell = gearRow.insertCell(-1)
+                    typeCell.innerText = gear.type
+                    typeCell.colSpan = 2
+                    gearRow.insertCell(-1).innerText = gear.strength
+                    gearRow.insertCell(-1).innerText = gear.armorPen
+                    gearRow.insertCell(-1).innerText = gear.damage
+                    let abilitiesCell = gearRow.insertCell(-1)
+                    abilitiesCell.colSpan = 4
+                    abilitiesCell.innerText = gear.abilities
+                }
+            }
+        }
+    }
+    unitTable.insertRow(-1).innerHTML =
+        `<td colspan="4">Abilities</td>
+        <td colspan="12">Description</td>`
+    for (let abilityName in unit.abilities) {
+        let abilityDescription = unit.abilities[abilityName]
+        let abilitiesRow = unitTable.insertRow(-1)
+        let abilityNameCell = abilitiesRow.insertCell(-1)
+        abilityNameCell.innerText = abilityName
+        abilityNameCell.colSpan = 4
+        let descriptionCell = abilitiesRow.insertCell(-1)
+        descriptionCell.colSpan = 12
+        descriptionCell.innerText = abilityDescription
+    }
+    unitSection.appendChild(unitTable)
 }
