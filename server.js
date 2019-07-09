@@ -34,7 +34,8 @@ app.post('/fetchFactionList', function (req, res) {
 
 app.post('/fetchUnitList', function (req, res) {
 	let faction = req.body.faction
-	army.getUnitList(faction, function (err, result) {
+	let role = req.body.role
+	army.getUnitList(faction, role, function (err, result) {
 		if (err) {
 			console.log(err.message)
 		}

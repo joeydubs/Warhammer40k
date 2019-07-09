@@ -13,7 +13,7 @@
 	<header>
 		<h1>Warhammer 40k Army Builder</h1>
 		<nav>
-			<button onclick="fetchUnitList()">Unit List</button>
+			<button onclick="fetchFactionList()">Unit List</button>
 			<button onclick="fetchArmy()">My Army</button>
 			<button onclick="fetchStratagems()">My Stratagems</button>
 		</nav>
@@ -21,11 +21,11 @@
 
 	<main>
 		<section id="unit-builder" hidden>
-			<select id="faction-selector" onchange="fetchFactionList()">
+			<select id="faction-selector" onchange="fetchUnitList()">
 				<option>-- Select Faction --</option>
 			</select>
 			<select id="role-selector" onchange="fetchUnitList()">
-				<option>All</option>
+				<option>Any</option>
 				<option>HQ</option>
 				<option>Troops</option>
 				<option>Elites</option>
@@ -36,7 +36,7 @@
 				<option>Fortification</option>
 				<option>Lord of War</option>
 			</select>
-			<select id="unit-selector" onchange="fetchUnit()">
+			<select id="unit-selector" onchange="fetchUnit()" disabled>
 				<option>-- Select Unit --</option>
 			</select>
 			<select id="dynasty-selector" disabled>

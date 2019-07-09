@@ -388,7 +388,7 @@ class ArmyManager {
     }
 
     getFactionList(respond) {
-        let query = "SELECT name FROM factions"
+        let query = "SELECT name FROM factions WHERE name <> 'Any'"
 
         var message = []
 
@@ -411,11 +411,16 @@ class ArmyManager {
         this.db.each(query, callback, completion)
     }
 
-    getUnitList(faction, respond) {
-        let query = `SELECT name
+    getUnitList(faction, role, respond) {
+        var query = `SELECT units.name
             FROM units
             INNER JOIN factions ON units.factionID = factions.id
-            WHERE factions.name = ${faction}`
+            WHERE factions.name = "${faction}"`
+
+        if (role != "Any") {
+            query += ` AND units.role = "${role}"`
+        }
+        console.log(query)
 
         var message = []
 

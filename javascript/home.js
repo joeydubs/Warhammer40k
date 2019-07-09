@@ -17,6 +17,16 @@ function fetchFactionList() {
             document.getElementById("my-army").setAttribute("hidden", true)
             document.getElementById("stratagems").setAttribute("hidden", true)
             document.getElementById("unit-selector").setAttribute("disabled", true)
+
+            document.getElementById("unit-models").innerHTML = ""
+            document.getElementById("role-selector").value = "Any"
+            document.getElementById("unit-selector").value = "-- Select Unit --"
+            document.getElementById("submit-unit").setAttribute("disabled", true)
+            if (!document.getElementById("model-stats").hasAttribute("hidden")) {
+                document.getElementById("model-stats").setAttribute("hidden", true)
+                document.getElementById("model-stats").innerHTML = ""
+                document.getElementById("get-stats").innerText = "Get Stats"
+            }
         }
     }
 
@@ -30,9 +40,9 @@ function fetchUnitList() {
     let selectedRole = document.getElementById("role-selector").value
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Get Model List request received")
+            console.log("Get Model List request received")
             let unitList = JSON.parse(request.responseText)
-            //console.log(modelList)
+            console.log(unitList)
             document.getElementById("unit-selector").innerHTML = "<option>-- Select Unit --</option>"
             for (unit in unitList) {
                 var option = document.createElement("option")
@@ -55,7 +65,7 @@ function fetchUnit() {
     var unitName = document.getElementById("unit-selector").value
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Fetch Unit request received")
+            console.log("Fetch Unit request received")
             unit = JSON.parse(request.responseText)
             console.log(unit)
             var modelsSection = document.createElement("section")
@@ -119,9 +129,9 @@ function fetchStats() {
         var request = new XMLHttpRequest()
         request.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                //console.log("Fetch Stats request received")
+                console.log("Fetch Stats request received")
                 var modelStats = JSON.parse(request.responseText)
-                //console.log(modelStats)
+                console.log(modelStats)
                 displayStats(modelStats)
             }
         }
@@ -139,7 +149,7 @@ function fetchArmy() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Fetch Army request received")
+            console.log("Fetch Army request received")
             document.getElementById("unit-builder").setAttribute("hidden", true)
             document.getElementById("my-army").removeAttribute("hidden")
             document.getElementById("stratagems").setAttribute("hidden", true)
@@ -156,12 +166,12 @@ function fetchStratagems() {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Fetch Stratagems request received")
+            console.log("Fetch Stratagems request received")
             document.getElementById("unit-builder").setAttribute("hidden", true)
             document.getElementById("my-army").setAttribute("hidden", true)
             document.getElementById("stratagems").removeAttribute("hidden")
             var stratagems = JSON.parse(request.responseText)
-            //console.log(stratagems)
+            console.log(stratagems)
             generateStratagemsTable(stratagems)
         }
     }
@@ -173,9 +183,9 @@ function fetchStratagemDetails(stratagemID, callback) {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Fetch Stratagem Details request received")
+            console.log("Fetch Stratagem Details request received")
             var stratagemDetails = JSON.parse(request.responseText)
-            //console.log(stratagemDetails)
+            console.log(stratagemDetails)
             callback(stratagemDetails)
         }
     }
@@ -190,7 +200,7 @@ function createUnit() {
         name: document.getElementById("unit-selector").value,
         details: {},
     }
-    //console.log(unit)
+    console.log(unit)
     for (let key in unit.models) {
         let modelID = unit.models[key].id
         let qty = parseInt(document.getElementById(`${key.split(' ').join('-')}-qty`).value)
@@ -202,12 +212,12 @@ function createUnit() {
             }
 
             var boxes = document.getElementsByClassName(`${key.split(' ').join('-')}-gear`)
-            //console.log(boxes)
+            console.log(boxes)
             for (let box in boxes) {
                 let gearName = boxes[box].name
                 let gearID = boxes[box].value
                 if (boxes[box].checked) {
-                    //console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
+                    console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
                     if (myUnit.details[modelID]) {
                         points += (qty * unit.models[key].gear[gearName].cost)
                         myUnit.details[modelID].gear.push(gearID)
@@ -219,12 +229,12 @@ function createUnit() {
     }
 
     myUnit["points"] = points
-    //console.log(myUnit)
+    console.log(myUnit)
 
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Save Unit request received")
+            console.log("Save Unit request received")
             document.getElementById("unit-models").innerHTML = ""
             document.getElementById("unit-selector").value = "-- Select Unit --"
             document.getElementById("submit-unit").setAttribute("disabled", true)
@@ -243,7 +253,7 @@ function removeUnit(id) {
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //console.log("Remove Unit request received")
+            console.log("Remove Unit request received")
             var unitTable = document.getElementById("unit-" + id)
             unitTable.parentNode.removeChild(unitTable)
         }
@@ -305,7 +315,7 @@ function generateArmyTable(army) {
         var unitDiv = document.createElement("div")
         unitDiv.id = `unit-${key}`
         var unitTable = document.createElement("table")
-        //console.log(unit)
+        console.log(unit)
         var tr = document.createElement("tr")
         var removeTH = document.createElement("th")
         removeTH.innerHTML = `<button onclick="removeUnit(${key})">Remove</button>`
@@ -318,7 +328,7 @@ function generateArmyTable(army) {
         unitTable.insertRow(-1).innerHTML = "<td>Model</td><td>Gear</td><td>M</td><td>WS</td><td>BS</td><td>S</td><td>T</td><td>W</td><td>A</td><td>Ld</td><td>Sv</td>"
         for (let modelName in unit.models) {
             let model = unit.models[modelName]
-            //console.log(model)
+            console.log(model)
             let modelRow = unitTable.insertRow(-1)
             modelRow.insertCell(-1).innerText = modelName + " (" + model.quantity + ")"
             modelRow.insertCell(-1)
@@ -332,15 +342,15 @@ function generateArmyTable(army) {
             modelRow.insertCell(-1).innerText = model.leadership
             modelRow.insertCell(-1).innerText = model.save
 
-            //console.log(model.gear)
+            console.log(model.gear)
             if (Object.keys(model.gear).length > 0) {
                 unitTable.insertRow(-1).innerHTML = '<td></td><td></td><td>Range</td><td>Type</td><td>S</td><td>AP</td><td>D</td><td colspan="4">Abilities</td>'
                 for (let gearName in model.gear) {
                     let profiles = model.gear[gearName]
-                    //console.log(profiles)
+                    console.log(profiles)
                     for (let profile in profiles) {
                         let gear = profiles[profile]
-                        //console.log(profile)
+                        console.log(profile)
                         let gearRow = unitTable.insertRow(-1)
                         gearRow.insertCell(-1)
                         if (gearName == profile) {
