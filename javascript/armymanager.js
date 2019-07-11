@@ -287,10 +287,10 @@ class ArmyManager {
                 subfactionID,
                 points
             )
-            SELECT NULL, units.id, subfactions.id, ${unit.points}
-            FROM units, subfactions
-            WHERE units.name = "${unitName}"
-            AND subfactions.name = "${dynasty}"`
+            SELECT NULL, units.id, NULL, ${unit.points}
+            FROM units
+            WHERE units.name = "${unitName}"`
+            //AND subfactions.name = "${dynasty}"`
 
 
         var callback = function (err) {
@@ -387,8 +387,40 @@ class ArmyManager {
         this.db.exec(query, callback)
     }
 
-    getUnitList(respond) {
-        let query = "SELECT name FROM units"
+    getFactionList(respond) {
+        let query = "SELECT name FROM factions WHERE name <> 'Any'"
+
+        var message = []
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                message.push(row.name)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+    }
+
+    getUnitList(faction, role, respond) {
+        var query = `SELECT units.name
+            FROM units
+            INNER JOIN factions ON units.factionID = factions.id
+            WHERE factions.name = "${faction}"`
+
+        if (role != "Any") {
+            query += ` AND units.role = "${role}"`
+        }
+        console.log(query)
 
         var message = []
 
