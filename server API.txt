@@ -13,7 +13,7 @@ POST '/fetchFactionList'
     Calls getFactionList and returns the result as a Json string.
 
 POST '/fetchUnitList'
-    Requires a JSON body with a dictionary containing a 'faction' and 'role' key. Faction must be one returned by fetchFactionList, role must be one of the values in the following list:
+    Requires a JSON body with a dictionary containing a 'faction' and 'role' key. Faction must be the string name of a faction returned by fetchFactionList, role must be a string containing one of the values in the following list:
         Any
 		HQ
 		Troops
@@ -28,12 +28,12 @@ POST '/fetchUnitList'
     Calls getUnitList and returns the result as a Json string.
 
 POST '/fetchUnit'
-	var unit = req.body.unit
+    Requires a JSON body with a dictionary containing a 'unit' key. Unit must be the string name of a unit returned by fetchUnitList.
 
     Calls getUnitDetails and returns the result as a Json string.
 
 POST '/fetchModelStats'
-	var model = req.body.model
+    Requires a JSON body with a dictionary containing a 'model' key. Model must be the string name of a unit returned by fetchUnitList.
 
     Calls getModelStats and returns the result as a Json string.
 
@@ -44,23 +44,16 @@ POST "/fetchStratagems"
     Calls getStratagems and returns the result as a Json string.
 
 POST "/fetchStratagemDetails"
-	let stratagemID = req.body.stratagemID
+    Requires a JSON body with a dictionary containing a 'stratagemID' key. StratagemID must be an integer.
 
     Calls getStratagemDetails and returns the result as a Json string.
 
 POST '/createUnit'
-	var unit = req.body.unit
-	var dynasty = req.body.dynasty
-	army.createUnit(unit, dynasty)
-	
-	res.status(200)
-	res.send()
-})
+    Requires a JSON body with a dictionary containing a 'unit' and 'dynasty' key. Unit must be a dictionary containing unit data in the format specified in createUnit in the armymanager API. Dynasty must be a string containing the name of a dynasty (not currently used, needs an update to the logic).
+
+	Calls createUnit with the specified unit and dynasty.
 
 POST "/removeUnit"
-	var id = req.body.id
-	army.removeUnit(id)
+    Requires a JSON body with a dictionary containing an 'id' key. ID must be an integer containing a user_army id.
 
-	res.status(200)
-	res.send()
-})
+	Calls removeUnit with the specified user_army unit id.
