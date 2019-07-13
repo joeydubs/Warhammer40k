@@ -1,0 +1,211 @@
+constructor() :
+    Called by the Node server to instantiate the API
+
+    Opens the database for armymanager functions to use.
+
+
+getStratagems() : 
+    Input: Callback funtion with two parameters - err and result
+    
+    Pulls all stratagems from the database into a dictionary of conditions, then pulls the info for each unit in the user's army into a dictionary.
+        Structure for the dictionary:
+            stratagemID: {
+                includes: {
+                    keywords: [ids],
+                    factionkeywords: [ids],
+                    wargear: [ids],
+                    abilities: [ids]
+                },
+                excludes: {
+                    keywords: [ids],
+                    factionkeywords: [ids],
+                    wargear: [ids],
+                    abilities: [ids]
+                },
+                any: {
+                    keywords: [ids],
+                    factionkeywords: [ids],
+                    wargear: [ids],
+                    abilities: [ids]
+                }
+            }
+
+        Structure for the userInfo dictionary:
+            armyUnitID: {
+                keywords: [ids],
+                factionkeywords: [ids],
+                wargear: [ids],
+                abilities: [ids]
+            }
+    
+    This function calls filterStratagems() and passes the stratagem dictionary and userInfo dictionary.
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be an array of stratagem ids.
+
+
+filterStratagems() :
+    Input: dictionary of stratagems, dictionary of user army info. Used internally, see getStratagems() for the structure of these dictionaries.
+
+    This function compares the stratagem conditions to the unit info.
+    If the stratagem conditions are met by the assembled army, the stratagem is added to the filtered array to be returned.
+
+    Returns: array of stratagem ids
+
+
+getStratagemDetails() :
+    Input: stratagem id and a callback funtion with two parameters - err and result
+
+    This function retreives all columns for the specified stratagem
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be a dictionary containing the stratagem details.
+
+
+createUnit() :
+    Input: dictionary of unit details and the selected dynasty of the unit.
+        Dynasty should be null if no dynasty is selected.
+
+    Unit details should be a dictionary with the following structure:
+        {
+            details: {
+                modelID: {
+                    gear: [gearIDs],
+                    quantity: # of models in this unit
+                }
+            },
+            name: "unit name",
+            points: int (total unit cost including gear)
+        }
+
+    This function inserts data into the user_army, army_models and army_gear tables.
+    Dynasty is currently not used, but should be inserted into a separate table linked to the unit. This logic still needs to be written.
+
+
+removeUnit() :
+    Input: army unit id
+
+    This function deleted the data associated with the army unit id from the user_army, army_models and army_gear tables.
+
+
+getFactionList() :
+    Input: a callback funtion with two parameters - err and result
+
+    This function fetches all faction names from the database.
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be an array containing the faction names.
+
+
+getUnitList() :
+    Input: faction name, unit role, and a callback funtion with two parameters - err and result.
+        Faction must be specified.
+        Role should be set to "Any" to return all units.
+
+    This function retreives all unit names for the specified faction. If a specific unit role is specified, only units within the faction with that role will be returned.
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be an array containing the unit names.
+
+
+getModelStats() :
+    Input: unit name and a callback funtion with two parameters - err and result.
+
+    This function retreives all stats for the specified unit. If the unit has multiple stat levels, each will be it's own dictionary.
+    The dictionary of stats will have the following structure:
+        {
+            attacks: "3",
+            ballistic: 2,
+            damage: null,
+            id: 10,
+            leadership: 10,
+            move: 5,
+            name: "Overlord",
+            save: 3,
+            strength: 5,
+            toughness: 5,
+            weapon: 2,
+            wounds: 5
+        }
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be an array of dictionaries containing unit stats.
+
+
+getUnitDetails(unit, respond) {
+    Input: unit name and a callback funtion with two parameters - err and result.
+
+    This function retreives a dictionary of the unit details. The dictionary will have the following structure:
+        {
+            description: "string",
+            models: {
+                modelName: {
+                    cost: integer,
+                    gear: {
+                        gearName: {
+                            cost: integer,
+                            id: integer,
+                        }
+                    },
+                    id: integer,
+                    max: integer,
+                    min: integer,
+                    power: integer
+                }
+            },
+            options: "string"
+        }
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be the dictionary of unit details.
+
+
+getArmy() :
+    Input: a callback funtion with two parameters - err and result.
+
+    This function retreives a dictionary of the user_army details. It pulls from the user_army, army_models, and army_gear tables. The dictionary will have the following structure:
+        user_army.id: {
+            name: unit.name,
+            points: user_army.points,
+            role: unit.role,
+            subfaction: user_army.subfaction (needs to be implemented, currently null),
+            models: {
+                model.name: {
+                    quantity: army_models.quantity,
+                    attacks: model_stats.attacks,
+                    ballistic: model_stats.ballistic,
+                    leadership: model_stats.leadership,
+                    move: model_stats.move,
+                    save: model_stats.save,
+                    strength: model_stats.strength,
+                    toughness: model_stats.toughness,
+                    weapon: model_stats.weapon,
+                    wounds: model_stats.wounds,
+                    gear: {
+                        wargear.name: {
+                            wargear_stats.profile: {
+                                abilities: wargear_stats.abilities,
+                                armorPen: wargear_stats.armorPen,
+                                damage: wargear_stats.damage,
+                                range: wargear_stats.range,
+                                strength: wargear_stats.strength,
+                                type: wargear_stats.type
+                            }
+                        }
+                    },
+                }
+            },
+            abilities: {
+                abilities.name: abilities.ability
+            }
+        }
+
+    At completion, the callback is called with the parameters error and result.
+        Error should be null if no error occurred.
+        Result should be the dictionary of the user's army details.

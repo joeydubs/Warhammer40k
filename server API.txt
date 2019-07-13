@@ -1,0 +1,66 @@
+GET '/'
+	Retruns the home.html file
+
+GET '/home.js'
+	Returns the home.js file
+        This is a supporting file and is called by home.html
+
+GET '/home.css'
+	Returns the home.css file
+        This is a supporting file and is called by home.html
+
+POST '/fetchFactionList'
+    Calls getFactionList and returns the result as a Json string.
+
+POST '/fetchUnitList'
+    Requires a JSON body with a dictionary containing a 'faction' and 'role' key. Faction must be one returned by fetchFactionList, role must be one of the values in the following list:
+        Any
+		HQ
+		Troops
+		Elites
+		Fast Attack
+		Heavy Support
+		Dedicated Transport
+		Flyer
+		Fortification
+		Lord of War
+
+    Calls getUnitList and returns the result as a Json string.
+
+POST '/fetchUnit'
+	var unit = req.body.unit
+
+    Calls getUnitDetails and returns the result as a Json string.
+
+POST '/fetchModelStats'
+	var model = req.body.model
+
+    Calls getModelStats and returns the result as a Json string.
+
+POST "/fetchArmy"
+    Calls getArmy and returns the result as a Json string.
+
+POST "/fetchStratagems"
+    Calls getStratagems and returns the result as a Json string.
+
+POST "/fetchStratagemDetails"
+	let stratagemID = req.body.stratagemID
+
+    Calls getStratagemDetails and returns the result as a Json string.
+
+POST '/createUnit'
+	var unit = req.body.unit
+	var dynasty = req.body.dynasty
+	army.createUnit(unit, dynasty)
+	
+	res.status(200)
+	res.send()
+})
+
+POST "/removeUnit"
+	var id = req.body.id
+	army.removeUnit(id)
+
+	res.status(200)
+	res.send()
+})
