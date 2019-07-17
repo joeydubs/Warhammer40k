@@ -129,7 +129,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Catacomb Command Barge"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -147,7 +147,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Overlord"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -165,7 +165,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Lord"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -183,7 +183,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Cryptek"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -201,7 +201,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Destroyer Lord"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -219,7 +219,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Necron Warriors"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -237,7 +237,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Immortals"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -255,7 +255,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Lychguard"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -273,7 +273,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Deathmarks"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -291,7 +291,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Flayed Ones"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -372,7 +372,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Canoptek Wraiths"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -399,7 +399,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Canoptek Scarabs"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -417,7 +417,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Tomb Blades"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -435,7 +435,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Destroyers"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -453,7 +453,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Heavy Destroyers"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -480,7 +480,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Canoptek Spyders"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -498,7 +498,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Monolith"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -516,7 +516,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Annihilation Barge"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -534,7 +534,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Doomsday Ark"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -570,7 +570,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Ghost Ark"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -588,7 +588,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Doom Scythe"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -606,7 +606,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Night Scythe"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -624,7 +624,7 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Obelisk"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";
 
 INSERT INTO unit_faction_keywords_join (
     unitID,
@@ -651,4 +651,4 @@ INSERT INTO unit_faction_keywords_join (
 SELECT units.id, faction_keywords.id
 FROM units, faction_keywords
 WHERE units.name = "Tesseract Vault"
-AND faction_keywords.name = "Dynasty";
+AND faction_keywords.name = "<Subfaction>";

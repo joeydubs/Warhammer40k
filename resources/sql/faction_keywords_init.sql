@@ -7,6 +7,11 @@ CREATE TABLE faction_keywords (
 
 INSERT INTO faction_keywords VALUES (
     null,
+    "<Subfaction>"
+);
+
+INSERT INTO faction_keywords VALUES (
+    null,
     "Necrons"
 );
 
