@@ -68,6 +68,11 @@ function fetchUnit() {
             console.log("Fetch Unit request received")
             unit = JSON.parse(request.responseText)
             console.log(unit)
+
+            if (unit.factionKeywords.includes("<Subfaction>")) {
+                fetchSubfactions(document.getElementById("faction-selector").value)
+            }
+
             var modelsSection = document.createElement("section")
             modelsSection.id = "unit-models"
 
@@ -123,6 +128,28 @@ function fetchUnit() {
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify({ "unit": unitName }))
 }
+
+function fetchSubfactions(faction) {
+    let request = new XMLHttpRequest()
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Fetch Subfaction request received")
+            let subfactions = JSON.parse(request.responseText)
+            document.getElementById("subfaction-selector").innerHTML = ""
+            for (let subfaction in subfactions) {
+                let option = document.createElement("option")
+                option.innerText = subfactions[subfaction]
+                document.getElementById("subfaction-selector").appendChild(option)
+            }
+            document.getElementById("subfaction-selector").removeAttribute("disabled")
+        }
+    }
+
+    request.open("POST", "/fetchSubfactions")
+    request.setRequestHeader("Content-Type", "application/json")
+    request.send(JSON.stringify({"faction": faction}))
+}
+
 
 function fetchStats() {
     if (document.getElementById("model-stats").hasAttribute("hidden")) {
@@ -246,7 +273,7 @@ function createUnit() {
     }
     request.open("POST", "/createUnit")
     request.setRequestHeader("Content-Type", "application/json")
-    request.send(JSON.stringify({ "unit": myUnit, "dynasty": document.getElementById("dynasty-selector").value }))
+    request.send(JSON.stringify({ "unit": myUnit, "subfaction": document.getElementById("subfaction-selector").value }))
 }
 
 function removeUnit(id) {

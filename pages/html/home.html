@@ -15,8 +15,8 @@
 		<nav>
 			<ul>
 				<li><a href="#" onclick="fetchFactionList(); return false">Unit List</a></li>
-				<li><a href="#" onclick="fetchArmy()">My Army</a></li>
-				<li><a href="#" onclick="fetchStratagems()">My Stratagems</a></li>
+				<li><a href="#" onclick="fetchArmy(); return false">My Army</a></li>
+				<li><a href="#" onclick="fetchStratagems(); return false">My Stratagems</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -41,7 +41,7 @@
 			<select id="unit-selector" onchange="fetchUnit()" disabled>
 				<option>-- Select Unit --</option>
 			</select>
-			<select id="dynasty-selector" disabled>
+			<select id="subfaction-selector" disabled>
 			</select>
 			<button id="get-stats" onclick="fetchStats()">Get Stats</button>
 			<button id="submit-unit" onclick="createUnit()" disabled>Add Unit</button>

@@ -476,16 +476,19 @@ class ArmyManager {
 
     getUnitDetails(unit, respond) {
         let query =
-            `SELECT models.name AS name, models.id AS modelid, wargear.name AS gear, wargear.id AS gearid, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
+            `SELECT models.name AS name, models.id AS modelid, faction_keywords.name AS factionKeyword, wargear.name AS gear, wargear.id AS gearid, units.description, options, min, max, models.points AS modelcost, wargear.points AS gearcost, power
             FROM wargear
             INNER JOIN model_wargear_join ON wargear.id = model_wargear_join.wargear
             INNER JOIN models ON model_wargear_join.model = models.id
             INNER JOIN model_unit_join ON model_unit_join.model = models.id
             INNER JOIN units ON model_unit_join.unit = units.id
+            LEFT OUTER JOIN unit_faction_keywords_join ON unit_faction_keywords_join.unitID = units.id
+            LEFT OUTER JOIN faction_keywords ON unit_faction_keywords_join.factionKeywordID = faction_keywords.id
             WHERE units.name = "${unit}"`
 
         var message = {
-            models: {}
+            models: {},
+            factionKeywords: []
         }
 
         var callback = function (err, row) {
@@ -498,6 +501,10 @@ class ArmyManager {
                 }
                 if (!message.options) {
                     message["options"] = row.options
+                }
+
+                if (!message.factionKeywords.includes(row.factionKeyword)) {
+                    message.factionKeywords.push(row.factionKeyword)
                 }
 
                 var name = row.name
