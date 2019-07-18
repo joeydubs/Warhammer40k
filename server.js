@@ -121,7 +121,7 @@ app.post("/fetchStratagemDetails", function (req, res) {
 
 app.post('/createUnit', function (req, res) {
 	var unit = req.body.unit
-	var dynasty = req.body.dynasty
+	var dynasty = req.body.subfaction
 	army.createUnit(unit, dynasty)
 	
 	res.status(200)

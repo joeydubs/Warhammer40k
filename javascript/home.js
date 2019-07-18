@@ -384,8 +384,7 @@ function generateUnitCard(unit, unitID, unitSection) {
     removeTH.colSpan = 2
     tr.appendChild(removeTH)
     var th = document.createElement("th")
-    console.log(unit.name + " - " + (unit.subfaction ? unit.subfaction + ' - ' : unit.role))
-    th.innerText = `${unit.name} - ${(unit.subfaction ? unit.subfaction + ' - ' : unit.role)}`
+    th.innerText = `${unit.name} - ${(unit.subfaction ? unit.role + ' - ' + unit.subfaction : unit.role)}`
     th.colSpan = 14
     tr.appendChild(th)
     unitTable.appendChild(tr)
