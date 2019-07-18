@@ -11,6 +11,7 @@
 .read "user_army_init.sql"
 .read "army_models_init.sql"
 .read "army_gear_init.sql"
+.read "army_faction_keywords_init.sql"
 .read "stratagems_init.sql"
 .read "stratagem_conditions_init.sql"
 
