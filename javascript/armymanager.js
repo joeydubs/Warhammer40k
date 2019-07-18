@@ -299,6 +299,18 @@ class ArmyManager {
             }
             else {
                 var unitID = this.lastID
+
+                let subfactionQuery = `INSERT INTO army_faction_keywords (armyUnitID, factionKeywordID)
+                    SELECT ${unitID}, subfactions.id
+                    FROM subfactions
+                    WHERE subfactions.name = ${dynasty}`
+
+                db.run(subfactionQuery, [], function (err) {
+                    if (err) {
+                        console.log(err.message)
+                    }
+                })
+
                 for (var key in unit.details) {
                     var model = unit.details[key]
                     var modelID = parseInt(key)
@@ -340,6 +352,7 @@ class ArmyManager {
         db.run(query, [], callback)
     }
 
+    // Unused. I was trying to separate this code out of the callback in the createUnit function above.
     setupUnit(unitName, unitID) {
         for (var key in unit[unitName]) {
             var model = unit[unitName][key]
@@ -376,7 +389,10 @@ class ArmyManager {
     }
 
     removeUnit(id) {
-        let query = `DELETE FROM user_army WHERE id = ${id}; DELETE FROM army_models WHERE armyUnitID = ${id}; DELETE FROM army_gear WHERE armyUnitID = ${id}`
+        let query = `DELETE FROM user_army WHERE id = ${id};
+            DELETE FROM army_models WHERE armyUnitID = ${id};
+            DELETE FROM army_gear WHERE armyUnitID = ${id};
+            DELETE FROM army_faction_keywords WHERE armyUnitID = ${id};`
 
         var callback = function (err) {
             if (err) {
@@ -434,6 +450,32 @@ class ArmyManager {
         }
 
         var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+    }
+
+    getSubfactions(faction, respond) {
+        let query = `SELECT name
+            FROM subfactions
+            WHERE faction = "${faction}"`
+
+        var message = []
+
+        let callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                message.push(row.name)
+            }
+        }
+
+        let completion = function (err, rows) {
             if (err) {
                 console.log(err.message)
             }
@@ -551,7 +593,8 @@ class ArmyManager {
             LEFT OUTER JOIN wargear_stats ON wargear.id = wargear_stats.wargearID
             LEFT OUTER JOIN unit_abilities_join ON unit_abilities_join.unitID =units.id
             LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id
-            LEFT OUTER JOIN subfactions ON user_army.subfactionID = subfactions.id`
+            LEFT OUTER JOIN army_faction_keywords ON user_army.id = army_faction_keywords.armyUnitID
+            LEFT OUTER JOIN subfactions ON army_faction_keywords.factionKeyworkID = subfactions.id`
 
         var message = {}
 

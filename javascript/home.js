@@ -72,6 +72,10 @@ function fetchUnit() {
             if (unit.factionKeywords.includes("<Subfaction>")) {
                 fetchSubfactions(document.getElementById("faction-selector").value)
             }
+            else {
+                document.getElementById("subfaction-selector").innerHTML = ""
+                document.getElementById("subfaction-selector").setAttribute("disabled", true)
+            }
 
             var modelsSection = document.createElement("section")
             modelsSection.id = "unit-models"
@@ -135,6 +139,7 @@ function fetchSubfactions(faction) {
         if (this.readyState == 4 && this.status == 200) {
             console.log("Fetch Subfaction request received")
             let subfactions = JSON.parse(request.responseText)
+            console.log(subfactions)
             document.getElementById("subfaction-selector").innerHTML = ""
             for (let subfaction in subfactions) {
                 let option = document.createElement("option")
@@ -379,7 +384,7 @@ function generateUnitCard(unit, unitID, unitSection) {
     removeTH.colSpan = 2
     tr.appendChild(removeTH)
     var th = document.createElement("th")
-    th.innerText = `${unit.name} - ${unit.subfaction} - ${unit.role}`
+    th.innerText = `${unit.name} - ${unit.subfaction ? unit.subfaction + ' - ' : ''} ${unit.role}`
     th.colSpan = 14
     tr.appendChild(th)
     unitTable.appendChild(tr)

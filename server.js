@@ -45,6 +45,19 @@ app.post('/fetchUnitList', function (req, res) {
 	})
 })
 
+app.post('/fetchSubfactions', function (req, res) {
+	let faction = req.body.faction
+
+	army.getSubfactions(faction, function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
+})
+
 app.post('/fetchUnit', function (req, res) {
 	var unit = req.body.unit
 
