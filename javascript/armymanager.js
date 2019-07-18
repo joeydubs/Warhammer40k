@@ -303,7 +303,7 @@ class ArmyManager {
                 let subfactionQuery = `INSERT INTO army_faction_keywords (armyUnitID, factionKeywordID)
                     SELECT ${unitID}, subfactions.id
                     FROM subfactions
-                    WHERE subfactions.name = ${dynasty}`
+                    WHERE subfactions.name = "${dynasty}"`
 
                 db.run(subfactionQuery, [], function (err) {
                     if (err) {
@@ -594,7 +594,7 @@ class ArmyManager {
             LEFT OUTER JOIN unit_abilities_join ON unit_abilities_join.unitID =units.id
             LEFT OUTER JOIN abilities ON unit_abilities_join.abilityID = abilities.id
             LEFT OUTER JOIN army_faction_keywords ON user_army.id = army_faction_keywords.armyUnitID
-            LEFT OUTER JOIN subfactions ON army_faction_keywords.factionKeyworkID = subfactions.id`
+            LEFT OUTER JOIN subfactions ON army_faction_keywords.factionKeywordID = subfactions.id`
 
         var message = {}
 
