@@ -1,4 +1,4 @@
-DROP TABLE models;
+DROP TABLE IF EXISTS models;
 
 CREATE TABLE models (
     id INTEGER PRIMARY KEY,

@@ -1,4 +1,4 @@
-DROP TABLE model_unit_join;
+DROP TABLE IF EXISTS model_unit_join;
 
 CREATE TABLE model_unit_join (
     model INTEGER,

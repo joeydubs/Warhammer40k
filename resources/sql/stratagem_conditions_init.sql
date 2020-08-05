@@ -1,4 +1,4 @@
-DROP TABLE stratagem_conditions;
+DROP TABLE IF EXISTS stratagem_conditions;
 
 CREATE TABLE stratagem_conditions (
     stratagemID INTEGER,

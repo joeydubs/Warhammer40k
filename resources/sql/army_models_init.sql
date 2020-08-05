@@ -1,4 +1,4 @@
-DROP TABLE army_models;
+DROP TABLE IF EXISTS army_models;
 
 CREATE TABLE army_models (
     armyUnitID INTEGER,

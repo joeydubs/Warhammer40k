@@ -1,4 +1,4 @@
-DROP TABLE abilities;
+DROP TABLE IF EXISTS abilities;
 
 CREATE TABLE abilities
 (

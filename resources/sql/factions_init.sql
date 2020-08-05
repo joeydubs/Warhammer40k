@@ -1,4 +1,4 @@
-DROP TABLE factions;
+DROP TABLE IF EXISTS factions;
 
 CREATE TABLE factions (
     id INTEGER PRIMARY KEY,

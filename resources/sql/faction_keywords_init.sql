@@ -1,4 +1,4 @@
-DROP TABLE faction_keywords;
+DROP TABLE IF EXISTS faction_keywords;
 
 CREATE TABLE faction_keywords (
     id INTEGER PRIMARY KEY,

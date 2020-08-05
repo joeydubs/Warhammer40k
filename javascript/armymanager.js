@@ -487,13 +487,13 @@ class ArmyManager {
 
     getModelStats(unit, respond) {
         let query =
-            `SELECT models.name, model_stats.id, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
-        FROM model_stats
-        INNER JOIN models ON models.id = model_stats.modelID
+            `SELECT models.name, stats.id, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+        FROM stats
+        INNER JOIN models ON models.id = stats.modelID
         INNER JOIN model_unit_join ON models.id = model_unit_join.model
         INNER JOIN units ON units.id = model_unit_join.unit
         WHERE units.name = "${unit}"
-        ORDER BY model_stats.id`
+        ORDER BY stats.id`
 
         var message = []
 
@@ -581,14 +581,14 @@ class ArmyManager {
 
     getArmy(respond) {
         let query =
-            `SELECT user_army.id, user_army.points, units.name AS unit, units.role, subfactions.name AS subfaction, models.name AS model, army_models.quantity, model_stats.move, model_stats.weapon, model_stats.ballistic, model_stats.strength, model_stats.toughness, model_stats.wounds, model_stats.attacks, model_stats.leadership, model_stats.save, wargear.name AS wargear, wargear_stats.profile AS wargearProfile, wargear_stats.range AS wargearRange, wargear_stats.type AS wargearType, wargear_stats.strength AS wargearStrength, wargear_stats.armorPen AS wargearArmorPen, wargear_stats.damage AS wargearDamage, wargear_stats.abilities AS wargearAbilities, abilities.name as abilityName, abilities.ability as abilityDescription
+            `SELECT user_army.id, user_army.points, units.name AS unit, units.role, subfactions.name AS subfaction, models.name AS model, army_models.quantity, stats.move, stats.weapon, stats.ballistic, stats.strength, stats.toughness, stats.wounds, stats.attacks, stats.leadership, stats.save, wargear.name AS wargear, wargear_stats.profile AS wargearProfile, wargear_stats.range AS wargearRange, wargear_stats.type AS wargearType, wargear_stats.strength AS wargearStrength, wargear_stats.armorPen AS wargearArmorPen, wargear_stats.damage AS wargearDamage, wargear_stats.abilities AS wargearAbilities, abilities.name as abilityName, abilities.ability as abilityDescription
             FROM user_army
             LEFT OUTER JOIN army_models ON user_army.id = army_models.armyUnitID
             LEFT OUTER JOIN army_gear ON army_gear.armyUnitID = user_army.id
             AND army_gear.modelID = army_models.modelID
             LEFT OUTER JOIN units ON user_army.unitID = units.id
             LEFT OUTER JOIN models ON army_models.modelID = models.id
-            LEFT OUTER JOIN model_stats ON models.id = model_stats.modelID
+            LEFT OUTER JOIN stats ON models.id = stats.modelID
             LEFT OUTER JOIN wargear ON army_gear.gearID = wargear.id
             LEFT OUTER JOIN wargear_stats ON wargear.id = wargear_stats.wargearID
             LEFT OUTER JOIN unit_abilities_join ON unit_abilities_join.unitID =units.id

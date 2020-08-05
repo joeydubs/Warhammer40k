@@ -1,4 +1,4 @@
-DROP TABLE model_wargear_join;
+DROP TABLE IF EXISTS model_wargear_join;
 
 CREATE TABLE model_wargear_join (
     model INTEGER,

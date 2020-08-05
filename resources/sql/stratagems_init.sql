@@ -1,4 +1,4 @@
-DROP TABLE stratagems;
+DROP TABLE IF EXISTS stratagems;
 
 CREATE TABLE stratagems (
     id INTEGER PRIMARY KEY,

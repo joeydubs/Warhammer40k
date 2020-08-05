@@ -1,4 +1,4 @@
-DROP TABLE units;
+DROP TABLE IF EXISTS units;
 
 CREATE TABLE units (
     id INTEGER PRIMARY KEY,
@@ -7,7 +7,7 @@ CREATE TABLE units (
     options TEXT,
     role TEXT,
     power INTEGER,
-    factionID TEXT
+    factionID INTEGER
 );
 
 INSERT INTO units (id, name, description, options, role, power, factionID)

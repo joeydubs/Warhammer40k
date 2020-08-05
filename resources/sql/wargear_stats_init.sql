@@ -1,4 +1,4 @@
-DROP TABLE wargear_stats;
+DROP TABLE IF EXISTS wargear_stats;
 
 CREATE TABLE wargear_stats (
     id INTEGER PRIMARY KEY,
