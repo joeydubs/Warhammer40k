@@ -487,12 +487,41 @@ class ArmyManager {
 
     getModelStats(unit, respond) {
         let query =
-            `SELECT models.name, stats.id, damage, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+            `SELECT models.name, stats.id, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
         FROM stats
         INNER JOIN models ON models.id = stats.modelID
         INNER JOIN model_unit_join ON models.id = model_unit_join.model
         INNER JOIN units ON units.id = model_unit_join.unit
         WHERE units.name = "${unit}"
+        ORDER BY stats.id`
+
+        var message = []
+
+        var callback = function (err, row) {
+            if (err) {
+                console.log(err.message)
+            }
+            else {
+                message.push(row)
+            }
+        }
+
+        var completion = function (err, rows) {
+            if (err) {
+                console.log(err.message)
+            }
+            respond(err, message)
+        }
+
+        this.db.each(query, callback, completion)
+    }
+
+    getModelWoundTrack(model, respond) {
+        let query =
+            `SELECT models.name, stats.id, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+        FROM wound_tracks
+        INNER JOIN models ON models.id = wound_tracks.modelID
+        WHERE model.name = "${unit}"
         ORDER BY stats.id`
 
         var message = []

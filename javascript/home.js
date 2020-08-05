@@ -301,7 +301,6 @@ function displayStats(modelStats) {
     table.innerHTML =
         `<tr>
         <th>Name</th>
-        <th>Remaining W</th>
         <th>M</th>
         <th>WS</th>
         <th>BS</th>
@@ -315,8 +314,7 @@ function displayStats(modelStats) {
     for (index in modelStats) {
         var stats = modelStats[index]
         var row = document.createElement("tr")
-        index == 0 ? row.insertCell().innerText = stats.name : row.insertCell()
-        row.insertCell().innerText = stats.damage
+        row.insertCell().innerText = stats.statName
         row.insertCell().innerText = stats.move
         row.insertCell().innerText = stats.weapon
         row.insertCell().innerText = stats.ballistic

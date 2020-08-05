@@ -152,7 +152,7 @@ WHERE models.name = "Triarch Praetorian";
 -- triarch stalker, 6
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, 10, 3, 3, 7, 6, 10, "3", 10, 3
+SELECT NULL, models.id, models.name, "*", "*", "*", 7, 6, 10, "3", 10, 3
 FROM models
 WHERE models.name = "Triarch Stalker";
 
@@ -215,7 +215,7 @@ WHERE models.name = "Canoptek Spyders";
 -- monolith, 13
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, 6, 6, 3, 8, 8, 20, "3", 10, 3
+SELECT NULL, models.id, models.name, "*", 6, "*", 8, 8, 20, "3", 10, 3
 FROM models
 WHERE models.name = "Monolith";
 
@@ -229,7 +229,7 @@ WHERE models.name = "Annihilation Barge";
 -- doomsday ark, 16
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, 12, 6, 3, 6, 6, 14, "3", 10, 4
+SELECT NULL, models.id, models.name, "*", 6, "*", 6, 6, 14, "*", 10, 4
 FROM models
 WHERE models.name = "Doomsday Ark";
 
@@ -243,34 +243,34 @@ WHERE models.name = "Transcendent C'tan";
 -- Ghost ark, 16
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, 12, 6, 3, 6, 6, 14, "3", 10, 4
+SELECT NULL, models.id, models.name, "*", 6, "*", 6, 6, 14, "*", 10, 4
 FROM models
 WHERE models.name = "Ghost Ark";
 
 -- Doom Scythe 7-12 20-60 6+ 3+ 6 6 12 3 10 3+
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, "20-60", 6, 3, 6, 6, 12, "3", 10, 3
+SELECT NULL, models.id, models.name, "*", 6, "*", 6, 6, 12, "*", 10, 3
 FROM models
 WHERE models.name = "Doom Scythe";
 
 -- Night Scythe 7-12 20-60 6+ 3+ 6 6 12 3 10 3+
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, "20-60", 6, 3, 6, 6, 12, "3", 10, 3
+SELECT NULL, models.id, models.name, "*", 6, "*", 6, 6, 12, "*", 10, 3
 FROM models
 WHERE models.name = "Night Scythe";
 
 -- Obelisk 13-24 8 6+ 3+ 8 8 24 3 10 3+
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, 8, 6, 3, 8, 8, 24, "3", 10, 3
+SELECT NULL, models.id, models.name, "*", 6, "*", 8, 8, 24, "3", 10, 3
 FROM models
 WHERE models.name = "Obelisk";
 
 -- Tesseract Vault 15-28 8 6+ 3 8 7 28 3 10 3+
 INSERT INTO stats
     (id, modelID, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, "save")
-SELECT NULL, models.id, models.name, 8, 6, 3, 8, 7, 28, "3", 10, 3
+SELECT NULL, models.id, models.name, "*", 6, "*", 8, 7, 28, "3", 10, 3
 FROM models
 WHERE models.name = "Tesseract Vault";

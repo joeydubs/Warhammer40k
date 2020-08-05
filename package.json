@@ -1,0 +1,25 @@
+{
+  "name": "Warhammer40k",
+  "version": "1.0.0",
+  "description": "Army builder",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^5.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeydubs/Warhammer40k.git"
+  },
+  "author": "Joey Wicker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joeydubs/Warhammer40k/issues"
+  },
+  "homepage": "https://github.com/joeydubs/Warhammer40k#readme"
+}

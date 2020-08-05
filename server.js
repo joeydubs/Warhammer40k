@@ -84,6 +84,19 @@ app.post('/fetchModelStats', function (req, res) {
 	})
 })
 
+app.post('/fetchModelWoundTrack', function (req, res) {
+	var model = req.body.model
+
+	army.getModelWoundTrack(model, function (err, result) {
+		if (err) {
+			console.log(err.message)
+		}
+		res.status(200)
+		res.type('json')
+		res.send(JSON.stringify(result))
+	})
+})
+
 app.post("/fetchArmy", function (req, res) {
 	army.getArmy(function (err, result) {
 		if (err) {
