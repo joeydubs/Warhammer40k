@@ -61,7 +61,7 @@ VALUES
         "Gauss blaster",
         null,
         null,
-        7,
+        0,
         true
 );
 
@@ -72,7 +72,7 @@ VALUES
         "Gauss cannon",
         null,
         null,
-        20,
+        5,
         true
 );
 
@@ -127,7 +127,7 @@ VALUES
         "Heat ray",
         null,
         null,
-        40,
+        30,
         true
 );
 
@@ -138,7 +138,7 @@ VALUES
         "Heavy gauss cannon",
         null,
         null,
-        20,
+        0,
         true
 );
 
@@ -160,7 +160,7 @@ VALUES
         "Particle caster",
         null,
         null,
-        4,
+        0,
         true
 );
 
@@ -171,7 +171,7 @@ VALUES
         "Particle shredder",
         null,
         null,
-        30,
+        25,
         true
 );
 
@@ -193,7 +193,7 @@ VALUES
         "Rod of covenant",
         null,
         null,
-        10,
+        0,
         true
 );
 
@@ -204,7 +204,7 @@ VALUES
         "Staff of light",
         null,
         null,
-        10,
+        0,
         true
 );
 
@@ -248,7 +248,7 @@ VALUES
         "Tesla cannon",
         null,
         null,
-        13,
+        0,
         true
 );
 
@@ -259,7 +259,7 @@ VALUES
         "Tesla carbine",
         null,
         null,
-        7,
+        0,
         true
 );
 
@@ -292,7 +292,7 @@ VALUES
         "Transdimensional beamer",
         null,
         null,
-        14,
+        15,
         true
 );
 
@@ -380,7 +380,7 @@ VALUES
         "Hyperphase sword",
         null,
         null,
-        3,
+        0,
         true
 );
 
@@ -446,7 +446,7 @@ VALUES
         "Voidblade",
         null,
         null,
-        6,
+        0,
         true
 );
 
@@ -457,7 +457,7 @@ VALUES
         "Voidscythe",
         null,
         null,
-        20,
+        5,
         true
 );
 
@@ -468,7 +468,7 @@ VALUES
         "Warscythe",
         null,
         null,
-        9,
+        0,
         true
 );
 
@@ -479,7 +479,7 @@ VALUES
         "Whip coils",
         null,
         null,
-        9,
+        5,
         true
 );
 
@@ -490,7 +490,7 @@ VALUES
         "Canoptek Cloak",
         null,
         null,
-        5,
+        10,
         false
 );
 
@@ -512,7 +512,7 @@ VALUES
         "Dispersion Shield",
         null,
         null,
-        6,
+        0,
         false
 );
 
@@ -545,7 +545,7 @@ VALUES
         "Nebuloscope",
         null,
         null,
-        2,
+        3,
         false
 );
 
@@ -567,7 +567,7 @@ VALUES
         "Resurrection Orb",
         null,
         null,
-        35,
+        20,
         false
 );
 

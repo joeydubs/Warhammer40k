@@ -180,8 +180,6 @@ function fetchStats() {
 }
 
 function fetchModelWoundTrack(model) {
-    console.log("Calling fetchModelWoundTrack(\"" + model + "\")")
-
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -251,7 +249,7 @@ function createUnit() {
         name: document.getElementById("unit-selector").value,
         details: {},
     }
-    console.log(unit)
+    // console.log(unit)
     for (let key in unit.models) {
         let modelID = unit.models[key].id
         let qty = parseInt(document.getElementById(`${key.split(' ').join('-')}-qty`).value)
@@ -263,12 +261,12 @@ function createUnit() {
             }
 
             var boxes = document.getElementsByClassName(`${key.split(' ').join('-')}-gear`)
-            console.log(boxes)
+            // console.log(boxes)
             for (let box in boxes) {
                 let gearName = boxes[box].name
                 let gearID = boxes[box].value
                 if (boxes[box].checked) {
-                    console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
+                    // console.log(`Key: ${key}, Gear: ${gearName}, ID: ${gearID}`)
                     if (myUnit.details[modelID]) {
                         points += (qty * unit.models[key].gear[gearName].cost)
                         myUnit.details[modelID].gear.push(gearID)
@@ -280,7 +278,7 @@ function createUnit() {
     }
 
     myUnit["points"] = points
-    console.log(myUnit)
+    // console.log(myUnit)
 
     var request = new XMLHttpRequest()
     request.onreadystatechange = function () {
@@ -379,7 +377,7 @@ function displayWoundTrack(modelWoundTrack) {
 function generateArmyTable(army) {
     var section = document.createElement("section")
     section.id = "my-army"
-    console.log(army)
+    // console.log(army)
     var div = document.createElement("p")
     var pointTotal = 0;
     section.appendChild(div)
@@ -420,7 +418,7 @@ function generateStratagemsTable(stratagems) {
 function generateUnitCard(unit, unitID, unitSection) {
     var unitTable = document.createElement("table")
     unitTable.innerHTML = "<col><col><col><col><col><col><col><col><col><col><col><col><col><col><col><col>"
-    console.log(unit)
+    // console.log(unit)
     var tr = document.createElement("tr")
     var removeTH = document.createElement("th")
     removeTH.innerHTML = `<button onclick="removeUnit(${unitID})">Remove</button>`
@@ -446,7 +444,7 @@ function generateUnitCard(unit, unitID, unitSection) {
         <td></td>`
     for (let modelName in unit.models) {
         let model = unit.models[modelName]
-        console.log(model)
+        // console.log(model)
         let modelRow = unitTable.insertRow(-1)
         modelRow.insertCell(-1).innerText = model.quantity
         let nameCell = modelRow.insertCell(-1)
@@ -463,7 +461,7 @@ function generateUnitCard(unit, unitID, unitSection) {
         modelRow.insertCell(-1).innerText = model.save
         modelRow.insertCell(-1)
 
-        console.log(model.gear)
+        // console.log(model.gear)
         if (Object.keys(model.gear).length > 0) {
             unitTable.insertRow(-1).innerHTML =
                 `<td colspan="2"></td>
@@ -476,10 +474,10 @@ function generateUnitCard(unit, unitID, unitSection) {
                 <td colspan="4">Abilities</td>`
             for (let gearName in model.gear) {
                 let profiles = model.gear[gearName]
-                console.log(profiles)
+                // console.log(profiles)
                 for (let profile in profiles) {
                     let gear = profiles[profile]
-                    console.log(profile)
+                    // console.log(profile)
                     let gearRow = unitTable.insertRow(-1)
                     gearRow.insertCell(-1).colSpan = 2
                     let gearNameCell = gearRow.insertCell(-1)
