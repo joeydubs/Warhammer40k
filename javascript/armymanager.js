@@ -487,7 +487,7 @@ class ArmyManager {
 
     getModelStats(unit, respond) {
         let query =
-            `SELECT models.name, stats.id, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
+            `SELECT models.name, models.hasWoundTrack, stats.id, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
         FROM stats
         INNER JOIN models ON models.id = stats.modelID
         INNER JOIN model_unit_join ON models.id = model_unit_join.model
@@ -518,11 +518,11 @@ class ArmyManager {
 
     getModelWoundTrack(model, respond) {
         let query =
-            `SELECT models.name, stats.id, statName, move, weapon, ballistic, strength, toughness, wounds, attacks, leadership, save
-        FROM wound_tracks
-        INNER JOIN models ON models.id = wound_tracks.modelID
-        WHERE model.name = "${unit}"
-        ORDER BY stats.id`
+            `SELECT wt.id, modelID, tier, remainingW, char1name, char1value, char2name, char2value, char3name, char3value
+        FROM wound_tracks AS wt
+        INNER JOIN models ON models.id = wt.modelID
+        WHERE models.name = "${model}"
+        ORDER BY wt.tier`
 
         var message = []
 
@@ -586,6 +586,7 @@ class ArmyManager {
                     message.models[name] = model
                 }
                 message.models[name]["id"] = row.modelid
+                message.models[name]["hasWoundTrack"] = row.hasWoundTrack
                 message.models[name]["min"] = row.min
                 message.models[name]["max"] = row.max
                 message.models[name]["cost"] = row.modelcost

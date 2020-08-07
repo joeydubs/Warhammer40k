@@ -59,6 +59,7 @@ function fetchUnitList() {
 
 function fetchUnit() {
     document.getElementById("model-stats").setAttribute("hidden", true)
+    document.getElementById("model-wound-track").setAttribute("hidden", true)
     document.getElementById("get-stats").innerText = "Get Stats"
 
     var request = new XMLHttpRequest()
@@ -173,8 +174,26 @@ function fetchStats() {
     }
     else {
         document.getElementById("model-stats").setAttribute("hidden", true)
+        document.getElementById("model-wound-track").setAttribute("hidden", true)
         document.getElementById("get-stats").innerText = "Get Stats"
     }
+}
+
+function fetchModelWoundTrack(model) {
+    console.log("Calling fetchModelWoundTrack(\"" + model + "\")")
+
+    var request = new XMLHttpRequest()
+    request.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("Fetch Wound Track request received")
+            var modelWoundTrack = JSON.parse(request.responseText)
+            console.log(modelWoundTrack)
+            displayWoundTrack(modelWoundTrack)
+        }
+    }
+    request.open("POST", "/fetchModelWoundTrack")
+    request.setRequestHeader("Content-Type", "application/json");
+    request.send(JSON.stringify({ "model": model }))
 }
 
 function fetchArmy() {
@@ -296,6 +315,9 @@ function removeUnit(id) {
 }
 
 function displayStats(modelStats) {
+    if (modelStats[0].hasWoundTrack) {
+        fetchModelWoundTrack(modelStats[0].name)
+    }
     var table = document.createElement("table")
     table.id = "model-stats"
     table.innerHTML =
@@ -329,6 +351,29 @@ function displayStats(modelStats) {
     document.getElementById("model-stats").replaceWith(table)
     document.getElementById("model-stats").removeAttribute("hidden")
     document.getElementById("get-stats").innerText = "Hide Stats"
+}
+
+function displayWoundTrack(modelWoundTrack) {
+    var table = document.createElement("table")
+    table.id = "model-wound-track"
+    table.innerHTML =
+        `<tr>
+        <th>Remaining W</th>
+        <th>${modelWoundTrack[0].char1name}</th>
+        <th>${modelWoundTrack[0].char2name}</th>
+        <th>${modelWoundTrack[0].char3name}</th>
+        </tr>`
+    for (index in modelWoundTrack) {
+        var track = modelWoundTrack[index]
+        var row = document.createElement("tr")
+        row.insertCell().innerText = track.remainingW
+        row.insertCell().innerText = track.char1value
+        row.insertCell().innerText = track.char2value
+        row.insertCell().innerText = track.char3value
+        table.appendChild(row)
+    }
+    document.getElementById("model-wound-track").replaceWith(table)
+    document.getElementById("model-wound-track").removeAttribute("hidden")
 }
 
 function generateArmyTable(army) {
